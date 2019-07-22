@@ -48,8 +48,9 @@ public class LoginFrame extends JFrame implements ActionListener {
 	 */
 	public LoginFrame() {
 		setResizable(false);
-
 		setTitle("Login");
+		Image formIcon = new ImageIcon(this.getClass().getResource("/averna_ico.png")).getImage();
+		setIconImage(formIcon);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 425, 275);
 		setLocationRelativeTo(null);
