@@ -1,0 +1,13 @@
+package util;
+
+import org.hibernate.cfg.reveng.DelegatingReverseEngineeringStrategy;
+import org.hibernate.cfg.reveng.ReverseEngineeringStrategy;
+
+public class CustomNamingStrategy extends DelegatingReverseEngineeringStrategy {
+
+	public CustomNamingStrategy(ReverseEngineeringStrategy delegate) {
+		super(delegate);
+		// TODO Auto-generated constructor stub
+	}
+
+}

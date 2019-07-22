@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.org/dtd/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-catalog="db_warehouse" match-name="areas"/>
+  <table-filter match-catalog="db_warehouse" match-name="job_titles"/>
+  <table-filter match-catalog="db_warehouse" match-name="locations"/>
+  <table-filter match-catalog="db_warehouse" match-name="manufacturers"/>
+  <table-filter match-catalog="db_warehouse" match-name="orders"/>
+  <table-filter match-catalog="db_warehouse" match-name="part_groups"/>
+  <table-filter match-catalog="db_warehouse" match-name="parts"/>
+  <table-filter match-catalog="db_warehouse" match-name="projects"/>
+  <table-filter match-catalog="db_warehouse" match-name="racks"/>
+  <table-filter match-catalog="db_warehouse" match-name="shelfs"/>
+  <table-filter match-catalog="db_warehouse" match-name="units"/>
+  <table-filter match-catalog="db_warehouse" match-name="user_rights"/>
+  <table-filter match-catalog="db_warehouse" match-name="users"/>
+</hibernate-reverse-engineering>

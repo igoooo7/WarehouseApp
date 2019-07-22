@@ -1,0 +1,22 @@
+package util;
+
+import org.hibernate.cfg.reveng.DelegatingReverseEngineeringStrategy;
+import org.hibernate.cfg.reveng.ReverseEngineeringStrategy;
+import org.hibernate.cfg.reveng.TableIdentifier;
+
+public class CustomNamingStrategy extends DelegatingReverseEngineeringStrategy {
+
+	public CustomNamingStrategy(ReverseEngineeringStrategy delegate) {
+		super(delegate);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public String columnToPropertyName(TableIdentifier table, String column) {
+		if (column.endsWith("Z")) {
+			return "dupa";
+		} else {
+			return super.columnToPropertyName(table, column);
+		}
+	}
+}

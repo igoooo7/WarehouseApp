@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <mapping resource="org/xxx/gen/Orders.hbm.xml"/>
+        <mapping resource="org/xxx/gen/Units.hbm.xml"/>
+        <mapping resource="org/xxx/gen/Areas.hbm.xml"/>
+        <mapping resource="org/xxx/gen/UserRights.hbm.xml"/>
+        <mapping resource="org/xxx/gen/Locations.hbm.xml"/>
+        <mapping resource="org/xxx/gen/Parts.hbm.xml"/>
+        <mapping resource="org/xxx/gen/JobTitles.hbm.xml"/>
+        <mapping resource="org/xxx/gen/Manufacturers.hbm.xml"/>
+        <mapping resource="org/xxx/gen/Shelfs.hbm.xml"/>
+        <mapping resource="org/xxx/gen/PartGroups.hbm.xml"/>
+        <mapping resource="org/xxx/gen/Users.hbm.xml"/>
+        <mapping resource="org/xxx/gen/Racks.hbm.xml"/>
+    </session-factory>
+</hibernate-configuration>

@@ -1,0 +1,7 @@
+package utils;
+
+importDelegatingReverseEngineeringStrategy;
+
+public class AppRevengStrategy extends DelegatingReverseEngineeringStrategy {
+
+}

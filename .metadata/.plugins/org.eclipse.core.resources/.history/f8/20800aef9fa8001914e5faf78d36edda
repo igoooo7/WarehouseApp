@@ -1,0 +1,7 @@
+package utils;
+
+import org.hibernate.cfg.reveng.DelegatingReverseEngineeringStrategy;
+
+public class AppRevengStrategy extends DelegatingReverseEngineeringStrategy {
+
+}

@@ -1,0 +1,46 @@
+package data_access;
+
+import java.util.List;
+import java.util.logging.Logger;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
+
+import entities.Areas;
+import javassist.bytecode.stackmap.TypeData.ClassName;
+
+public class DBManagerForAreas {
+	
+	private static final Logger LOGGER = Logger.getLogger( ClassName.class.getName());
+
+	private static EntityManagerFactory emf;
+	private static EntityManager em;
+
+	private static void createManager() {
+		emf = Persistence.createEntityManagerFactory("db_warehouse");
+		em = emf.createEntityManager();
+	}
+
+	private static void destroyManager() {
+		em.close();
+		emf.close();
+	}
+
+	public List<Areas> getAllAreas() {
+
+		createManager();
+
+		TypedQuery<Areas> query = em.createQuery("Select a from Areas a", Areas.class);
+		List<Areas> areaList = query.getResultList();
+
+		destroyManager();
+		
+		return areaList;
+
+		// em.getTransaction().begin();
+		// em.find(Class.
+		// em.getTransaction().commit();
+	}
+}

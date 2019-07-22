@@ -1,0 +1,29 @@
+package util;
+
+import org.hibernate.cfg.reveng.DelegatingReverseEngineeringStrategy;
+import org.hibernate.cfg.reveng.ReverseEngineeringStrategy;
+import org.hibernate.cfg.reveng.TableIdentifier;
+
+public class CustomNamingStrategy extends DelegatingReverseEngineeringStrategy {
+	
+	
+	public CustomNamingStrategy(ReverseEngineeringStrategy delegate) {
+		super(delegate);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public String tableToClassName(TableIdentifier tableIdentifier)
+	{
+		String name = super.tableToClassName(tableIdentifier);
+		
+		if(name.endsWith("s"))
+		{
+			return name;
+		}
+		else
+		{
+			return name+ " dupa";
+		}
+	}
+}

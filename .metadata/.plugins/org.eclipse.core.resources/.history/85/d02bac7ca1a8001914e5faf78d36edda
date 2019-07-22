@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/db_warehouse</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.search.autoregister_listeners">true</property>
+        <property name="hibernate.validator.apply_to_ddl">false</property>
+        <mapping class="generated_classes.Projects"/>
+        <mapping class="generated_classes.Racks"/>
+        <mapping class="generated_classes.Locations"/>
+        <mapping class="generated_classes.Units"/>
+        <mapping class="generated_classes.Areas"/>
+        <mapping class="generated_classes.Shelfs"/>
+        <mapping class="generated_classes.Users"/>
+        <mapping class="generated_classes.UserRights"/>
+        <mapping class="generated_classes.JobTitles"/>
+        <mapping class="generated_classes.Parts"/>
+        <mapping class="generated_classes.Orders"/>
+        <mapping class="generated_classes.PartGroups"/>
+        <mapping class="generated_classes.Manufacturers"/>
+    </session-factory>
+</hibernate-configuration>

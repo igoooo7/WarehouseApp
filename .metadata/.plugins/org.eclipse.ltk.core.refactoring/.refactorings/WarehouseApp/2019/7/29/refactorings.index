@@ -1,0 +1,54 @@
+1563284351041	Copy file
+1563284412349	Delete element
+1563284423118	Rename resource 'persistence.xml'
+1563284714130	Rename resource 'hibernate.cfg.xml'
+1563285283629	Delete element
+1563286034016	Move file
+1563286065141	Rename resource 'persistence.xml.cfg.xml'
+1563286792656	Rename package 'model.org.xxx.gen'
+1563286821390	Rename package 'generatedClasses'
+1563286826019	Copy package
+1563286832274	Delete element
+1563286851135	Rename package 'model.generatedClasses'
+1563287336510	Delete element
+1563287536427	Delete element
+1563287546681	Delete element
+1563287550039	Delete element
+1563287566501	Delete elements
+1563287773474	Delete element
+1563287777012	Move file
+1563289501540	Delete element
+1563289505165	Delete element
+1563295874388	Delete elements
+1563368802791	Delete elements
+1563369114033	Delete elements
+1563369322103	Delete element
+1563371238509	Delete element
+1563371273432	Delete element
+1563372468302	Rename package 'generated_classes'
+1563372527714	Rename package 'model'
+1563372804571	Rename type 'AppRevengeStrategy'
+1563373601577	Delete element
+1563374047540	Delete element
+1563374598200	Delete elements
+1563374645313	Delete element
+1563374714654	Move file
+1563374722828	Delete element
+1563374725658	Delete element
+1563374789301	Delete element
+1563374795038	Move file
+1563374874996	Delete element
+1563374887096	Delete element
+1563374959645	Delete element
+1563374964416	Delete element
+1563378393731	Delete elements
+1563378423828	Delete element
+1563378427464	Delete element
+1563378506172	Delete element
+1563378582429	Delete element
+1563379145536	Delete elements
+1563379193656	Delete elements
+1563379403802	Delete elements
+1563381570913	Delete elements
+1563384158363	Delete elements
+1563384347490	Rename type 'DBManager'
