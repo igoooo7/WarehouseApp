@@ -103,7 +103,6 @@ public class MainFrame extends JFrame {
 		prepareLayout();
 		contentPane.setLayout(gl_contentPane);
 
-		// Set new user info
 		user = new User(0,"","","","","","",false);	
 
 	}
