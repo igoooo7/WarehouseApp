@@ -1,9 +1,9 @@
 package pl.nowator_zpu.warehouse_app.interfaces;
 
-import pl.nowator_zpu.warehouse_app.application_classes.UserInfo;
+import pl.nowator_zpu.warehouse_app.application_classes.User;
 
 public interface UserLoginListener {
 
-	public void loginEventPerformed(UserInfo ui);	
+	public void loginEventPerformed(User ui);	
 	
 }

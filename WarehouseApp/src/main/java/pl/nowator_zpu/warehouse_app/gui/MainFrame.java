@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.logging.Logger;
 
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -17,13 +18,14 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 import javassist.bytecode.stackmap.TypeData.ClassName;
-import pl.nowator_zpu.warehouse_app.application_classes.UserInfo;
+import pl.nowator_zpu.warehouse_app.application_classes.User;
 import pl.nowator_zpu.warehouse_app.interfaces.UserLoginListener;
 import javax.swing.border.TitledBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
+import java.awt.Image;
 
 public class MainFrame extends JFrame {
 
@@ -36,7 +38,7 @@ public class MainFrame extends JFrame {
 	
 	LoginFrame loginFrame;
 
-	public UserInfo userInfo;
+	public User user;
 
 	private JPanel contentPane;
 	private GroupLayout gl_contentPane;
@@ -84,7 +86,9 @@ public class MainFrame extends JFrame {
 	 */
 	public MainFrame() {
 
-		setTitle("AVERNA Wrocław - Warehouse Management");			
+		setTitle("AVERNA Wrocław - Warehouse Management");	
+		Image formIcon = new ImageIcon(this.getClass().getResource("/averna_ico.png")).getImage();
+		setIconImage(formIcon);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -100,14 +104,14 @@ public class MainFrame extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 
 		// Set new user info
-		userInfo = new UserInfo(" ", " ", " ", false);
+		user = new User(0,"","","","","","",false);	
 
 	}
 
 	private void prepareLayout() {
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229), 1, true), "User data", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(64, 64, 64)));
+		panel.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229), 2, true), "User logged", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(64, 64, 64)));
 
 		gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
@@ -162,8 +166,7 @@ public class MainFrame extends JFrame {
 	}
 
 	private void createControls() {
-
-		// Create menu
+		
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
@@ -244,21 +247,21 @@ public class MainFrame extends JFrame {
 		mntmLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {				
 
-				if (!userInfo.getLogged() && loginFrame == null) {
+				if (!user.getLogged() && loginFrame == null) {
 					loginFrame = new LoginFrame();
 					loginFrame.setUserLoginListener(new UserLoginListener() {
 						
 						@Override
-						public void loginEventPerformed(UserInfo ui) {
+						public void loginEventPerformed(User ui) {
 							
-							userInfo = ui;
+							user = ui;
 							refreshForm();		
 						}		
 					});	
 					
 					loginFrame.setVisible(true);	
 					
-				} else if (userInfo.getLogged()) {
+				} else if (user.getLogged()) {
 					
 					JOptionPane.showMessageDialog(null, "User is already logged!", "Message",
 							JOptionPane.INFORMATION_MESSAGE);
@@ -272,10 +275,14 @@ public class MainFrame extends JFrame {
 		mntmLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				userInfo.setUserName("");
-				userInfo.setJobTitle("");
-				userInfo.setUserRights("");
-				userInfo.setLogged(false);
+				user.setUserId(0);
+				user.setJobTitle("");
+				user.setUserRights("");
+				user.setUserName("");
+				user.setUserPassword("");
+				user.setFirstName("");
+				user.setLastName("");	
+				user.setLogged(false);
 				
 				refreshForm();
 				
@@ -288,9 +295,9 @@ public class MainFrame extends JFrame {
 	
 	private void refreshForm() {
 		
-		txtUserName.setText(userInfo.getUserName());
-		txtJobTitle.setText(userInfo.getJobTitle());
-		txtUserRights.setText(userInfo.getUserRights());
+		txtUserName.setText(user.getFirstName() + " " + user.getLastName());
+		txtJobTitle.setText(user.getJobTitle());
+		txtUserRights.setText(user.getUserRights());
 		
 	}
 }

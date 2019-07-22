@@ -22,7 +22,7 @@ import pl.nowator_zpu.warehouse_app.data_access.Controller;
 import pl.nowator_zpu.warehouse_app.entities.Users;
 import pl.nowator_zpu.warehouse_app.interfaces.UserLoginListener;
 
-public class LoginFrame extends JFrame implements ActionListener {
+public class AboutFrame extends JFrame implements ActionListener {
 
 	/**
 	 * 
@@ -46,7 +46,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 	/**
 	 * Create the frame.
 	 */
-	public LoginFrame() {
+	public AboutFrame() {
 		setResizable(false);
 
 		setTitle("Login");
