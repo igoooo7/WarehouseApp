@@ -73,7 +73,7 @@ SELECT * FROM manufacturers;
 
 INSERT INTO users(user_rights_id, job_title_id, user_name, user_password, first_name, last_name) 
 VALUES
-(3, 1, 'Igoooo7', '111', ' Igor', 'Leskiewicz'),
+(3, 1, 'Igoooo7', '111', 'Igor', 'Leskiewicz'),
 (2, 1, 'Stefek', '222', 'Łukasz', 'Stefanowicz'),
 (1, 2, 'Alko_Szufla', '333', 'Karol', 'Szufla');
 SELECT * FROM users;
