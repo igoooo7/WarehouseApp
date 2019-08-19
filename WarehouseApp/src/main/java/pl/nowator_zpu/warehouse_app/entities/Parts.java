@@ -1,5 +1,5 @@
 package pl.nowator_zpu.warehouse_app.entities;
-// Generated 19 lip 2019, 19:08:26 by Hibernate Tools 5.2.12.Final
+// Generated 5 sie 2019, 18:10:16 by Hibernate Tools 5.2.12.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -25,9 +25,11 @@ import javax.persistence.TemporalType;
 public class Parts implements java.io.Serializable {
 
 	private Integer partId;
-	private Locations locations;
+	private Areas areas;
 	private Manufacturers manufacturers;
 	private PartGroups partGroups;
+	private Racks racks;
+	private Shelfs shelfs;
 	private Units units;
 	private Users users;
 	private String orderCode;
@@ -44,11 +46,13 @@ public class Parts implements java.io.Serializable {
 	public Parts() {
 	}
 
-	public Parts(Locations locations, Manufacturers manufacturers, PartGroups partGroups, Units units, Users users,
-			String orderCode, int quantityMin, int quantityMax) {
-		this.locations = locations;
+	public Parts(Areas areas, Manufacturers manufacturers, PartGroups partGroups, Racks racks, Shelfs shelfs,
+			Units units, Users users, String orderCode, int quantityMin, int quantityMax) {
+		this.areas = areas;
 		this.manufacturers = manufacturers;
 		this.partGroups = partGroups;
+		this.racks = racks;
+		this.shelfs = shelfs;
 		this.units = units;
 		this.users = users;
 		this.orderCode = orderCode;
@@ -56,12 +60,15 @@ public class Parts implements java.io.Serializable {
 		this.quantityMax = quantityMax;
 	}
 
-	public Parts(Locations locations, Manufacturers manufacturers, PartGroups partGroups, Units units, Users users,
-			String orderCode, String productCode, String partName, String description, int quantityMin, int quantityMax,
-			Date creationDate, Date lastChangeDate, byte[] image, Set<Orders> orders) {
-		this.locations = locations;
+	public Parts(Areas areas, Manufacturers manufacturers, PartGroups partGroups, Racks racks, Shelfs shelfs,
+			Units units, Users users, String orderCode, String productCode, String partName, String description,
+			int quantityMin, int quantityMax, Date creationDate, Date lastChangeDate, byte[] image,
+			Set<Orders> orders) {
+		this.areas = areas;
 		this.manufacturers = manufacturers;
 		this.partGroups = partGroups;
+		this.racks = racks;
+		this.shelfs = shelfs;
 		this.units = units;
 		this.users = users;
 		this.orderCode = orderCode;
@@ -89,13 +96,13 @@ public class Parts implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "location_id", nullable = false)
-	public Locations getLocations() {
-		return this.locations;
+	@JoinColumn(name = "area_id", nullable = false)
+	public Areas getAreas() {
+		return this.areas;
 	}
 
-	public void setLocations(Locations locations) {
-		this.locations = locations;
+	public void setAreas(Areas areas) {
+		this.areas = areas;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -116,6 +123,26 @@ public class Parts implements java.io.Serializable {
 
 	public void setPartGroups(PartGroups partGroups) {
 		this.partGroups = partGroups;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "rack_id", nullable = false)
+	public Racks getRacks() {
+		return this.racks;
+	}
+
+	public void setRacks(Racks racks) {
+		this.racks = racks;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "shelf_id", nullable = false)
+	public Shelfs getShelfs() {
+		return this.shelfs;
+	}
+
+	public void setShelfs(Shelfs shelfs) {
+		this.shelfs = shelfs;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

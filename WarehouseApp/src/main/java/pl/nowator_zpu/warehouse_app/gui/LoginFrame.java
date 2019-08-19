@@ -4,6 +4,10 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -13,50 +17,55 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.LineBorder;
 
 import pl.nowator_zpu.warehouse_app.application_classes.User;
 import pl.nowator_zpu.warehouse_app.data_access.Controller;
-import pl.nowator_zpu.warehouse_app.entities.Users;
 import pl.nowator_zpu.warehouse_app.interfaces.UserLoginListener;
+import java.awt.event.KeyAdapter;
 
-public class LoginFrame extends JFrame implements ActionListener {
+public class LoginFrame extends JFrame implements WindowListener, KeyListener {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private JPanel contentPane;
 	private GroupLayout gl_contentPane;
+	private JPanel contentPane;
+	private JPanel panel;
+
 	private JButton btnLogin;
-	private JButton btnNewUserForm;
 	private JLabel lblUserName;
 	private JLabel lblPassword;
-	private JTextField txtUsername;
-	private JTextField txtPassword;
+	private JTextField txtUserName;
+	private JPasswordField passwordField;
 
 	private UserLoginListener userLoginListener;
-	public User user;
 
-	Controller controller;
+	private User user;
+
+	private Controller controller;
 
 	/**
 	 * Create the frame.
 	 */
 	public LoginFrame() {
+
 		setResizable(false);
 		setTitle("Login");
 		Image formIcon = new ImageIcon(this.getClass().getResource("/averna_ico.png")).getImage();
 		setIconImage(formIcon);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 425, 275);
+		setBounds(100, 100, 325, 275);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		setContentPane(contentPane);
+		addWindowListener(this);
 
 		createControls();
 		addActionListenersForControls();
@@ -68,61 +77,57 @@ public class LoginFrame extends JFrame implements ActionListener {
 
 	private void prepareLayout() {
 
+		panel = new JPanel();
+
 		gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING).addGroup(gl_contentPane
-				.createSequentialGroup().addContainerGap(100, Short.MAX_VALUE)
-				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
-						.createSequentialGroup()
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING).addComponent(btnLogin)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addGroup(gl_contentPane.createSequentialGroup().addComponent(lblUserName)
-												.addPreferredGap(ComponentPlacement.RELATED).addComponent(txtUsername,
-														GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-														GroupLayout.PREFERRED_SIZE))
-										.addGroup(gl_contentPane.createSequentialGroup()
-												.addComponent(lblPassword, GroupLayout.PREFERRED_SIZE, 78,
-														GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(ComponentPlacement.RELATED).addComponent(txtPassword,
-														GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-														GroupLayout.PREFERRED_SIZE))))
-						.addGap(99))
-						.addGroup(Alignment.TRAILING,
-								gl_contentPane
-										.createSequentialGroup().addComponent(btnNewUserForm,
-												GroupLayout.PREFERRED_SIZE, 189, GroupLayout.PREFERRED_SIZE)
-										.addContainerGap()))));
-		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING).addGroup(gl_contentPane
-				.createSequentialGroup().addContainerGap(54, Short.MAX_VALUE)
-				.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(lblUserName).addComponent(
-						txtUsername, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addGap(22)
-				.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(lblPassword).addComponent(
-						txtPassword, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(btnLogin).addGap(48)
-				.addComponent(btnNewUserForm).addContainerGap()));
+		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup().addGap(25)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)
+								.addComponent(panel, GroupLayout.PREFERRED_SIZE, 267, GroupLayout.PREFERRED_SIZE))
+						.addContainerGap(29, Short.MAX_VALUE)));
+		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPane.createSequentialGroup().addContainerGap()
+						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE).addGap(18)
+						.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
+						.addGap(22)));
+
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panel.createSequentialGroup().addGap(28)
+						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING).addComponent(lblUserName)
+								.addComponent(lblPassword))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false).addComponent(passwordField)
+								.addComponent(txtUserName))
+						.addGap(25)));
+		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panel.createSequentialGroup().addContainerGap(43, Short.MAX_VALUE)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(txtUserName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblUserName))
+						.addGap(28)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(lblPassword)
+								.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE))
+						.addGap(34)));
+		panel.setLayout(gl_panel);
 
 	}
 
 	private void createControls() {
 
-		btnLogin = new JButton("login");
-		Image btnLoginIcon = new ImageIcon(this.getClass().getResource("/icons8-key-16.png")).getImage();
-		btnLogin.setIcon(new ImageIcon(btnLoginIcon));
-
-		btnNewUserForm = new JButton("Create new account");
-		Image btnNewUserFormIcon = new ImageIcon(this.getClass().getResource("/icons8-customer-16.png")).getImage();
-		btnNewUserForm.setIcon(new ImageIcon(btnNewUserFormIcon));
+		lblPassword = new JLabel("Password:");
+		passwordField = new JPasswordField();
 
 		lblUserName = new JLabel("User name:");
+		txtUserName = new JTextField();
+		txtUserName.setColumns(10);
 
-		lblPassword = new JLabel("Password:");
-
-		txtUsername = new JTextField();
-		txtUsername.setColumns(10);
-
-		txtPassword = new JTextField();
-		txtPassword.setColumns(10);
-
+		btnLogin = new JButton("Enter");
+		Image btnLoginIcon = new ImageIcon(this.getClass().getResource("/user-enter-32.png")).getImage();
+		btnLogin.setIcon(new ImageIcon(btnLoginIcon));
 	}
 
 	public void setUserLoginListener(UserLoginListener userLoginListener) {
@@ -133,57 +138,125 @@ public class LoginFrame extends JFrame implements ActionListener {
 
 	private void addActionListenersForControls() {
 
-		btnLogin.addActionListener(this);
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				login();
+			}
+		});
+
+		passwordField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+
+				int keyCode = e.getKeyCode();
+				if (keyCode == KeyEvent.VK_ENTER) {					
+					login();
+					
+				} else if (keyCode == KeyEvent.VK_ESCAPE) {					
+					closeFrame();				}
+			}
+		});
+		
+		txtUserName.addKeyListener(this);
 
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-
-		// Login attempt
-		JButton source = (JButton) e.getSource();
+	private void login() {
 
 		if (userLoginListener != null) {
-			
-			if (source == btnLogin) {				
-				
-				txtUsername.setForeground(Color.black);
-				txtPassword.setForeground(Color.black);
 
-				if (!txtUsername.getText().isEmpty()) {
+			txtUserName.setForeground(Color.black);
+			passwordField.setForeground(Color.black);
 
-					controller = new Controller();
-					user = controller.getUserByUserName(txtUsername.getText());
+			char[] pass = passwordField.getPassword();
+			String password = new String(pass);
 
-					if (!(user == null)) {
+			if (!txtUserName.getText().isEmpty()) {
 
-						if (user.getUserPassword().equals(txtPassword.getText())) {
+				controller = new Controller();
+				user = controller.getUserByUserName(txtUserName.getText());
 
-							userLoginListener.loginEventPerformed(user);
+				if (!(user == null)) {
 
-							JOptionPane.showMessageDialog(null, "User successfully logged!", "Message",
-									JOptionPane.INFORMATION_MESSAGE);
+					if (user.getUserPassword().equals(password)) {
 
-							dispose();
+						user.setLogged(true);
+						userLoginListener.loginEventPerformed(user);
 
-						} else {
-							
-							txtPassword.setForeground(Color.red);
-							JOptionPane.showMessageDialog(null, "Password is not correct!", "Warning",
-									JOptionPane.WARNING_MESSAGE);
-						}
+						JOptionPane.showMessageDialog(null, "User successfully logged!", "Message",
+								JOptionPane.INFORMATION_MESSAGE);
+
+						dispose();
+
 					} else {
-						
-						txtUsername.setForeground(Color.red);
-						JOptionPane.showMessageDialog(null, "User does not exist!", "Warning",
+
+						passwordField.setForeground(Color.red);
+						JOptionPane.showMessageDialog(null, "Password is not correct!", "Warning",
 								JOptionPane.WARNING_MESSAGE);
 					}
 				} else {
-					
-					JOptionPane.showMessageDialog(null, "Please specify user name!", "Message",
-							JOptionPane.INFORMATION_MESSAGE);
+
+					txtUserName.setForeground(Color.red);
+					JOptionPane.showMessageDialog(null, "User does not exist!", "Warning", JOptionPane.WARNING_MESSAGE);
 				}
+			} else {
+
+				JOptionPane.showMessageDialog(null, "Please specify user name!", "Message",
+						JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 	}
+
+	@Override
+	public void windowActivated(WindowEvent e) {
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		txtUserName.setText("");
+		passwordField.setText("");
+	}
+	
+	private void closeFrame() {		
+		dispose();
+		setVisible(false);		
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+	}
+
+	@Override
+	public void windowOpened(WindowEvent e) {
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		
+		int keyCode = e.getKeyCode();
+		if (keyCode == KeyEvent.VK_ESCAPE) {			
+			closeFrame();	
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+	}
+
 }

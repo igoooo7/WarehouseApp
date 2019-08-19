@@ -1,5 +1,5 @@
 package pl.nowator_zpu.warehouse_app.entities;
-// Generated 19 lip 2019, 19:08:26 by Hibernate Tools 5.2.12.Final
+// Generated 5 sie 2019, 18:10:16 by Hibernate Tools 5.2.12.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,7 +22,7 @@ public class Racks implements java.io.Serializable {
 
 	private Integer rackId;
 	private int rack;
-	private Set<Locations> locations = new HashSet<Locations>(0);
+	private Set<Parts> parts = new HashSet<Parts>(0);
 
 	public Racks() {
 	}
@@ -31,9 +31,9 @@ public class Racks implements java.io.Serializable {
 		this.rack = rack;
 	}
 
-	public Racks(int rack, Set<Locations> locations) {
+	public Racks(int rack, Set<Parts> parts) {
 		this.rack = rack;
-		this.locations = locations;
+		this.parts = parts;
 	}
 
 	@Id
@@ -58,12 +58,12 @@ public class Racks implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "racks")
-	public Set<Locations> getLocations() {
-		return this.locations;
+	public Set<Parts> getParts() {
+		return this.parts;
 	}
 
-	public void setLocations(Set<Locations> locations) {
-		this.locations = locations;
+	public void setParts(Set<Parts> parts) {
+		this.parts = parts;
 	}
 
 }

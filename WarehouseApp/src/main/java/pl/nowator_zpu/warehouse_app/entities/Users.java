@@ -1,5 +1,5 @@
 package pl.nowator_zpu.warehouse_app.entities;
-// Generated 19 lip 2019, 19:08:26 by Hibernate Tools 5.2.12.Final
+// Generated 5 sie 2019, 18:10:16 by Hibernate Tools 5.2.12.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -27,6 +27,7 @@ public class Users implements java.io.Serializable {
 	private UserRights userRights;
 	private String userName;
 	private String userPassword;
+	private String userEmail;
 	private String firstName;
 	private String lastName;
 	private Set<Parts> parts = new HashSet<Parts>(0);
@@ -41,12 +42,13 @@ public class Users implements java.io.Serializable {
 		this.userName = userName;
 	}
 
-	public Users(JobTitles jobTitles, UserRights userRights, String userName, String userPassword, String firstName,
-			String lastName, Set<Parts> parts, Set<Orders> orders) {
+	public Users(JobTitles jobTitles, UserRights userRights, String userName, String userPassword, String userEmail,
+			String firstName, String lastName, Set<Parts> parts, Set<Orders> orders) {
 		this.jobTitles = jobTitles;
 		this.userRights = userRights;
 		this.userName = userName;
 		this.userPassword = userPassword;
+		this.userEmail = userEmail;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.parts = parts;
@@ -101,6 +103,15 @@ public class Users implements java.io.Serializable {
 
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
+	}
+
+	@Column(name = "user_email", length = 50)
+	public String getUserEmail() {
+		return this.userEmail;
+	}
+
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
 
 	@Column(name = "first_name", length = 25)
