@@ -1,5 +1,5 @@
 package pl.nowator_zpu.warehouse_app.entities;
-// Generated 5 sie 2019, 18:10:16 by Hibernate Tools 5.2.12.Final
+// Generated 20 sie 2019, 07:51:47 by Hibernate Tools 5.2.12.Final
 
 import java.util.Date;
 import java.util.HashSet;

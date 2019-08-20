@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 import javassist.bytecode.stackmap.TypeData.ClassName;
+import pl.nowator_zpu.warehouse_app.application_classes.PartsTableModel;
 import pl.nowator_zpu.warehouse_app.application_classes.User;
 import pl.nowator_zpu.warehouse_app.data_access.Controller;
 import pl.nowator_zpu.warehouse_app.entities.Users;
@@ -56,6 +57,8 @@ public class MainFrame extends JFrame {
 
 	LoginFrame loginFrame;
 	NewUserFrame newUserFrame;
+	
+	//private PartsTableModel partsTableModel;
 
 	private User user;
 
@@ -102,14 +105,13 @@ public class MainFrame extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 
 		user = new User();
-
+				
 	}
 
 	private void prepareLayout() {
 
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229), 2, true), "User logged",
-				TitledBorder.LEFT, TitledBorder.TOP, null, new Color(64, 64, 64)));
+		panel.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229), 2, true), "User data", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(64, 64, 64)));
 		
 		gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
@@ -210,16 +212,13 @@ public class MainFrame extends JFrame {
 		txtUserRights.setEditable(false);
 		txtUserRights.setColumns(10);
 		
+		//controller = new Controller();
+		//controller.getAllParts();
+		//partsTableModel.setData();
+		//partsTableModel = new PartsTableModel();		 
 		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null},
-				{null},
-			},
-			new String[] {
-				"New column"
-			}
-		));
+		
+		
 	}
 
 	private void addActionListenersForControls() {

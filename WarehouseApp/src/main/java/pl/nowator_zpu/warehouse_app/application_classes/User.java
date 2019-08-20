@@ -1,7 +1,5 @@
 package pl.nowator_zpu.warehouse_app.application_classes;
 
-import java.util.HashMap;
-
 public class User {
 
 	private Integer userId;
