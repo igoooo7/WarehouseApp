@@ -8,12 +8,13 @@ public class PartsTableModel extends AbstractTableModel {
 
 	private ArrayList<Part> parts = new ArrayList<>();
 
-	private String[] columnNames = new String[] { "Area", "Manufacturer", "Part Group", "Rack", "Shelf", "Unit", "User",
-			"Order code", "Product code", "Part name", "Description", "Quantity min.", "Quantity max", "Creation date",
+	private String[] columnNames = { "Manufacturer", "Part group", "Part name", "Order code", "Product code", "Area", "Rack", "Shelf", "Unit", "User",
+			"Description", "Quantity min.", "Quantity max", "Creation date",
 			"Last change" };
 
 	public PartsTableModel() {
 
+		
 	}
 
 	public void setData(ArrayList<Part> parts) {
@@ -41,27 +42,27 @@ public class PartsTableModel extends AbstractTableModel {
 		Part part = parts.get(row);
 
 		switch (col) {
-
+		
 		case 0:
-			return part.getArea();
-		case 1:
 			return part.getManufacturer();
-		case 2:
+		case 1:
 			return part.getPartGroup();
-		case 3:
-			return part.getRack();
-		case 4:
-			return part.getShelf();
-		case 5:
-			return part.getUnit();
-		case 6:
-			return part.getUser();
-		case 7:
-			return part.getOrderCode();
-		case 8:
-			return part.getProductCode();
-		case 9:
+		case 2:
 			return part.getPartName();
+		case 3:
+			return part.getOrderCode();
+		case 4:
+			return part.getProductCode();
+		case 5:
+			return part.getArea();
+		case 6:
+			return part.getRack();
+		case 7:
+			return part.getShelf();
+		case 8:
+			return part.getUnit();
+		case 9:
+			return part.getUser();			
 		case 10:
 			return part.getDescription();
 		case 11:

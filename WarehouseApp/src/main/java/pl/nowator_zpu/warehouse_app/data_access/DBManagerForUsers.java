@@ -1,7 +1,6 @@
 package pl.nowator_zpu.warehouse_app.data_access;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,7 +17,6 @@ import javax.persistence.criteria.Root;
 import javassist.bytecode.stackmap.TypeData.ClassName;
 import pl.nowator_zpu.warehouse_app.application_classes.User;
 import pl.nowator_zpu.warehouse_app.entities.JobTitles;
-import pl.nowator_zpu.warehouse_app.entities.Orders;
 import pl.nowator_zpu.warehouse_app.entities.UserRights;
 import pl.nowator_zpu.warehouse_app.entities.Users;
 

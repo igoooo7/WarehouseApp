@@ -12,6 +12,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.SetJoin;
 import javax.persistence.criteria.Subquery;
@@ -26,6 +27,7 @@ import pl.nowator_zpu.warehouse_app.entities.Parts;
 import pl.nowator_zpu.warehouse_app.entities.Racks;
 import pl.nowator_zpu.warehouse_app.entities.Shelfs;
 import pl.nowator_zpu.warehouse_app.entities.Units;
+import pl.nowator_zpu.warehouse_app.entities.UserRights;
 import pl.nowator_zpu.warehouse_app.entities.Users;
 
 public class DBManagerForParts {
@@ -63,12 +65,10 @@ public class DBManagerForParts {
 			Root<Racks> rackRoot = criteriaQuery.from(Racks.class);
 			Root<Shelfs> shelfRoot = criteriaQuery.from(Shelfs.class);
 			Root<Units> unitRoot = criteriaQuery.from(Units.class);
-			Root<Users> userRoot = criteriaQuery.from(Users.class);
 			
-			//Subquery<Integer> subQuery1 = criteriaQuery.subquery(Integer.class);
-			//Root<JobTitles> jobTitleRoot = subQuery1.from(JobTitles.class);
-			//SetJoin<JobTitles, Users> subJobTitles =  jobTitleRoot.join(Users_.class);
-			
+			Root<Users> userRoot = criteriaQuery.from(Users.class);				
+			userRoot.join("jobTitles");
+			userRoot.join("userRights");
 
 			criteriaQuery.multiselect(partRoot, partsGroupRoot, manufacturerRoot, areaRoot, rackRoot, shelfRoot, unitRoot, userRoot);
 
@@ -129,4 +129,22 @@ public class DBManagerForParts {
 		}
 	}	
 
+	public Boolean newPart(Parts part) {
+
+		try {
+
+			createManager();
+
+			em.getTransaction().begin();
+			em.persist(part);
+			em.getTransaction().commit();
+
+			destroyManager();
+
+			return true;
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING, e.toString());
+			return false;
+		}
+	}
 }

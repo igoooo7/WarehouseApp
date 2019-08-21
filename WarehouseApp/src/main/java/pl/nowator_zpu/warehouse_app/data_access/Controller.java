@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import pl.nowator_zpu.warehouse_app.application_classes.Part;
 import pl.nowator_zpu.warehouse_app.application_classes.User;
 import pl.nowator_zpu.warehouse_app.entities.JobTitles;
+import pl.nowator_zpu.warehouse_app.entities.Parts;
 import pl.nowator_zpu.warehouse_app.entities.UserRights;
 import pl.nowator_zpu.warehouse_app.entities.Users;
 
@@ -54,5 +55,9 @@ public class Controller {
 	// Part
 	public ArrayList<Part> getAllParts() {
 		return dbManagerForParts.getAllParts();
+	}
+	
+	public Boolean newPart(Parts part) {
+		return dbManagerForParts.newPart(part);
 	}
 }

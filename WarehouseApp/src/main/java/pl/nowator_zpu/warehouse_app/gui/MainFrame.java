@@ -2,44 +2,37 @@ package pl.nowator_zpu.warehouse_app.gui;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.logging.Logger;
 
 import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
-import javassist.bytecode.stackmap.TypeData.ClassName;
 import pl.nowator_zpu.warehouse_app.application_classes.PartsTableModel;
 import pl.nowator_zpu.warehouse_app.application_classes.User;
 import pl.nowator_zpu.warehouse_app.data_access.Controller;
-import pl.nowator_zpu.warehouse_app.entities.Users;
 import pl.nowator_zpu.warehouse_app.interfaces.UserLoginListener;
-import javax.swing.border.TitledBorder;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.Font;
-import java.awt.Image;
-import javax.swing.JButton;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JScrollPane;
 
 public class MainFrame extends JFrame {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-
-	private static final Logger LOGGER = Logger.getLogger(ClassName.class.getName());
+	private static final long serialVersionUID = 1L;	
 
 	private GroupLayout gl_contentPane;
 	private JPanel contentPane;
@@ -55,15 +48,17 @@ public class MainFrame extends JFrame {
 	private JButton btnNewUser;
 	private JButton btnDeleteUser;
 
+	private JScrollPane scrollPane;
+	
 	LoginFrame loginFrame;
 	NewUserFrame newUserFrame;
 	
-	//private PartsTableModel partsTableModel;
+	private PartsTableModel partsTableModel;
 
 	private User user;
 
 	private Controller controller;
-	private JTable table;
+	private JTable partsTable;
 
 	/**
 	 * Launch the application.
@@ -111,7 +106,7 @@ public class MainFrame extends JFrame {
 	private void prepareLayout() {
 
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229), 2, true), "User data", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(64, 64, 64)));
+		panel.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229), 2, true), "User data", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(64, 64, 64)));		
 		
 		gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
@@ -119,7 +114,6 @@ public class MainFrame extends JFrame {
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(94)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(table, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)
@@ -128,49 +122,63 @@ public class MainFrame extends JFrame {
 							.addGap(32)
 							.addComponent(btnNewUser, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)
 							.addGap(33)
-							.addComponent(btnDeleteUser, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(1122, Short.MAX_VALUE))
+							.addComponent(btnDeleteUser, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(scrollPane)
+							.addGap(250)))
+					.addGap(184))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(21)
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
-					.addGap(26)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnNewUser, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnDeleteUser, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addComponent(table, GroupLayout.PREFERRED_SIZE, 307, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(482, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
+					.addContainerGap())
 		);
-
+		
 		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
-				.createSequentialGroup().addContainerGap()
-				.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING).addComponent(lblJobTitle)
-						.addComponent(lblUserName).addComponent(lblUserRights))
-				.addPreferredGap(ComponentPlacement.UNRELATED)
-				.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+						.addComponent(lblJobTitle)
+						.addComponent(lblUserName)
+						.addComponent(lblUserRights))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addComponent(txtUserName, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
 						.addComponent(txtJobTitle, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
 						.addComponent(txtUserRights, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE))
-				.addContainerGap(24, Short.MAX_VALUE)));
-		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
-				.createSequentialGroup().addContainerGap()
-				.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(lblUserName).addComponent(
-						txtUserName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addPreferredGap(ComponentPlacement.RELATED)
-				.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(lblJobTitle).addComponent(
-						txtJobTitle, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addPreferredGap(ComponentPlacement.RELATED)
-				.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(lblUserRights).addComponent(
-						txtUserRights, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-						GroupLayout.PREFERRED_SIZE))
-				.addContainerGap(35, Short.MAX_VALUE)));
-		panel.setLayout(gl_panel);
+					.addContainerGap(28, Short.MAX_VALUE))
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblUserName)
+						.addComponent(txtUserName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblJobTitle)
+						.addComponent(txtJobTitle, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblUserRights)
+						.addComponent(txtUserRights, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap())
+		);
+		panel.setLayout(gl_panel);	
+		
 	}
 
 	private void createControls() {
@@ -210,14 +218,14 @@ public class MainFrame extends JFrame {
 
 		txtUserRights = new JTextField();
 		txtUserRights.setEditable(false);
-		txtUserRights.setColumns(10);
+		txtUserRights.setColumns(10);		
 		
-		//controller = new Controller();
-		//controller.getAllParts();
-		//partsTableModel.setData();
-		//partsTableModel = new PartsTableModel();		 
-		table = new JTable();
+		partsTableModel = new PartsTableModel();	
+		partsTable = new JTable(partsTableModel);				
+		getDataForPartsTable();
 		
+		scrollPane = new JScrollPane();
+		scrollPane.setViewportView(partsTable);
 		
 	}
 
@@ -231,8 +239,7 @@ public class MainFrame extends JFrame {
 
 				if (userDecision == JOptionPane.YES_OPTION) {
 
-					setVisible(false);
-					dispose();
+					closeFrame();
 				}
 			}
 		});
@@ -331,11 +338,15 @@ public class MainFrame extends JFrame {
 	}
 
 	private void refreshForm() {
-
+		
 		txtUserName.setText(user.getFirstName() + " " + user.getLastName());
 		txtJobTitle.setText(user.getJobTitle());
 		txtUserRights.setText(user.getUserRights());
-
+	}
+	
+	private void closeFrame() {			
+		dispose();
+		setVisible(false);		
 	}
 	
 	private void setEmptyUser() {
@@ -351,5 +362,11 @@ public class MainFrame extends JFrame {
 		user.setLogged(false);
 
 		btnLogin.setText("Login");
+	}
+	
+	private void getDataForPartsTable() {		
+		
+				controller = new Controller();			
+				partsTableModel.setData(controller.getAllParts());
 	}
 }

@@ -186,7 +186,7 @@ public class LoginFrame extends JFrame implements WindowListener, KeyListener {
 						JOptionPane.showMessageDialog(null, "User successfully logged!", "Message",
 								JOptionPane.INFORMATION_MESSAGE);
 
-						dispose();
+						closeFrame();
 
 					} else {
 
@@ -217,13 +217,18 @@ public class LoginFrame extends JFrame implements WindowListener, KeyListener {
 
 	@Override
 	public void windowClosing(WindowEvent e) {
-		txtUserName.setText("");
-		passwordField.setText("");
+		clearAllTextFieldsBeforeFrameClose();
 	}
 	
-	private void closeFrame() {		
+	private void closeFrame() {	
+		clearAllTextFieldsBeforeFrameClose();
 		dispose();
 		setVisible(false);		
+	}
+	
+	private void clearAllTextFieldsBeforeFrameClose() {
+		txtUserName.setText("");
+		passwordField.setText("");
 	}
 
 	@Override
