@@ -13,8 +13,7 @@ public class PartsTableModel extends AbstractTableModel {
 			"Last change" };
 
 	public PartsTableModel() {
-
-		
+				
 	}
 
 	public void setData(ArrayList<Part> parts) {
@@ -41,7 +40,7 @@ public class PartsTableModel extends AbstractTableModel {
 
 		Part part = parts.get(row);
 
-		switch (col) {
+		switch (col) {		
 		
 		case 0:
 			return part.getManufacturer();
@@ -75,6 +74,6 @@ public class PartsTableModel extends AbstractTableModel {
 			return part.getLastChangeDate();
 		}
 		return null;
-	}
-
+	}		
+	
 }

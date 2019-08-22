@@ -60,4 +60,8 @@ public class Controller {
 	public Boolean newPart(Parts part) {
 		return dbManagerForParts.newPart(part);
 	}
+	
+	public Boolean deletePartById(int partId) {
+		return dbManagerForParts.deletePartById(partId);
+	}
 }

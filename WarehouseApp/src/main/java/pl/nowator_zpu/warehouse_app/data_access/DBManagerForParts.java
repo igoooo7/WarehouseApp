@@ -147,4 +147,27 @@ public class DBManagerForParts {
 			return false;
 		}
 	}
+	
+	public Boolean deletePartById(int partId) {
+		
+		try {
+
+			createManager();
+
+			Parts p = em.find(Parts.class, partId);
+						
+			if (p != null) {
+				em.getTransaction().begin();
+				em.remove(p);
+				em.getTransaction().commit();
+			}
+
+			destroyManager();
+
+			return true;
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING, e.toString());
+			return false;
+		}			
+	}
 }
