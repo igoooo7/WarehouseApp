@@ -439,7 +439,7 @@ public class MainFrame extends JFrame {
 		btnNewPart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				// Logic for new part insert !!!
+				// Logic for new part insert !
 
 			}
 		});
