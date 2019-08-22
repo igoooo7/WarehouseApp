@@ -63,6 +63,7 @@ public class MainFrame extends JFrame {
 
 	private Controller controller;
 	private JTable partsTable;
+	private JButton btnNewPart;
 
 	/**
 	 * Launch the application.
@@ -90,7 +91,7 @@ public class MainFrame extends JFrame {
 		Image formIcon = new ImageIcon(this.getClass().getResource("/averna_ico.png")).getImage();
 		setIconImage(formIcon);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1000, 600);
+		setBounds(100, 100, 1200, 750);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 
 		contentPane = new JPanel();
@@ -112,54 +113,55 @@ public class MainFrame extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229), 2, true), "User data",
 				TitledBorder.LEFT, TitledBorder.TOP, null, new Color(64, 64, 64)));
-		
+
 		gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(94)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(btnExit, GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
-								.addComponent(btnDeletePart, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(btnUpdate, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-							.addGap(31)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup().addGap(94)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(panel, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
 								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(scrollPane)
-									.addGap(65))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)
-									.addGap(32)
-									.addComponent(btnNewUser, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)
-									.addGap(33)
-									.addComponent(btnDeleteUser, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)))))
-					.addGap(184))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(21)
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+										.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+												.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+														.addComponent(btnUpdate, GroupLayout.PREFERRED_SIZE, 154,
+																GroupLayout.PREFERRED_SIZE)
+														.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+																.addComponent(btnDeletePart, GroupLayout.DEFAULT_SIZE,
+																		GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+																.addComponent(btnNewPart, GroupLayout.PREFERRED_SIZE,
+																		154, GroupLayout.PREFERRED_SIZE)))
+												.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 154,
+														GroupLayout.PREFERRED_SIZE))
+										.addGap(31)
+										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+												.addGroup(gl_contentPane.createSequentialGroup()
+														.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 154,
+																GroupLayout.PREFERRED_SIZE)
+														.addGap(32)
+														.addComponent(btnNewUser, GroupLayout.PREFERRED_SIZE, 149,
+																GroupLayout.PREFERRED_SIZE)
+														.addGap(33).addComponent(btnDeleteUser,
+																GroupLayout.PREFERRED_SIZE, 149,
+																GroupLayout.PREFERRED_SIZE))
+												.addGroup(gl_contentPane.createSequentialGroup()
+														.addComponent(scrollPane).addGap(65)))))
+						.addGap(384)));
+		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
+				.createSequentialGroup().addGap(21)
+				.addComponent(panel, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(ComponentPlacement.UNRELATED)
+				.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnNewUser, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnDeleteUser, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
-							.addGap(8))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(btnDeletePart, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(btnUpdate, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap())))
-		);
+				.addGap(50)
+				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
+						.createSequentialGroup()
+						.addComponent(btnDeletePart, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
+						.addGap(18).addComponent(btnNewPart, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
+						.addGap(18).addComponent(btnUpdate, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE))
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE))
+				.addContainerGap()));
 
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
@@ -227,17 +229,21 @@ public class MainFrame extends JFrame {
 		txtUserRights.setEditable(false);
 		txtUserRights.setColumns(10);
 
-		partsTableModel = new PartsTableModel();		
-		partsTable = new JTable(partsTableModel);		
-		
+		partsTableModel = new PartsTableModel();
+		partsTable = new JTable(partsTableModel);
+
 		refreshPartsTableModel();
-		
+
 		scrollPane = new JScrollPane();
 		scrollPane.setViewportView(partsTable);
 
 		btnDeletePart = new JButton("Delete part");
-		
-		btnUpdate = new JButton("Update");		
+
+		btnNewPart = new JButton("New part");
+
+		btnUpdate = new JButton("Update");
+		Image btnUpdateIcon = new ImageIcon(this.getClass().getResource("/update-32.png")).getImage();
+		btnUpdate.setIcon(new ImageIcon(btnUpdateIcon));
 
 	}
 
@@ -350,83 +356,100 @@ public class MainFrame extends JFrame {
 		btnDeletePart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				if (user.getUserRightsLevel() >= 2) {
+				if (user.getLogged()) {
 
-					int selectedRow = partsTable.getSelectedRow();
-					 
-					if (selectedRow > -1) {
+					if (user.getUserRightsLevel() >= 2) {
 
-						int userDecision = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete selected parts?",
-								"Question", JOptionPane.YES_NO_OPTION);
+						int selectedRow = partsTable.getSelectedRow();
 
-						if (userDecision == JOptionPane.YES_OPTION) {
-														
-							controller = new Controller();
-							ArrayList<Part> allParts = controller.getAllParts();							 
-							ArrayList<Part> partsToDelete = new ArrayList<Part>();
-							
-							int[] selectedRows = partsTable.getSelectedRows();
-							
-							Boolean partsSuccessfullyDeleted = true;
-							
-							for (int row : selectedRows) {
-								System.out.println(row);
-								String manufacturer = (String)partsTable.getValueAt(row, 0);
-								String orderCode = (String)partsTable.getValueAt(row, 3);
-								
-								for (Part part : allParts) {
-									if(part.getManufacturer().equals(manufacturer) && part.getOrderCode().equals(orderCode)) {
-										
-										partsToDelete.add(part);
-										
+						if (selectedRow > -1) {
+
+							int userDecision = JOptionPane.showConfirmDialog(null,
+									"Are you sure you want to delete selected parts?", "Question",
+									JOptionPane.YES_NO_OPTION);
+
+							if (userDecision == JOptionPane.YES_OPTION) {
+
+								controller = new Controller();
+								ArrayList<Part> allParts = controller.getAllParts();
+								ArrayList<Part> partsToDelete = new ArrayList<Part>();
+
+								int[] selectedRows = partsTable.getSelectedRows();
+
+								Boolean partsSuccessfullyDeleted = true;
+
+								for (int row : selectedRows) {
+									System.out.println(row);
+									String manufacturer = (String) partsTable.getValueAt(row, 0);
+									String orderCode = (String) partsTable.getValueAt(row, 3);
+
+									for (Part part : allParts) {
+										if (part.getManufacturer().equals(manufacturer)
+												&& part.getOrderCode().equals(orderCode)) {
+
+											partsToDelete.add(part);
+
+										}
 									}
 								}
-							}
-							
-							for (Part part : partsToDelete) {
-								
-								Boolean deleteOk = controller.deletePartById(part.getPartId());
-								
-								if (!deleteOk) {
-									partsSuccessfullyDeleted = false;
+
+								for (Part part : partsToDelete) {
+
+									Boolean deleteOk = controller.deletePartById(part.getPartId());
+
+									if (!deleteOk) {
+										partsSuccessfullyDeleted = false;
+									}
+								}
+
+								refreshPartsTableModel();
+
+								if (partsSuccessfullyDeleted) {
+
+									JOptionPane.showMessageDialog(null, "Selected part successfully deleted", "Message",
+											JOptionPane.INFORMATION_MESSAGE);
+
+								} else {
+
+									JOptionPane.showMessageDialog(null,
+											"Some problems appeared, selected parts isn't deleted!", "Warning",
+											JOptionPane.INFORMATION_MESSAGE);
 								}
 							}
-							
-							refreshPartsTableModel();
-							
-							if (partsSuccessfullyDeleted) {
-								
-								JOptionPane.showMessageDialog(null, "Selected part successfully deleted",
-										"Message", JOptionPane.INFORMATION_MESSAGE);
-								
-							}
-							else {
-								
-								JOptionPane.showMessageDialog(null, "Some problems appeared, selected parts isn't deleted!",
-										"Warning", JOptionPane.INFORMATION_MESSAGE);
-							}							
+						} else {
+							JOptionPane.showMessageDialog(null, "Please select parts you want to delete!", "Warning",
+									JOptionPane.INFORMATION_MESSAGE);
 						}
-					}
-					else {
-						JOptionPane.showMessageDialog(null, "Please select products you want to delete!",
+					} else {
+
+						JOptionPane.showMessageDialog(null, "Current user don't have rights to delete parts!",
 								"Warning", JOptionPane.INFORMATION_MESSAGE);
+
 					}
 				}
+
 				else {
-					
-					JOptionPane.showMessageDialog(null, "Current user don't have rights to delete parts!",
-							"Warning", JOptionPane.INFORMATION_MESSAGE);
-					
+
+					JOptionPane.showMessageDialog(null, "User isn't logged!", "Warning",
+							JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});
-		
+
+		btnNewPart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				// Logic for new part insert !!!
+
+			}
+		});
+
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				 refreshPartsTableModel();
+				refreshPartsTableModel();
 			}
 		});
-		
+
 	}
 
 	private void refreshForm() {
@@ -455,12 +478,12 @@ public class MainFrame extends JFrame {
 
 		btnLogin.setText("Login");
 	}
-	
+
 	private void refreshPartsTableModel() {
-		
+
 		controller = new Controller();
 		partsTableModel.setData(controller.getAllParts());
 		partsTableModel.fireTableDataChanged();
-		
+
 	}
 }

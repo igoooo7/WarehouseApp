@@ -105,68 +105,61 @@ public class NewUserFrame extends JFrame implements WindowListener, KeyListener 
 						.addGap(385)));
 
 		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(25)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-									.addComponent(lblEmail, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
-									.addComponent(lblLastName, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
-									.addComponent(lblUserName, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
-									.addComponent(lblPassword, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE))
+		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.TRAILING).addGroup(gl_panel
+				.createSequentialGroup().addGap(25)
+				.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false).addGroup(gl_panel
+						.createSequentialGroup()
+						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
+								.createParallelGroup(Alignment.TRAILING)
+								.addComponent(lblEmail, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblLastName, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblUserName, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblPassword, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE))
 								.addComponent(lblJobTitle, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
 								.addComponent(lblFirstName))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(txtUserName)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING).addComponent(txtUserName)
 								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-									.addComponent(passwordField, Alignment.TRAILING)
-									.addComponent(txtLastName)
-									.addComponent(txtEmail, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-									.addComponent(cBoxJobTitle, 0, 163, Short.MAX_VALUE)
-									.addComponent(txtFirstName, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))))
+										.addComponent(passwordField, Alignment.TRAILING).addComponent(txtLastName)
+										.addComponent(txtEmail, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+										.addComponent(cBoxJobTitle, 0, 163, Short.MAX_VALUE).addComponent(txtFirstName,
+												Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(lblUserRights, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(cBoxUserRights, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-					.addContainerGap(43, Short.MAX_VALUE))
-		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(23)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(txtFirstName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblUserRights, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(cBoxUserRights, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+				.addContainerGap(43, Short.MAX_VALUE)));
+		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
+				.createSequentialGroup().addGap(23)
+				.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(txtFirstName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblFirstName))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblLastName)
-						.addComponent(txtLastName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblUserName)
-						.addComponent(txtUserName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(txtEmail, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(ComponentPlacement.UNRELATED)
+				.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(lblLastName).addComponent(
+						txtLastName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+				.addPreferredGap(ComponentPlacement.UNRELATED)
+				.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(lblUserName).addComponent(
+						txtUserName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+				.addPreferredGap(ComponentPlacement.UNRELATED)
+				.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(txtEmail, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblEmail))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblPassword)
-						.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(cBoxJobTitle, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(ComponentPlacement.UNRELATED)
+				.addGroup(gl_panel
+						.createParallelGroup(Alignment.BASELINE).addComponent(lblPassword).addComponent(passwordField,
+								GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+				.addGap(18)
+				.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(cBoxJobTitle, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblJobTitle))
-					.addGap(18)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblUserRights)
-						.addComponent(cBoxUserRights, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(20, Short.MAX_VALUE))
-		);
+				.addGap(18)
+				.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(lblUserRights).addComponent(
+						cBoxUserRights, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+						GroupLayout.PREFERRED_SIZE))
+				.addContainerGap(20, Short.MAX_VALUE)));
 		panel.setLayout(gl_panel);
 
 	}
@@ -212,102 +205,113 @@ public class NewUserFrame extends JFrame implements WindowListener, KeyListener 
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				StringBuilder sb = new StringBuilder();
-				char[] pass = passwordField.getPassword();
-				String password = new String(pass);
+				if (user.getLogged()) {
 
-				if (!txtFirstName.getText().isEmpty() && !txtLastName.getText().isEmpty()
-						&& !txtUserName.getText().isEmpty() && !txtEmail.getText().isEmpty() && !password.isEmpty()) {
+					StringBuilder sb = new StringBuilder();
+					char[] pass = passwordField.getPassword();
+					String password = new String(pass);
 
-					txtUserName.setForeground(Color.black);
+					if (!txtFirstName.getText().isEmpty() && !txtLastName.getText().isEmpty()
+							&& !txtUserName.getText().isEmpty() && !txtEmail.getText().isEmpty()
+							&& !password.isEmpty()) {
 
-					ArrayList<User> allUsers = new ArrayList<>();
-					allUsers = controller.getAllUsers();
+						txtUserName.setForeground(Color.black);
 
-					Boolean userAlreadyExist = false;
-					for (User user : allUsers) {
-						if (user.getUserName().equals(txtUserName.getText())) {
-							userAlreadyExist = true;
+						ArrayList<User> allUsers = new ArrayList<>();
+						allUsers = controller.getAllUsers();
+
+						Boolean userAlreadyExist = false;
+						for (User user : allUsers) {
+							if (user.getUserName().equals(txtUserName.getText())) {
+								userAlreadyExist = true;
+							}
 						}
-					}
 
-					if (!userAlreadyExist) {
+						if (!userAlreadyExist) {
 
-						JobTitles jt = controller.getJobTitleByTitle(cBoxJobTitle.getSelectedItem().toString());
-						UserRights ur = controller.getUserRightsByRights(cBoxUserRights.getSelectedItem().toString());
+							JobTitles jt = controller.getJobTitleByTitle(cBoxJobTitle.getSelectedItem().toString());
+							UserRights ur = controller
+									.getUserRightsByRights(cBoxUserRights.getSelectedItem().toString());
 
-						if ((user.getUserRightsLevel() < 3 && ur.getUserRightsId() == 3)
-								|| (user.getUserRightsLevel() < 2 && ur.getUserRightsId() >= 2)) {
+							if ((user.getUserRightsLevel() < 3 && ur.getUserRightsId() == 3)
+									|| (user.getUserRightsLevel() < 2 && ur.getUserRightsId() >= 2)) {
 
-							JOptionPane.showMessageDialog(null, "Current user don't have rights to create new user!",
-									"Warning", JOptionPane.INFORMATION_MESSAGE);
-
-						} else {
-							Users newUser = new Users();
-							newUser.setFirstName(txtFirstName.getText());
-							newUser.setLastName(txtLastName.getText());
-							newUser.setUserName(txtUserName.getText());
-							newUser.setUserEmail(txtEmail.getText());
-							newUser.setUserPassword(password);
-							newUser.setJobTitles(jt);
-							newUser.setUserRights(ur);
-
-							Boolean userSuccessfullyCreated = controller.newUser(newUser);
-
-							if (userSuccessfullyCreated) {
-
-								JOptionPane.showMessageDialog(null, "User successfully created", "Message",
+								JOptionPane.showMessageDialog(null,
+										"Current user don't have rights to create new user!", "Warning",
 										JOptionPane.INFORMATION_MESSAGE);
 
 							} else {
+								Users newUser = new Users();
+								newUser.setFirstName(txtFirstName.getText());
+								newUser.setLastName(txtLastName.getText());
+								newUser.setUserName(txtUserName.getText());
+								newUser.setUserEmail(txtEmail.getText());
+								newUser.setUserPassword(password);
+								newUser.setJobTitles(jt);
+								newUser.setUserRights(ur);
 
-								JOptionPane.showMessageDialog(null, "Some problems appeared, user wasn't created!",
-										"Warning", JOptionPane.INFORMATION_MESSAGE);
+								Boolean userSuccessfullyCreated = controller.newUser(newUser);
+
+								if (userSuccessfullyCreated) {
+
+									JOptionPane.showMessageDialog(null, "User successfully created", "Message",
+											JOptionPane.INFORMATION_MESSAGE);
+
+								} else {
+
+									JOptionPane.showMessageDialog(null, "Some problems appeared, user wasn't created!",
+											"Warning", JOptionPane.INFORMATION_MESSAGE);
+								}
 							}
+						} else {
+
+							txtUserName.setForeground(Color.red);
+							JOptionPane.showMessageDialog(null,
+									"User already exist, please specify different user name", "Warning",
+									JOptionPane.INFORMATION_MESSAGE);
+
 						}
+
 					} else {
 
-						txtUserName.setForeground(Color.red);
-						JOptionPane.showMessageDialog(null, "User already exist, please specify different user name",
-								"Warning", JOptionPane.INFORMATION_MESSAGE);
-
-					}
-
-				} else {
-
-					if (txtFirstName.getText().isEmpty()) {
-						sb.append(" first name");
-					}
-					if (txtLastName.getText().isEmpty()) {
-						if (!sb.toString().isEmpty()) {
-							sb.append(", ");
+						if (txtFirstName.getText().isEmpty()) {
+							sb.append(" first name");
 						}
-						sb.append(" last name");
-					}
-					if (txtUserName.getText().isEmpty()) {
-						if (!sb.toString().isEmpty()) {
-							sb.append(", ");
+						if (txtLastName.getText().isEmpty()) {
+							if (!sb.toString().isEmpty()) {
+								sb.append(", ");
+							}
+							sb.append(" last name");
 						}
-						sb.append(" user name");
-					}
-					if (txtEmail.getText().isEmpty()) {
-						if (!sb.toString().isEmpty()) {
-							sb.append(", ");
+						if (txtUserName.getText().isEmpty()) {
+							if (!sb.toString().isEmpty()) {
+								sb.append(", ");
+							}
+							sb.append(" user name");
 						}
-						sb.append(" email");
-					}
-					if (password.isEmpty()) {
-						if (!sb.toString().isEmpty()) {
-							sb.append(", ");
+						if (txtEmail.getText().isEmpty()) {
+							if (!sb.toString().isEmpty()) {
+								sb.append(", ");
+							}
+							sb.append(" email");
 						}
-						sb.append(" password");
-					}
-					sb.append(".");
+						if (password.isEmpty()) {
+							if (!sb.toString().isEmpty()) {
+								sb.append(", ");
+							}
+							sb.append(" password");
+						}
+						sb.append(".");
 
-					JOptionPane.showMessageDialog(null, "Please specify:" + sb.toString(), "Warning",
-							JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Please specify:" + sb.toString(), "Warning",
+								JOptionPane.INFORMATION_MESSAGE);
+					}
+				} else {					 
+
+						JOptionPane.showMessageDialog(null, "User isn't logged!", "Warning",
+								JOptionPane.INFORMATION_MESSAGE);
+					 
 				}
-
 			}
 		});
 
@@ -321,7 +325,7 @@ public class NewUserFrame extends JFrame implements WindowListener, KeyListener 
 			public void keyPressed(KeyEvent e) {
 				int keyCode = e.getKeyCode();
 				if (keyCode == KeyEvent.VK_ESCAPE) {
-					closeFrame();	
+					closeFrame();
 				}
 			}
 		});
@@ -359,13 +363,13 @@ public class NewUserFrame extends JFrame implements WindowListener, KeyListener 
 	public void windowClosing(WindowEvent e) {
 		clearAllTextFieldsBeforeFrameClose();
 	}
-	
-	private void closeFrame() {	
+
+	private void closeFrame() {
 		clearAllTextFieldsBeforeFrameClose();
 		dispose();
-		setVisible(false);		
+		setVisible(false);
 	}
-	
+
 	private void clearAllTextFieldsBeforeFrameClose() {
 		txtFirstName.setText("");
 		txtLastName.setText("");
@@ -394,8 +398,8 @@ public class NewUserFrame extends JFrame implements WindowListener, KeyListener 
 	public void keyPressed(KeyEvent e) {
 
 		int keyCode = e.getKeyCode();
-		if (keyCode == KeyEvent.VK_ESCAPE) {			
-			closeFrame();			
+		if (keyCode == KeyEvent.VK_ESCAPE) {
+			closeFrame();
 		}
 	}
 
