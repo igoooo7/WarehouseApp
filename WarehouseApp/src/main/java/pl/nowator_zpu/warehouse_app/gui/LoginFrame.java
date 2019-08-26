@@ -174,7 +174,7 @@ public class LoginFrame extends JFrame implements WindowListener, KeyListener {
 			if (!txtUserName.getText().isEmpty()) {
 
 				controller = new Controller();
-				user = controller.getUserByUserName(txtUserName.getText());
+				user = controller.dbManagerForUsers.getUserByUserName(txtUserName.getText());
 
 				if (!(user == null)) {
 
@@ -206,6 +206,17 @@ public class LoginFrame extends JFrame implements WindowListener, KeyListener {
 			}
 		}
 	}
+	
+	private void closeFrame() {	
+		clearAllTextFieldsBeforeFrameClose();
+		dispose();
+		setVisible(false);		
+	}
+	
+	private void clearAllTextFieldsBeforeFrameClose() {
+		txtUserName.setText("");
+		passwordField.setText("");
+	}
 
 	@Override
 	public void windowActivated(WindowEvent e) {
@@ -218,17 +229,6 @@ public class LoginFrame extends JFrame implements WindowListener, KeyListener {
 	@Override
 	public void windowClosing(WindowEvent e) {
 		clearAllTextFieldsBeforeFrameClose();
-	}
-	
-	private void closeFrame() {	
-		clearAllTextFieldsBeforeFrameClose();
-		dispose();
-		setVisible(false);		
-	}
-	
-	private void clearAllTextFieldsBeforeFrameClose() {
-		txtUserName.setText("");
-		passwordField.setText("");
 	}
 
 	@Override

@@ -40,7 +40,7 @@ public class DBManagerForUsers {
 	// User
 	public User getUserByUserName(String name) {
 
-		User userResult = new User();
+		User result = new User();
 
 		try {
 
@@ -71,18 +71,18 @@ public class DBManagerForUsers {
 			UserRights ur = (UserRights) queryResult[1];
 			JobTitles jt = (JobTitles) queryResult[2];
 
-			userResult.setUserId(u.getUserId());
-			userResult.setJobTitle(jt.getJobTitle());
-			userResult.setUserRights(ur.getUserRights());
-			userResult.setUserRightsLevel(ur.getUserRightsId());
-			userResult.setUserName(u.getUserName());
-			userResult.setUserPassword(u.getUserPassword());
-			userResult.setFirstName(u.getFirstName());
-			userResult.setLastName(u.getLastName());
+			result.setUserId(u.getUserId());
+			result.setJobTitle(jt.getJobTitle());
+			result.setUserRights(ur.getUserRights());
+			result.setUserRightsLevel(ur.getUserRightsId());
+			result.setUserName(u.getUserName());
+			result.setUserPassword(u.getUserPassword());
+			result.setFirstName(u.getFirstName());
+			result.setLastName(u.getLastName());
 
 			destroyManager();
 
-			return userResult;
+			return result;
 		} catch (Exception e) {
 			LOGGER.log(Level.WARNING, e.toString());
 			return null;
@@ -91,7 +91,7 @@ public class DBManagerForUsers {
 
 	public ArrayList<User> getAllUsers() {
 
-		ArrayList<User> usersResult = new ArrayList<>();
+		ArrayList<User> result = new ArrayList<>();
 
 		try {
 
@@ -130,12 +130,12 @@ public class DBManagerForUsers {
 				user.setFirstName(u.getFirstName());
 				user.setLastName(u.getLastName());
 
-				usersResult.add(user);
+				result.add(user);
 			}
 
 			destroyManager();
 
-			return usersResult;
+			return result;
 		} catch (Exception e) {
 			LOGGER.log(Level.WARNING, e.toString());
 			return null;
@@ -167,8 +167,8 @@ public class DBManagerForUsers {
 
 			createManager();
 
-			Users u = em.find(Users.class, user.getUserId());	
-						
+			Users u = em.find(Users.class, user.getUserId());
+
 			if (u != null) {
 				em.getTransaction().begin();
 				em.remove(u);
@@ -187,7 +187,7 @@ public class DBManagerForUsers {
 	// Job title
 	public ArrayList<String> getAllJobTitles() {
 
-		ArrayList<String> jobTitlesResult = new ArrayList<>();
+		ArrayList<String> result = new ArrayList<>();
 
 		try {
 
@@ -203,10 +203,10 @@ public class DBManagerForUsers {
 			List<JobTitles> queryResult = query.getResultList();
 
 			for (JobTitles jt : queryResult) {
-				jobTitlesResult.add(jt.getJobTitle());
+				result.add(jt.getJobTitle());
 			}
 
-			return jobTitlesResult;
+			return result;
 		} catch (Exception e) {
 			LOGGER.log(Level.WARNING, e.toString());
 			return null;
@@ -215,7 +215,7 @@ public class DBManagerForUsers {
 
 	public JobTitles getJobTitleByTitle(String title) {
 
-		JobTitles jobTitleResult = new JobTitles();
+		JobTitles result = new JobTitles();
 
 		try {
 
@@ -233,9 +233,9 @@ public class DBManagerForUsers {
 
 			TypedQuery<JobTitles> query = em.createQuery(criteriaQuery);
 
-			jobTitleResult = query.getSingleResult();
+			result = query.getSingleResult();
 
-			return jobTitleResult;
+			return result;
 		} catch (Exception e) {
 			LOGGER.log(Level.WARNING, e.toString());
 			return null;
@@ -245,7 +245,7 @@ public class DBManagerForUsers {
 	// User rights
 	public ArrayList<String> getAllUserRights() {
 
-		ArrayList<String> userRightsResult = new ArrayList<>();
+		ArrayList<String> result = new ArrayList<>();
 
 		try {
 
@@ -261,10 +261,10 @@ public class DBManagerForUsers {
 			List<UserRights> queryResult = query.getResultList();
 
 			for (UserRights ur : queryResult) {
-				userRightsResult.add(ur.getUserRights());
+				result.add(ur.getUserRights());
 			}
 
-			return userRightsResult;
+			return result;
 		} catch (Exception e) {
 			LOGGER.log(Level.WARNING, e.toString());
 			return null;
@@ -273,7 +273,7 @@ public class DBManagerForUsers {
 
 	public UserRights getUserRightsByRights(String rights) {
 
-		UserRights userRightsResult = new UserRights();
+		UserRights result = new UserRights();
 
 		try {
 
@@ -291,9 +291,9 @@ public class DBManagerForUsers {
 
 			TypedQuery<UserRights> query = em.createQuery(criteriaQuery);
 
-			userRightsResult = query.getSingleResult();
+			result = query.getSingleResult();
 
-			return userRightsResult;
+			return result;
 		} catch (Exception e) {
 			LOGGER.log(Level.WARNING, e.toString());
 			return null;

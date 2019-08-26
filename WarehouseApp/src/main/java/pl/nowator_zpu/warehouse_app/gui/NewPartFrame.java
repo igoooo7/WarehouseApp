@@ -31,7 +31,7 @@ import pl.nowator_zpu.warehouse_app.entities.JobTitles;
 import pl.nowator_zpu.warehouse_app.entities.UserRights;
 import pl.nowator_zpu.warehouse_app.entities.Users;
 
-public class NewUserFrame extends JFrame implements WindowListener, KeyListener {
+public class NewPartFrame extends JFrame implements WindowListener, KeyListener {
 
 	/**
 	 * 
@@ -68,7 +68,7 @@ public class NewUserFrame extends JFrame implements WindowListener, KeyListener 
 	/**
 	 * Create the frame.
 	 */
-	public NewUserFrame() {
+	public NewPartFrame() {
 
 		setResizable(false);
 		setTitle("New user");
