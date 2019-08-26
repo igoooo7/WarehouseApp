@@ -344,13 +344,13 @@ public class NewUserFrame extends JFrame implements WindowListener, KeyListener 
 		controller = new Controller();
 		String[] array;
 
-		ArrayList<String> jtList = controller.dbManagerForUsers.getAllJobTitles();
-		ArrayList<String> urList = controller.dbManagerForUsers.getAllUserRights();
+		ArrayList<String> jobTitleList = controller.dbManagerForUsers.getAllJobTitles();
+		ArrayList<String> userRightsList = controller.dbManagerForUsers.getAllUserRights();
 
-		array = jtList.toArray(new String[jtList.size()]);
+		array = jobTitleList.toArray(new String[jobTitleList.size()]);
 		cBoxJobTitle = new JComboBox<Object>(array);
 
-		array = urList.toArray(new String[urList.size()]);
+		array = userRightsList.toArray(new String[userRightsList.size()]);
 		cBoxUserRights = new JComboBox<Object>(array);
 
 	}

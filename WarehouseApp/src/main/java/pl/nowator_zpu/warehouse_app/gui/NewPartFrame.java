@@ -1,10 +1,10 @@
 package pl.nowator_zpu.warehouse_app.gui;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
@@ -18,18 +18,14 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.LineBorder;
 
 import pl.nowator_zpu.warehouse_app.application_classes.User;
 import pl.nowator_zpu.warehouse_app.data_access.Controller;
-import pl.nowator_zpu.warehouse_app.entities.JobTitles;
-import pl.nowator_zpu.warehouse_app.entities.UserRights;
-import pl.nowator_zpu.warehouse_app.entities.Users;
 
 public class NewPartFrame extends JFrame implements WindowListener, KeyListener {
 
@@ -41,26 +37,37 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 	private GroupLayout gl_contentPane;
 	private JPanel contentPane;
 
-	private JLabel lblFirstName;
-	private JLabel lblLastName;
-	private JLabel lblUserName;
-	private JLabel lblEmail;
-	private JLabel lblPassword;
-	private JLabel lblJobTitle;
-	private JLabel lblUserRights;
-	
-	private JTextField txtFirstName;	
-	private JTextField txtLastName;
-	private JTextField txtUserName;
-	private JTextField txtEmail;
-	
-	private JPasswordField passwordField;
-	
+	private JLabel lblPartName;
+	private JLabel lblProductCode;
+	private JLabel lblOrderCode;
+	private JLabel lblDescription;
+	private JLabel lblManufacturer;
+	private JLabel lblPartGroup;
+	private JLabel lblUnit;
+	private JLabel lblArea;
+	private JLabel lblRack;
+	private JLabel lblShelf;
+	private JLabel lblQuantityMin;
+	private JLabel lblQuantityMax;
+
+	private JTextField txtPartName;
+	private JTextField txtProductCode;
+	private JTextField txtOrderCode;
+	private JTextField txtQuantityMin;
+	private JTextField txtQuantityMax;
+
+	private JTextArea txtrDescription;
+
+	private JComboBox cBoxManufacturer;
+	private JComboBox cBoxPartGroup;
+	private JComboBox cBoxUnit;
+	private JComboBox cBoxArea;
+	private JComboBox cBoxRack;
+	private JComboBox cBoxShelf;
+
+	private JButton btnImage;
 	private JButton btnCreate;
-	
-	private JComboBox<Object> cBoxJobTitle;
-	private JComboBox<Object> cBoxUserRights;
-	
+
 	private User user;
 
 	private Controller controller;
@@ -71,11 +78,11 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 	public NewPartFrame() {
 
 		setResizable(false);
-		setTitle("New user");
+		setTitle("New part");
 		Image formIcon = new ImageIcon(this.getClass().getResource("/averna_ico.png")).getImage();
 		setIconImage(formIcon);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 400, 450);
+		setBounds(100, 100, 410, 700);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -95,110 +102,207 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 		JPanel panel = new JPanel();
 
 		gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPane.createSequentialGroup().addContainerGap(48, Short.MAX_VALUE)
+		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup().addGap(26)
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(btnCreate, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)
-								.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE))
-						.addGap(27)));
+								.addComponent(panel, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnCreate, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE))
+						.addContainerGap(28, Short.MAX_VALUE)));
 		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPane.createSequentialGroup().addGap(29)
-						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 285, GroupLayout.PREFERRED_SIZE).addGap(30)
+				.addGroup(gl_contentPane.createSequentialGroup().addGap(28)
+						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 532, GroupLayout.PREFERRED_SIZE).addGap(31)
 						.addComponent(btnCreate, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
-						.addGap(385)));
+						.addGap(138)));
 
 		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.TRAILING).addGroup(gl_panel
-				.createSequentialGroup().addGap(25)
-				.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false).addGroup(gl_panel
-						.createSequentialGroup()
-						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
-								.createParallelGroup(Alignment.TRAILING)
-								.addComponent(lblEmail, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblLastName, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblUserName, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblPassword, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE))
-								.addComponent(lblJobTitle, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblFirstName))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING).addComponent(txtUserName)
-								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(passwordField, Alignment.TRAILING).addComponent(txtLastName)
-										.addComponent(txtEmail, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-										.addComponent(cBoxJobTitle, 0, 163, Short.MAX_VALUE).addComponent(txtFirstName,
-												Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))))
-						.addGroup(gl_panel.createSequentialGroup()
-								.addComponent(lblUserRights, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(cBoxUserRights, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-				.addContainerGap(43, Short.MAX_VALUE)));
+		gl_panel.setHorizontalGroup(
+				gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup().addContainerGap().addGroup(gl_panel
+								.createParallelGroup(Alignment.LEADING).addGroup(gl_panel.createSequentialGroup()
+										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
+												.createSequentialGroup()
+												.addComponent(lblOrderCode, GroupLayout.PREFERRED_SIZE, 97,
+														GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED).addComponent(txtOrderCode,
+														GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE))
+												.addGroup(gl_panel.createSequentialGroup().addGroup(gl_panel
+														.createParallelGroup(Alignment.LEADING)
+														.addComponent(lblProductCode, GroupLayout.PREFERRED_SIZE, 97,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(lblPartName)).addPreferredGap(
+																ComponentPlacement.RELATED)
+														.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+																.addComponent(txtPartName, GroupLayout.DEFAULT_SIZE,
+																		211, Short.MAX_VALUE)
+																.addComponent(txtProductCode, GroupLayout.DEFAULT_SIZE,
+																		211, Short.MAX_VALUE))))
+										.addGap(23))
+								.addGroup(gl_panel.createSequentialGroup().addGroup(gl_panel
+										.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
+												.createSequentialGroup()
+												.addComponent(lblDescription, GroupLayout.PREFERRED_SIZE, 97,
+														GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED)
+												.addComponent(txtrDescription, GroupLayout.PREFERRED_SIZE, 209,
+														GroupLayout.PREFERRED_SIZE))
+										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+												.addGroup(gl_panel
+														.createSequentialGroup()
+														.addComponent(lblManufacturer, GroupLayout.PREFERRED_SIZE, 97,
+																GroupLayout.PREFERRED_SIZE)
+														.addPreferredGap(ComponentPlacement.RELATED).addComponent(
+																cBoxManufacturer, 0, GroupLayout.DEFAULT_SIZE,
+																Short.MAX_VALUE))
+												.addGroup(gl_panel.createSequentialGroup().addGroup(gl_panel
+														.createParallelGroup(Alignment.LEADING)
+														.addComponent(lblPartGroup, GroupLayout.PREFERRED_SIZE, 97,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(lblUnit, GroupLayout.PREFERRED_SIZE, 97,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(lblArea, GroupLayout.PREFERRED_SIZE, 97,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(lblRack, GroupLayout.PREFERRED_SIZE, 97,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(lblShelf, GroupLayout.PREFERRED_SIZE, 97,
+																GroupLayout.PREFERRED_SIZE))
+														.addPreferredGap(ComponentPlacement.RELATED)
+														.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+																.addComponent(cBoxUnit, GroupLayout.PREFERRED_SIZE, 209,
+																		GroupLayout.PREFERRED_SIZE)
+																.addComponent(cBoxPartGroup, GroupLayout.PREFERRED_SIZE,
+																		209, GroupLayout.PREFERRED_SIZE)
+																.addComponent(cBoxArea, GroupLayout.PREFERRED_SIZE, 209,
+																		GroupLayout.PREFERRED_SIZE)
+																.addComponent(cBoxRack, GroupLayout.PREFERRED_SIZE, 209,
+																		GroupLayout.PREFERRED_SIZE)
+																.addComponent(cBoxShelf, GroupLayout.PREFERRED_SIZE,
+																		209, GroupLayout.PREFERRED_SIZE))))
+										.addGroup(gl_panel.createSequentialGroup()
+												.addComponent(lblQuantityMin, GroupLayout.PREFERRED_SIZE, 97,
+														GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED)
+												.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+														.addComponent(btnImage)
+														.addGroup(gl_panel.createSequentialGroup()
+																.addComponent(txtQuantityMin,
+																		GroupLayout.PREFERRED_SIZE, 47,
+																		GroupLayout.PREFERRED_SIZE)
+																.addGap(18)
+																.addComponent(lblQuantityMax,
+																		GroupLayout.PREFERRED_SIZE, 97,
+																		GroupLayout.PREFERRED_SIZE)
+																.addPreferredGap(ComponentPlacement.RELATED,
+																		GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+																.addComponent(txtQuantityMax,
+																		GroupLayout.PREFERRED_SIZE, 47,
+																		GroupLayout.PREFERRED_SIZE)))))
+										.addContainerGap(20, Short.MAX_VALUE)))));
 		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
 				.createSequentialGroup().addGap(23)
-				.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(txtFirstName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblFirstName))
+				.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(lblPartName).addComponent(
+						txtPartName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 				.addPreferredGap(ComponentPlacement.UNRELATED)
-				.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(lblLastName).addComponent(
-						txtLastName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addPreferredGap(ComponentPlacement.UNRELATED)
-				.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(lblUserName).addComponent(
-						txtUserName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addPreferredGap(ComponentPlacement.UNRELATED)
-				.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(txtEmail, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblEmail))
-				.addPreferredGap(ComponentPlacement.UNRELATED)
-				.addGroup(gl_panel
-						.createParallelGroup(Alignment.BASELINE).addComponent(lblPassword).addComponent(passwordField,
-								GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addGap(18)
-				.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(cBoxJobTitle, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblJobTitle))
-				.addGap(18)
-				.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(lblUserRights).addComponent(
-						cBoxUserRights, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+				.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(lblProductCode).addComponent(
+						txtProductCode, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 						GroupLayout.PREFERRED_SIZE))
-				.addContainerGap(20, Short.MAX_VALUE)));
+				.addPreferredGap(ComponentPlacement.UNRELATED)
+				.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(lblOrderCode).addComponent(
+						txtOrderCode, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+				.addGap(18)
+				.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(lblDescription)
+						.addComponent(txtrDescription, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE))
+				.addGap(18)
+				.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(lblManufacturer).addComponent(
+						cBoxManufacturer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+						GroupLayout.PREFERRED_SIZE))
+				.addPreferredGap(ComponentPlacement.UNRELATED)
+				.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(cBoxPartGroup, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblPartGroup))
+				.addPreferredGap(ComponentPlacement.UNRELATED)
+				.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(cBoxUnit, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblUnit))
+				.addPreferredGap(ComponentPlacement.UNRELATED)
+				.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(cBoxArea, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblArea))
+				.addPreferredGap(ComponentPlacement.UNRELATED)
+				.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(cBoxRack, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblRack))
+				.addPreferredGap(ComponentPlacement.UNRELATED)
+				.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(cBoxShelf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblShelf))
+				.addGap(18)
+				.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(lblQuantityMin)
+						.addComponent(txtQuantityMin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblQuantityMax).addComponent(txtQuantityMax, GroupLayout.PREFERRED_SIZE,
+								GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+				.addPreferredGap(ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+				.addComponent(btnImage, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE).addContainerGap()));
 		panel.setLayout(gl_panel);
 
 	}
 
 	private void createControls() {
 
-		lblFirstName = new JLabel("First name:");
+		lblPartName = new JLabel("Part name:");
 
-		txtFirstName = new JTextField();
-		txtFirstName.setColumns(15);
+		txtPartName = new JTextField();
+		txtPartName.setColumns(15);
 
-		lblLastName = new JLabel("Last name:");
+		lblProductCode = new JLabel("Product code:");
 
-		txtLastName = new JTextField();
-		txtLastName.setColumns(15);
+		txtProductCode = new JTextField();
+		txtProductCode.setColumns(15);
 
-		lblUserName = new JLabel("User name:");
+		lblOrderCode = new JLabel("Order code:");
 
-		txtUserName = new JTextField();
-		txtUserName.setColumns(15);
+		txtOrderCode = new JTextField();
+		txtOrderCode.setColumns(15);
 
-		lblEmail = new JLabel("Email:");
+		lblDescription = new JLabel("Description:");
 
-		txtEmail = new JTextField();
-		txtEmail.setColumns(25);
+		txtrDescription = new JTextArea();
+		txtrDescription.setLineWrap(true);
+		txtrDescription.setFont(new Font("Tahoma", Font.PLAIN, 13));
 
-		lblPassword = new JLabel("Password:");
-		passwordField = new JPasswordField();
+		lblManufacturer = new JLabel("Manufacturer:");
 
-		lblJobTitle = new JLabel("Job title:");
+		lblPartGroup = new JLabel("Part group:");
 
-		lblUserRights = new JLabel("Rights:");
+		lblUnit = new JLabel("Unit:");
+
+		lblArea = new JLabel("Area:");
+
+		lblRack = new JLabel("Rack:");
+
+		lblShelf = new JLabel("Shelf:");
+
+		lblQuantityMin = new JLabel("Quantity min:");
+
+		txtQuantityMin = new JTextField();
+		txtQuantityMin.setColumns(15);
+
+		lblQuantityMax = new JLabel("Quantity max:");
+
+		txtQuantityMax = new JTextField();
+		txtQuantityMax.setColumns(15);
+
+		btnImage = new JButton("Load image");
+		Image btnLoadImageIcon = new ImageIcon(this.getClass().getResource("/load-image-32.png")).getImage();
+		btnImage.setIcon(new ImageIcon(btnLoadImageIcon));
 
 		btnCreate = new JButton("Create");
-		Image btnCreateIcon = new ImageIcon(this.getClass().getResource("/create-user-32.png")).getImage();
+		Image btnCreateIcon = new ImageIcon(this.getClass().getResource("/new-part-32.png")).getImage();
 		btnCreate.setIcon(new ImageIcon(btnCreateIcon));
 
 		prepareComboBoxes();
@@ -208,131 +312,9 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
-				if (user.getLogged()) {
-
-					StringBuilder sb = new StringBuilder();
-					char[] pass = passwordField.getPassword();
-					String password = new String(pass);
-
-					if (!txtFirstName.getText().isEmpty() && !txtLastName.getText().isEmpty()
-							&& !txtUserName.getText().isEmpty() && !txtEmail.getText().isEmpty()
-							&& !password.isEmpty()) {
-
-						txtUserName.setForeground(Color.black);
-
-						ArrayList<User> allUsers = new ArrayList<>();
-						allUsers = controller.dbManagerForUsers.getAllUsers();
-
-						Boolean userAlreadyExist = false;
-						for (User user : allUsers) {
-							if (user.getUserName().equals(txtUserName.getText())) {
-								userAlreadyExist = true;
-							}
-						}
-
-						if (!userAlreadyExist) {
-
-							JobTitles jt = controller.dbManagerForUsers.getJobTitleByTitle(cBoxJobTitle.getSelectedItem().toString());
-							UserRights ur = controller
-									.dbManagerForUsers.getUserRightsByRights(cBoxUserRights.getSelectedItem().toString());
-
-							if ((user.getUserRightsLevel() < 3 && ur.getUserRightsId() == 3)
-									|| (user.getUserRightsLevel() < 2 && ur.getUserRightsId() >= 2)) {
-
-								JOptionPane.showMessageDialog(null,
-										"Current user don't have rights to create new user!", "Warning",
-										JOptionPane.INFORMATION_MESSAGE);
-
-							} else {
-								Users newUser = new Users();
-								newUser.setFirstName(txtFirstName.getText());
-								newUser.setLastName(txtLastName.getText());
-								newUser.setUserName(txtUserName.getText());
-								newUser.setUserEmail(txtEmail.getText());
-								newUser.setUserPassword(password);
-								newUser.setJobTitles(jt);
-								newUser.setUserRights(ur);
-
-								Boolean userSuccessfullyCreated = controller.dbManagerForUsers.newUser(newUser);
-
-								if (userSuccessfullyCreated) {
-
-									JOptionPane.showMessageDialog(null, "User successfully created", "Message",
-											JOptionPane.INFORMATION_MESSAGE);
-
-								} else {
-
-									JOptionPane.showMessageDialog(null, "Some problems appeared, user wasn't created!",
-											"Warning", JOptionPane.INFORMATION_MESSAGE);
-								}
-							}
-						} else {
-
-							txtUserName.setForeground(Color.red);
-							JOptionPane.showMessageDialog(null,
-									"User already exist, please specify different user name", "Warning",
-									JOptionPane.INFORMATION_MESSAGE);
-
-						}
-
-					} else {
-
-						if (txtFirstName.getText().isEmpty()) {
-							sb.append(" first name");
-						}
-						if (txtLastName.getText().isEmpty()) {
-							if (!sb.toString().isEmpty()) {
-								sb.append(", ");
-							}
-							sb.append(" last name");
-						}
-						if (txtUserName.getText().isEmpty()) {
-							if (!sb.toString().isEmpty()) {
-								sb.append(", ");
-							}
-							sb.append(" user name");
-						}
-						if (txtEmail.getText().isEmpty()) {
-							if (!sb.toString().isEmpty()) {
-								sb.append(", ");
-							}
-							sb.append(" email");
-						}
-						if (password.isEmpty()) {
-							if (!sb.toString().isEmpty()) {
-								sb.append(", ");
-							}
-							sb.append(" password");
-						}
-						sb.append(".");
-
-						JOptionPane.showMessageDialog(null, "Please specify:" + sb.toString(), "Warning",
-								JOptionPane.INFORMATION_MESSAGE);
-					}
-				} else {					 
-
-						JOptionPane.showMessageDialog(null, "User isn't logged!", "Warning",
-								JOptionPane.INFORMATION_MESSAGE);
-					 
-				}
 			}
 		});
 
-		txtFirstName.addKeyListener(this);
-		txtLastName.addKeyListener(this);
-		txtUserName.addKeyListener(this);
-		txtEmail.addKeyListener(this);
-
-		passwordField.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				int keyCode = e.getKeyCode();
-				if (keyCode == KeyEvent.VK_ESCAPE) {
-					closeFrame();
-				}
-			}
-		});
 	}
 
 	public void setUser(User user) {
@@ -342,16 +324,33 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 	private void prepareComboBoxes() {
 
 		controller = new Controller();
-		String[] array;
+		String[] stringArray;
+		Integer[] integerArray;
 
-		ArrayList<String> jtList = controller.dbManagerForUsers.getAllJobTitles();
-		ArrayList<String> urList = controller.dbManagerForUsers.getAllUserRights();
+		ArrayList<String> manufacturerList = controller.dbManagerForParts.getAllManufacturers();
+		ArrayList<String> partGroupList = controller.dbManagerForParts.getAllPartGroups();
+		ArrayList<String> unitList = controller.dbManagerForParts.getAllUnits();
+		ArrayList<String> areaList = controller.dbManagerForParts.getAllAreas();
+		ArrayList<Integer> rackList = controller.dbManagerForParts.getAllRacks();
+		ArrayList<Integer> shelfList = controller.dbManagerForParts.getAllShelfs();
 
-		array = jtList.toArray(new String[jtList.size()]);
-		cBoxJobTitle = new JComboBox<Object>(array);
+		stringArray = manufacturerList.toArray(new String[manufacturerList.size()]);
+		cBoxManufacturer = new JComboBox<Object>(stringArray);
 
-		array = urList.toArray(new String[urList.size()]);
-		cBoxUserRights = new JComboBox<Object>(array);
+		stringArray = partGroupList.toArray(new String[partGroupList.size()]);
+		cBoxPartGroup = new JComboBox<Object>(stringArray);
+
+		stringArray = unitList.toArray(new String[unitList.size()]);
+		cBoxUnit = new JComboBox<Object>(stringArray);
+
+		stringArray = areaList.toArray(new String[areaList.size()]);
+		cBoxArea = new JComboBox<Object>(stringArray);
+
+		integerArray = rackList.toArray(new Integer[rackList.size()]);
+		cBoxRack = new JComboBox<Object>(integerArray);
+
+		integerArray = shelfList.toArray(new Integer[shelfList.size()]);
+		cBoxShelf = new JComboBox<Object>(integerArray);
 
 	}
 
@@ -375,11 +374,8 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 	}
 
 	private void clearAllTextFieldsBeforeFrameClose() {
-		txtFirstName.setText("");
-		txtLastName.setText("");
-		txtUserName.setText("");
-		txtEmail.setText("");
-		passwordField.setText("");
+		txtPartName.setText("");
+		txtProductCode.setText("");
 	}
 
 	@Override

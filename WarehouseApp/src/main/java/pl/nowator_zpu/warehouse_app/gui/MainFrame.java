@@ -62,8 +62,9 @@ public class MainFrame extends JFrame implements KeyListener {
 	private JButton btnUpdate;
 	private JButton btnNewPart;
 
-	LoginFrame loginFrame;
-	NewUserFrame newUserFrame;
+	private LoginFrame loginFrame;
+	private NewUserFrame newUserFrame;
+	private NewPartFrame newPartFrame;
 
 	private PartsTableModel partsTableModel;
 	private JTable partsTable;
@@ -399,8 +400,14 @@ public class MainFrame extends JFrame implements KeyListener {
 		btnNewPart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				// Logic for new part insert !
+				if (newPartFrame == null) {
 
+					newPartFrame = new NewPartFrame();
+					newPartFrame.setUser(user);
+					newPartFrame.setVisible(true);
+				} else {
+					newPartFrame.setVisible(true);
+				}
 			}
 		});
 
