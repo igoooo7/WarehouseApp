@@ -3,7 +3,11 @@ package pl.nowator_zpu.warehouse_app.gui;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -22,8 +26,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.RowFilter;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.RowFilter;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.TableRowSorter;
@@ -33,7 +37,6 @@ import pl.nowator_zpu.warehouse_app.application_classes.PartsTableModel;
 import pl.nowator_zpu.warehouse_app.application_classes.User;
 import pl.nowator_zpu.warehouse_app.data_access.Controller;
 import pl.nowator_zpu.warehouse_app.interfaces.UserLoginListener;
-import java.awt.SystemColor;
 
 public class MainFrame extends JFrame implements KeyListener {
 
@@ -62,6 +65,7 @@ public class MainFrame extends JFrame implements KeyListener {
 	private JButton btnDeletePart;
 	private JButton btnUpdate;
 	private JButton btnNewPart;
+	private JButton btnShowPicture; 
 
 	private LoginFrame loginFrame;
 	private NewUserFrame newUserFrame;
@@ -124,64 +128,69 @@ public class MainFrame extends JFrame implements KeyListener {
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(195, 203, 43));
 		panel.setBorder(new TitledBorder(new LineBorder(new Color(195, 203, 43), 2, true), "User data",
-				TitledBorder.LEFT, TitledBorder.TOP, null, new Color(64, 64, 64)));
+				TitledBorder.LEFT, TitledBorder.TOP, null, new Color(64, 64, 64)));		
 
 		gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup().addGap(94)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(panel, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(94)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(btnShowPicture, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+									.addComponent(btnUpdate, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addComponent(btnDeletePart, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(btnNewPart, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE))
+							.addGap(31)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_contentPane.createSequentialGroup()
-										.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-												.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-														.addComponent(btnUpdate, GroupLayout.PREFERRED_SIZE, 154,
-																GroupLayout.PREFERRED_SIZE)
-														.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-																.addComponent(btnDeletePart, GroupLayout.DEFAULT_SIZE,
-																		GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-																.addComponent(btnNewPart, GroupLayout.PREFERRED_SIZE,
-																		154, GroupLayout.PREFERRED_SIZE)))
-												.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 154,
-														GroupLayout.PREFERRED_SIZE))
-										.addGap(31)
-										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-												.addGroup(gl_contentPane.createSequentialGroup()
-														.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 154,
-																GroupLayout.PREFERRED_SIZE)
-														.addGap(32)
-														.addComponent(btnNewUser, GroupLayout.PREFERRED_SIZE, 149,
-																GroupLayout.PREFERRED_SIZE)
-														.addGap(33).addComponent(btnDeleteUser,
-																GroupLayout.PREFERRED_SIZE, 149,
-																GroupLayout.PREFERRED_SIZE))
-												.addGroup(gl_contentPane.createSequentialGroup()
-														.addComponent(scrollPane).addGap(65))
-												.addGroup(
-														gl_contentPane.createSequentialGroup().addComponent(lblNewLabel)
-																.addPreferredGap(ComponentPlacement.RELATED)
-																.addComponent(txtFilter, GroupLayout.PREFERRED_SIZE,
-																		201, GroupLayout.PREFERRED_SIZE)))))
-						.addGap(384)));
-		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
-				.createSequentialGroup().addGap(21)
-				.addComponent(panel, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
-				.addPreferredGap(ComponentPlacement.UNRELATED)
-				.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+									.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)
+									.addGap(32)
+									.addComponent(btnNewUser, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)
+									.addGap(33)
+									.addComponent(btnDeleteUser, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(scrollPane)
+									.addGap(65))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(lblNewLabel)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(txtFilter, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE)))))
+					.addGap(384))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(21)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnNewUser, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnDeleteUser, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE))
-				.addGap(21)
-				.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(lblNewLabel).addComponent(
-						txtFilter, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addPreferredGap(ComponentPlacement.UNRELATED)
-				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
-						.createSequentialGroup()
-						.addComponent(btnDeletePart, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
-						.addGap(18).addComponent(btnNewPart, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
-						.addGap(18).addComponent(btnUpdate, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE))
+					.addGap(21)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel)
+						.addComponent(txtFilter, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(btnDeletePart, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(btnNewPart, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(btnUpdate, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
+							.addGap(31)
+							.addComponent(btnShowPicture, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE))
 						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE))
-				.addContainerGap()));
+					.addContainerGap())
+		);
 
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
@@ -268,7 +277,10 @@ public class MainFrame extends JFrame implements KeyListener {
 		lblNewLabel = new JLabel("Filter:");
 		txtFilter = new JTextField();
 		txtFilter.setColumns(10);
-
+		
+		btnShowPicture = new JButton("Show picture");		
+		Image btnShowPictureIcon = new ImageIcon(this.getClass().getResource("/show-picture-32.png")).getImage();
+		btnShowPicture.setIcon(new ImageIcon(btnShowPictureIcon));
 	}
 
 	private void addActionListenersForControls() {
@@ -407,11 +419,11 @@ public class MainFrame extends JFrame implements KeyListener {
 			public void actionPerformed(ActionEvent arg0) {
 
 				if (newPartFrame == null) {
-
-					newPartFrame = new NewPartFrame();
+					
+					newPartFrame = new NewPartFrame();				 
 					newPartFrame.setUser(user);
 					newPartFrame.setVisible(true);
-				} else {
+				} else {					 
 					newPartFrame.setVisible(true);
 				}
 			}
@@ -432,6 +444,14 @@ public class MainFrame extends JFrame implements KeyListener {
 
 			}
 		});
+		
+		btnShowPicture.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				//Show part image
+			}
+		});
+		
 	}
 
 	private void refreshForm() {
@@ -566,7 +586,7 @@ public class MainFrame extends JFrame implements KeyListener {
 			newPartFrame.dispose();
 			newPartFrame.setVisible(false);
 		}	 
-	}
+	}	
 
 	@Override
 	public void keyPressed(KeyEvent e) {

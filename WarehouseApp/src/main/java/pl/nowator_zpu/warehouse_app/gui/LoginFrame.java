@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
@@ -25,7 +26,6 @@ import javax.swing.border.LineBorder;
 import pl.nowator_zpu.warehouse_app.application_classes.User;
 import pl.nowator_zpu.warehouse_app.data_access.Controller;
 import pl.nowator_zpu.warehouse_app.interfaces.UserLoginListener;
-import java.awt.event.KeyAdapter;
 
 public class LoginFrame extends JFrame implements WindowListener, KeyListener {
 
