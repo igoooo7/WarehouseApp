@@ -9,6 +9,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.File;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import javax.swing.GroupLayout;
@@ -16,16 +19,29 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.LineBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import pl.nowator_zpu.warehouse_app.application_classes.User;
 import pl.nowator_zpu.warehouse_app.data_access.Controller;
+import pl.nowator_zpu.warehouse_app.entities.Areas;
+import pl.nowator_zpu.warehouse_app.entities.JobTitles;
+import pl.nowator_zpu.warehouse_app.entities.Manufacturers;
+import pl.nowator_zpu.warehouse_app.entities.PartGroups;
+import pl.nowator_zpu.warehouse_app.entities.Parts;
+import pl.nowator_zpu.warehouse_app.entities.Racks;
+import pl.nowator_zpu.warehouse_app.entities.Shelfs;
+import pl.nowator_zpu.warehouse_app.entities.Units;
+import pl.nowator_zpu.warehouse_app.entities.UserRights;
+import pl.nowator_zpu.warehouse_app.entities.Users;
 
 public class NewPartFrame extends JFrame implements WindowListener, KeyListener {
 
@@ -71,8 +87,6 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 	private User user;
 
 	private Controller controller;
-	
-	
 
 	/**
 	 * Create the frame.
@@ -103,7 +117,7 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 	private void prepareLayout() {
 
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(175, 185, 0));
+		panel.setBackground(new Color(195, 203, 43));
 
 		gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -295,7 +309,7 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 		txtQuantityMax = new JTextField();
 		txtQuantityMax.setColumns(15);
 
-		btnImage = new JButton("Load image");
+		btnImage = new JButton("Load image");		
 		Image btnLoadImageIcon = new ImageIcon(this.getClass().getResource("/load-image-32.png")).getImage();
 		btnImage.setIcon(new ImageIcon(btnLoadImageIcon));
 
@@ -310,8 +324,194 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+
+				int q_min = 0;
+				int q_max = 0;
+
+				if (user.getLogged()) {
+
+					StringBuilder sb = new StringBuilder();
+
+					if (user.getUserRightsLevel() >= 2) {
+
+						if (!txtPartName.getText().isEmpty() && !txtProductCode.getText().isEmpty()
+								&& !txtOrderCode.getText().isEmpty() && !txtQuantityMin.getText().isEmpty()
+								&& !txtQuantityMax.getText().isEmpty()) {
+							 
+							Boolean quantityValuesAreCorrect = true;
+
+							try {
+								q_min = Integer.parseInt(txtQuantityMin.getText());
+							} catch (Exception e) {
+								txtQuantityMin.setText("0");
+								quantityValuesAreCorrect = false;
+							}
+							try {
+								q_max = Integer.parseInt(txtQuantityMax.getText());
+							} catch (Exception e) {
+								txtQuantityMax.setText("0");
+								quantityValuesAreCorrect = false;
+							}	
+							
+							if (q_min > q_max) {
+								quantityValuesAreCorrect = false;
+							}
+
+							if (!quantityValuesAreCorrect) {
+
+								JOptionPane.showMessageDialog(null, "Please enter a valid values for quantity fields !",
+										"Warning", JOptionPane.WARNING_MESSAGE);
+
+							} else {
+
+								Parts part = new Parts();
+
+								Manufacturers m = controller.dbManagerForParts
+										.getManufacturerByManufacturer(cBoxManufacturer.getSelectedItem().toString());
+
+								PartGroups p = controller.dbManagerForParts
+										.getPartGroupByPartGroup(cBoxPartGroup.getSelectedItem().toString());
+
+								Units u = controller.dbManagerForParts
+										.getUnitByUnit(cBoxUnit.getSelectedItem().toString());
+
+								Areas a = controller.dbManagerForParts
+										.getAreaByArea(cBoxArea.getSelectedItem().toString());
+
+								Racks r = controller.dbManagerForParts
+										.getRackByRack(cBoxRack.getSelectedItem().toString());
+
+								Shelfs s = controller.dbManagerForParts
+										.getShelfByShelf(cBoxShelf.getSelectedItem().toString());
+
+								part.setPartName(txtPartName.getText());
+								part.setProductCode(txtProductCode.getText());
+								part.setOrderCode(txtOrderCode.getText());
+								part.setDescription(txtrDescription.getText());
+								part.setManufacturers(m);
+								part.setPartGroups(p);
+								part.setUnits(u);
+								part.setAreas(a);
+								part.setRacks(r);
+								part.setShelfs(s);
+								part.setQuantityMin(q_min);
+								part.setQuantityMax(q_max);
+
+								Users us = new Users();
+								us.setUserId(user.getUserId());
+								us.setFirstName(user.getFirstName());
+								us.setLastName(user.getLastName());
+								us.setUserName(user.getUserName());
+								us.setUserEmail(user.getUserEmail());
+								us.setUserPassword(user.getUserPassword());
+
+								JobTitles jt = controller.dbManagerForUsers.getJobTitleByTitle(user.getJobTitle());
+								UserRights ur = controller.dbManagerForUsers
+										.getUserRightsByRights(user.getUserRights());
+
+								us.setJobTitles(jt);
+								us.setUserRights(ur);
+
+								part.setUsers(us);
+
+								LocalDateTime dateTime = LocalDateTime.now();
+								Timestamp sqlDateTime = Timestamp.valueOf(dateTime);
+
+								part.setCreationDate(sqlDateTime);
+
+								
+								//Part image
+								
+								
+								
+								
+								
+								
+								
+								
+								Boolean partSuccessfullyCreated = controller.dbManagerForParts.newPart(part);
+
+								if (partSuccessfullyCreated) {
+
+									clearAllTextFields();
+									JOptionPane.showMessageDialog(null, "Part successfully created", "Message",
+											JOptionPane.INFORMATION_MESSAGE);
+
+								} else {
+
+									JOptionPane.showMessageDialog(null, "Some problems appeared, part wasn't created!",
+											"Warning", JOptionPane.WARNING_MESSAGE);
+								}
+
+							}
+
+						} else {
+
+							if (txtPartName.getText().isEmpty()) {
+								sb.append(" part name");
+							}
+							if (txtProductCode.getText().isEmpty()) {
+								if (!sb.toString().isEmpty()) {
+									sb.append(", ");
+								}
+								sb.append(" product code");
+							}
+							if (txtOrderCode.getText().isEmpty()) {
+								if (!sb.toString().isEmpty()) {
+									sb.append(", ");
+								}
+								sb.append(" order code");
+							}
+							if (txtQuantityMin.getText().isEmpty()) {
+								if (!sb.toString().isEmpty()) {
+									sb.append(", ");
+								}
+								sb.append(" quantity min");
+							}
+							if (txtQuantityMax.getText().isEmpty()) {
+								if (!sb.toString().isEmpty()) {
+									sb.append(", ");
+								}
+								sb.append(" quantity max");
+							}
+							sb.append(".");
+
+							JOptionPane.showMessageDialog(null, "Please specify:" + sb.toString(), "Warning",
+									JOptionPane.WARNING_MESSAGE);
+						}
+
+					} else {
+
+						JOptionPane.showMessageDialog(null, "Current user don't have rights to delete parts!",
+								"Warning", JOptionPane.WARNING_MESSAGE);
+
+					}
+
+				} else {
+
+					JOptionPane.showMessageDialog(null, "User isn't logged!", "Warning", JOptionPane.WARNING_MESSAGE);
+
+				}
+
+			}
+
+		});
+
+		btnImage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
 				
+				JFileChooser file = new JFileChooser();
+				file.setCurrentDirectory(new File(System.getProperty("user.home")));
 				
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("Images", "jpg", "png");
+				file.addChoosableFileFilter(filter);
+				int result = file.showSaveDialog(null);
+				
+				if(result == JFileChooser.APPROVE_OPTION) {
+					
+					
+					
+				}
 			}
 		});
 		
@@ -386,7 +586,7 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 		txtOrderCode.setText("");
 		txtrDescription.setText("");
 		txtQuantityMin.setText("");
-		txtQuantityMax.setText("");		
+		txtQuantityMax.setText("");
 	}
 
 	@Override

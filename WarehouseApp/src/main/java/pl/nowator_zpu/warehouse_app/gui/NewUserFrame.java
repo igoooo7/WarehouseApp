@@ -96,7 +96,7 @@ public class NewUserFrame extends JFrame implements WindowListener, KeyListener 
 	private void prepareLayout() {
 
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(175, 185, 0));
+		panel.setBackground(new Color(195, 203, 43));
 
 		gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(

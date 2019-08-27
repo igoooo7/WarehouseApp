@@ -122,8 +122,8 @@ public class MainFrame extends JFrame implements KeyListener {
 	private void prepareLayout() {
 
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(175, 185, 0));
-		panel.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229), 2, true), "User data",
+		panel.setBackground(new Color(195, 203, 43));
+		panel.setBorder(new TitledBorder(new LineBorder(new Color(195, 203, 43), 2, true), "User data",
 				TitledBorder.LEFT, TitledBorder.TOP, null, new Color(64, 64, 64)));
 
 		gl_contentPane = new GroupLayout(contentPane);

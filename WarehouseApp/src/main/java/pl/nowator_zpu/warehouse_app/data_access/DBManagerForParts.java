@@ -13,6 +13,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.SetJoin;
 import javax.persistence.criteria.Subquery;
@@ -200,6 +201,35 @@ public class DBManagerForParts {
 		}
 	}
 
+	public Areas getAreaByArea(String area) {
+
+		Areas result = new Areas();
+
+		try {
+
+			createManager();
+
+			CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+			CriteriaQuery<Areas> criteriaQuery = criteriaBuilder.createQuery(Areas.class);
+			Root<Areas> areaRoot = criteriaQuery.from(Areas.class);
+
+			Path<String> a = areaRoot.get("area");
+
+			criteriaQuery.select(areaRoot);
+
+			criteriaQuery.where(criteriaBuilder.equal(a, area));
+
+			TypedQuery<Areas> query = em.createQuery(criteriaQuery);
+
+			result = query.getSingleResult();
+
+			return result;
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING, e.toString());
+			return null;
+		}
+	}
+	
 	// Manufacturer
 	public ArrayList<String> getAllManufacturers() {
 
@@ -229,6 +259,36 @@ public class DBManagerForParts {
 		}
 	}
 
+	public Manufacturers getManufacturerByManufacturer(String manufacturer) {
+
+		Manufacturers result = new Manufacturers();
+
+		try {
+
+			createManager();
+
+			CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+			CriteriaQuery<Manufacturers> criteriaQuery = criteriaBuilder.createQuery(Manufacturers.class);
+			Root<Manufacturers> manufacturerRoot = criteriaQuery.from(Manufacturers.class);
+
+			Path<String> m = manufacturerRoot.get("manufacturer");
+
+			criteriaQuery.select(manufacturerRoot);
+
+			criteriaQuery.where(criteriaBuilder.equal(m, manufacturer));
+
+			TypedQuery<Manufacturers> query = em.createQuery(criteriaQuery);
+
+			result = query.getSingleResult();
+
+			return result;
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING, e.toString());
+			return null;
+		}
+	}
+
+	// Part group
 	// Part group
 	public ArrayList<String> getAllPartGroups() {
 
@@ -259,6 +319,36 @@ public class DBManagerForParts {
 	}
 
 	// Rack
+	public PartGroups getPartGroupByPartGroup(String group) {
+
+		PartGroups result = new PartGroups();
+
+		try {
+
+			createManager();
+
+			CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+			CriteriaQuery<PartGroups> criteriaQuery = criteriaBuilder.createQuery(PartGroups.class);
+			Root<PartGroups> partGroupRoot = criteriaQuery.from(PartGroups.class);
+
+			Path<String> pg = partGroupRoot.get("partGroup");
+
+			criteriaQuery.select(partGroupRoot);
+
+			criteriaQuery.where(criteriaBuilder.equal(pg, group));
+
+			TypedQuery<PartGroups> query = em.createQuery(criteriaQuery);
+
+			result = query.getSingleResult();
+
+			return result;
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING, e.toString());
+			return null;
+		}
+	}
+	
+	// Rack
 	public ArrayList<Integer> getAllRacks() {
 
 		ArrayList<Integer> result = new ArrayList<>();
@@ -288,6 +378,36 @@ public class DBManagerForParts {
 	}
 
 	// Shelf
+	public Racks getRackByRack(String rack) {
+
+		Racks result = new Racks();
+
+		try {
+
+			createManager();
+
+			CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+			CriteriaQuery<Racks> criteriaQuery = criteriaBuilder.createQuery(Racks.class);
+			Root<Racks> rackRoot = criteriaQuery.from(Racks.class);
+
+			Path<String> r = rackRoot.get("rack");
+
+			criteriaQuery.select(rackRoot);
+
+			criteriaQuery.where(criteriaBuilder.equal(r, rack));
+
+			TypedQuery<Racks> query = em.createQuery(criteriaQuery);
+
+			result = query.getSingleResult();
+
+			return result;
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING, e.toString());
+			return null;
+		}
+	}
+	
+	// Shelf
 	public ArrayList<Integer> getAllShelfs() {
 
 		ArrayList<Integer> result = new ArrayList<>();
@@ -315,6 +435,37 @@ public class DBManagerForParts {
 			return null;
 		}
 	}
+
+	public Shelfs getShelfByShelf(String shelf) {
+
+		Shelfs result = new Shelfs();
+
+		try {
+
+			createManager();
+
+			CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+			CriteriaQuery<Shelfs> criteriaQuery = criteriaBuilder.createQuery(Shelfs.class);
+			Root<Shelfs> shelfRoot = criteriaQuery.from(Shelfs.class);
+
+			Path<String> s = shelfRoot.get("shelf");
+
+			criteriaQuery.select(shelfRoot);
+
+			criteriaQuery.where(criteriaBuilder.equal(s, shelf));
+
+			TypedQuery<Shelfs> query = em.createQuery(criteriaQuery);
+
+			result = query.getSingleResult();
+
+			return result;
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING, e.toString());
+			return null;
+		}
+	}
+	
+	// Unit
 
 	// Unit
 	public ArrayList<String> getAllUnits() {
@@ -345,4 +496,33 @@ public class DBManagerForParts {
 		}
 	}
 
+
+	public Units getUnitByUnit(String unit) {
+
+		Units result = new Units();
+
+		try {
+
+			createManager();
+
+			CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+			CriteriaQuery<Units> criteriaQuery = criteriaBuilder.createQuery(Units.class);
+			Root<Units> unitRoot = criteriaQuery.from(Units.class);
+
+			Path<String> u = unitRoot.get("unit");
+
+			criteriaQuery.select(unitRoot);
+
+			criteriaQuery.where(criteriaBuilder.equal(u, unit));
+
+			TypedQuery<Units> query = em.createQuery(criteriaQuery);
+
+			result = query.getSingleResult();
+
+			return result;
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING, e.toString());
+			return null;
+		}
+	}
 }
