@@ -58,12 +58,12 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 
 	private JTextArea txtrDescription;
 
-	private JComboBox cBoxManufacturer;
-	private JComboBox cBoxPartGroup;
-	private JComboBox cBoxUnit;
-	private JComboBox cBoxArea;
-	private JComboBox cBoxRack;
-	private JComboBox cBoxShelf;
+	private JComboBox<Object> cBoxManufacturer;
+	private JComboBox<Object> cBoxPartGroup;
+	private JComboBox<Object> cBoxUnit;
+	private JComboBox<Object> cBoxArea;
+	private JComboBox<Object> cBoxRack;
+	private JComboBox<Object> cBoxShelf;
 
 	private JButton btnImage;
 	private JButton btnCreate;
@@ -71,6 +71,8 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 	private User user;
 
 	private Controller controller;
+	
+	
 
 	/**
 	 * Create the frame.
@@ -85,6 +87,7 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 		setBounds(100, 100, 410, 700);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(119, 136, 153));
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		setContentPane(contentPane);
 		addWindowListener(this);
@@ -100,6 +103,7 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 	private void prepareLayout() {
 
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(175, 185, 0));
 
 		gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -255,22 +259,18 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 	private void createControls() {
 
 		lblPartName = new JLabel("Part name:");
-
 		txtPartName = new JTextField();
 		txtPartName.setColumns(15);
 
 		lblProductCode = new JLabel("Product code:");
-
 		txtProductCode = new JTextField();
 		txtProductCode.setColumns(15);
 
 		lblOrderCode = new JLabel("Order code:");
-
 		txtOrderCode = new JTextField();
 		txtOrderCode.setColumns(15);
 
 		lblDescription = new JLabel("Description:");
-
 		txtrDescription = new JTextArea();
 		txtrDescription.setLineWrap(true);
 		txtrDescription.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -288,12 +288,10 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 		lblShelf = new JLabel("Shelf:");
 
 		lblQuantityMin = new JLabel("Quantity min:");
-
 		txtQuantityMin = new JTextField();
 		txtQuantityMin.setColumns(15);
 
 		lblQuantityMax = new JLabel("Quantity max:");
-
 		txtQuantityMax = new JTextField();
 		txtQuantityMax.setColumns(15);
 
@@ -312,8 +310,17 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				
 			}
 		});
+		
+		txtPartName.addKeyListener(this);
+		txtProductCode.addKeyListener(this);
+		txtOrderCode.addKeyListener(this);
+		txtrDescription.addKeyListener(this);
+		txtQuantityMin.addKeyListener(this);
+		txtQuantityMax.addKeyListener(this);
 
 	}
 
@@ -364,18 +371,22 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 
 	@Override
 	public void windowClosing(WindowEvent e) {
-		clearAllTextFieldsBeforeFrameClose();
+		clearAllTextFields();
 	}
 
 	private void closeFrame() {
-		clearAllTextFieldsBeforeFrameClose();
+		clearAllTextFields();
 		dispose();
 		setVisible(false);
 	}
 
-	private void clearAllTextFieldsBeforeFrameClose() {
+	private void clearAllTextFields() {
 		txtPartName.setText("");
 		txtProductCode.setText("");
+		txtOrderCode.setText("");
+		txtrDescription.setText("");
+		txtQuantityMin.setText("");
+		txtQuantityMax.setText("");		
 	}
 
 	@Override

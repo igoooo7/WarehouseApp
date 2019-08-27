@@ -37,18 +37,21 @@ public class LoginFrame extends JFrame implements WindowListener, KeyListener {
 	private GroupLayout gl_contentPane;
 	private JPanel contentPane;
 	private JPanel panel;
-
-	private JButton btnLogin;
+	
 	private JLabel lblUserName;
 	private JLabel lblPassword;
 	private JTextField txtUserName;
 	private JPasswordField passwordField;
 
+	private JButton btnLogin;
+	
 	private UserLoginListener userLoginListener;
 
 	private User user;
 
 	private Controller controller;
+	
+	
 
 	/**
 	 * Create the frame.
@@ -63,6 +66,7 @@ public class LoginFrame extends JFrame implements WindowListener, KeyListener {
 		setBounds(100, 100, 325, 275);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(119, 136, 153));
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		setContentPane(contentPane);
 		addWindowListener(this);
@@ -78,6 +82,7 @@ public class LoginFrame extends JFrame implements WindowListener, KeyListener {
 	private void prepareLayout() {
 
 		panel = new JPanel();
+		panel.setBackground(new Color(175, 185, 0));
 
 		gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -201,19 +206,19 @@ public class LoginFrame extends JFrame implements WindowListener, KeyListener {
 				}
 			} else {
 
-				JOptionPane.showMessageDialog(null, "Please specify user name!", "Message",
-						JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Please specify user name!", "Warning",
+						JOptionPane.WARNING_MESSAGE);
 			}
 		}
 	}
 	
 	private void closeFrame() {	
-		clearAllTextFieldsBeforeFrameClose();
+		clearAllTextFields();
 		dispose();
 		setVisible(false);		
 	}
 	
-	private void clearAllTextFieldsBeforeFrameClose() {
+	private void clearAllTextFields() {
 		txtUserName.setText("");
 		passwordField.setText("");
 	}
@@ -228,7 +233,7 @@ public class LoginFrame extends JFrame implements WindowListener, KeyListener {
 
 	@Override
 	public void windowClosing(WindowEvent e) {
-		clearAllTextFieldsBeforeFrameClose();
+		clearAllTextFields();
 	}
 
 	@Override
