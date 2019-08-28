@@ -11,24 +11,18 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
-import javax.persistence.criteria.SetJoin;
-import javax.persistence.criteria.Subquery;
 
 import javassist.bytecode.stackmap.TypeData.ClassName;
 import pl.nowator_zpu.warehouse_app.application_classes.Part;
 import pl.nowator_zpu.warehouse_app.entities.Areas;
-import pl.nowator_zpu.warehouse_app.entities.JobTitles;
 import pl.nowator_zpu.warehouse_app.entities.Manufacturers;
 import pl.nowator_zpu.warehouse_app.entities.PartGroups;
 import pl.nowator_zpu.warehouse_app.entities.Parts;
 import pl.nowator_zpu.warehouse_app.entities.Racks;
 import pl.nowator_zpu.warehouse_app.entities.Shelfs;
 import pl.nowator_zpu.warehouse_app.entities.Units;
-import pl.nowator_zpu.warehouse_app.entities.UserRights;
 import pl.nowator_zpu.warehouse_app.entities.Users;
 
 public class DBManagerForParts {
@@ -130,6 +124,85 @@ public class DBManagerForParts {
 		}
 	}
 
+	public Part getPartByOrderCodeAndManufacturerId(String orderCode, Integer manufacturerId) {
+
+		Part result = new Part();
+
+		try {
+
+			createManager();
+
+			CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+			CriteriaQuery<Object[]> criteriaQuery = criteriaBuilder.createQuery(Object[].class);
+			Root<Parts> partRoot = criteriaQuery.from(Parts.class);
+
+			Path<String> c = partRoot.get("orderCode");
+			Path<Integer> m = partRoot.get("manufacturers");
+
+			Root<PartGroups> partsGroupRoot = criteriaQuery.from(PartGroups.class);
+			Root<Manufacturers> manufacturerRoot = criteriaQuery.from(Manufacturers.class);
+			Root<Areas> areaRoot = criteriaQuery.from(Areas.class);
+			Root<Racks> rackRoot = criteriaQuery.from(Racks.class);
+			Root<Shelfs> shelfRoot = criteriaQuery.from(Shelfs.class);
+			Root<Units> unitRoot = criteriaQuery.from(Units.class);
+
+			Root<Users> userRoot = criteriaQuery.from(Users.class);
+			userRoot.join("jobTitles");
+			userRoot.join("userRights");
+
+			criteriaQuery.multiselect(partRoot, partsGroupRoot, manufacturerRoot, areaRoot, rackRoot, shelfRoot,
+					unitRoot, userRoot);
+
+			criteriaQuery.where(criteriaBuilder.and(criteriaBuilder.and(
+					criteriaBuilder.equal(partRoot.get("partGroups"), partsGroupRoot.get("partGroupId")),
+					criteriaBuilder.equal(partRoot.get("manufacturers"), manufacturerRoot.get("manufacturerId")),
+					criteriaBuilder.equal(partRoot.get("areas"), areaRoot.get("areaId")),
+					criteriaBuilder.equal(partRoot.get("racks"), rackRoot.get("rackId")),
+					criteriaBuilder.equal(partRoot.get("shelfs"), shelfRoot.get("shelfId")),
+					criteriaBuilder.equal(partRoot.get("units"), unitRoot.get("unitId")),
+					criteriaBuilder.equal(partRoot.get("users"), userRoot.get("userId")),
+					criteriaBuilder.equal(c, orderCode)), (criteriaBuilder.equal(m, manufacturerId))));
+
+			TypedQuery<Object[]> query = em.createQuery(criteriaQuery);
+
+			Object[] queryResult = query.getSingleResult();
+
+			Parts p = (Parts) queryResult[0];
+			PartGroups pg = (PartGroups) queryResult[1];
+			Manufacturers mr = (Manufacturers) queryResult[2];
+			Areas a = (Areas) queryResult[3];
+			Racks r = (Racks) queryResult[4];
+			Shelfs s = (Shelfs) queryResult[5];
+			Units un = (Units) queryResult[6];
+			Users us = (Users) queryResult[7];
+
+			result.setPartId(p.getPartId());
+			result.setArea(a.getArea());
+			result.setManufacturer(mr.getManufacturer());
+			result.setPartGroup(pg.getPartGroup());
+			result.setRack(r.getRack());
+			result.setShelf(s.getShelf());
+			result.setUnit(un.getUnit());
+			result.setUser(us.getFirstName() + " " + us.getLastName());
+			result.setOrderCode(p.getOrderCode());
+			result.setProductCode(p.getProductCode());
+			result.setPartName(p.getPartName());
+			result.setDescription(p.getDescription());
+			result.setQuantityMin(p.getQuantityMin());
+			result.setQuantityMax(p.getQuantityMax());
+			result.setCreationDate(p.getCreationDate());
+			result.setLastChangeDate(p.getLastChangeDate());
+			result.setImage(p.getImage());
+
+			destroyManager();
+
+			return result;
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING, e.toString());
+			return null;
+		}
+	}
+
 	public Boolean newPart(Parts part) {
 
 		try {
@@ -138,6 +211,25 @@ public class DBManagerForParts {
 
 			em.getTransaction().begin();
 			em.persist(part);
+			em.getTransaction().commit();
+
+			destroyManager();
+
+			return true;
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING, e.toString());
+			return false;
+		}
+	}
+
+	public Boolean changePart(Parts part) {
+
+		try {
+
+			createManager();
+
+			em.getTransaction().begin();
+			em.merge(part);
 			em.getTransaction().commit();
 
 			destroyManager();
@@ -229,7 +321,7 @@ public class DBManagerForParts {
 			return null;
 		}
 	}
-	
+
 	// Manufacturer
 	public ArrayList<String> getAllManufacturers() {
 
@@ -289,7 +381,6 @@ public class DBManagerForParts {
 	}
 
 	// Part group
-	// Part group
 	public ArrayList<String> getAllPartGroups() {
 
 		ArrayList<String> result = new ArrayList<>();
@@ -318,7 +409,6 @@ public class DBManagerForParts {
 		}
 	}
 
-	// Rack
 	public PartGroups getPartGroupByPartGroup(String group) {
 
 		PartGroups result = new PartGroups();
@@ -347,7 +437,7 @@ public class DBManagerForParts {
 			return null;
 		}
 	}
-	
+
 	// Rack
 	public ArrayList<Integer> getAllRacks() {
 
@@ -377,7 +467,6 @@ public class DBManagerForParts {
 		}
 	}
 
-	// Shelf
 	public Racks getRackByRack(String rack) {
 
 		Racks result = new Racks();
@@ -406,7 +495,7 @@ public class DBManagerForParts {
 			return null;
 		}
 	}
-	
+
 	// Shelf
 	public ArrayList<Integer> getAllShelfs() {
 
@@ -464,8 +553,6 @@ public class DBManagerForParts {
 			return null;
 		}
 	}
-	
-	// Unit
 
 	// Unit
 	public ArrayList<String> getAllUnits() {
@@ -496,7 +583,6 @@ public class DBManagerForParts {
 		}
 	}
 
-
 	public Units getUnitByUnit(String unit) {
 
 		Units result = new Units();
@@ -518,6 +604,41 @@ public class DBManagerForParts {
 			TypedQuery<Units> query = em.createQuery(criteriaQuery);
 
 			result = query.getSingleResult();
+
+			return result;
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING, e.toString());
+			return null;
+		}
+	}
+
+	// Image
+	public byte[] getImageByOrderCodeAndManufacturerId(String code, Integer manufacturerId) {
+
+		Parts part = new Parts();
+		byte[] result = null;
+
+		try {
+
+			createManager();
+
+			CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+			CriteriaQuery<Parts> criteriaQuery = criteriaBuilder.createQuery(Parts.class);
+			Root<Parts> partsRoot = criteriaQuery.from(Parts.class);
+
+			Path<String> c = partsRoot.get("orderCode");
+			Path<Integer> m = partsRoot.get("manufacturers");
+
+			criteriaQuery.select(partsRoot);
+
+			criteriaQuery.where(
+					criteriaBuilder.and((criteriaBuilder.equal(c, code)), (criteriaBuilder.equal(m, manufacturerId))));
+
+			TypedQuery<Parts> query = em.createQuery(criteriaQuery);
+
+			part = query.getSingleResult();
+
+			result = part.getImage();
 
 			return result;
 		} catch (Exception e) {

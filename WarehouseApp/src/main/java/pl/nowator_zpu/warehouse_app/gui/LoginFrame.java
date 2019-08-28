@@ -194,18 +194,15 @@ public class LoginFrame extends JFrame implements WindowListener, KeyListener {
 						closeFrame();
 
 					} else {
-
 						passwordField.setForeground(Color.red);
 						JOptionPane.showMessageDialog(null, "Password is not correct!", "Warning",
 								JOptionPane.WARNING_MESSAGE);
 					}
 				} else {
-
 					txtUserName.setForeground(Color.red);
 					JOptionPane.showMessageDialog(null, "User does not exist!", "Warning", JOptionPane.WARNING_MESSAGE);
 				}
 			} else {
-
 				JOptionPane.showMessageDialog(null, "Please specify user name!", "Warning",
 						JOptionPane.WARNING_MESSAGE);
 			}

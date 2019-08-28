@@ -35,6 +35,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import javassist.bytecode.stackmap.TypeData.ClassName;
+import pl.nowator_zpu.warehouse_app.application_classes.Part;
 import pl.nowator_zpu.warehouse_app.application_classes.User;
 import pl.nowator_zpu.warehouse_app.data_access.Controller;
 import pl.nowator_zpu.warehouse_app.entities.Areas;
@@ -48,7 +49,7 @@ import pl.nowator_zpu.warehouse_app.entities.Units;
 import pl.nowator_zpu.warehouse_app.entities.UserRights;
 import pl.nowator_zpu.warehouse_app.entities.Users;
 
-public class NewPartFrame extends JFrame implements WindowListener, KeyListener {
+public class ChangePartFrame extends JFrame implements WindowListener, KeyListener {
 
 	private static final Logger LOGGER = Logger.getLogger(ClassName.class.getName());
 	/**
@@ -93,19 +94,20 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 	private byte[] partImage;
 	private String partImagePath;
 
-	private JButton btnCreate;
+	private JButton btnChange;
 
 	private User user;
+	private Part part;
 
 	private Controller controller;
 
 	/**
 	 * Create the frame.
 	 */
-	public NewPartFrame() {
+	public ChangePartFrame(Part part) {
 
 		setResizable(false);
-		setTitle("New part");
+		setTitle("Change part");
 		Image formIcon = new ImageIcon(this.getClass().getResource("/averna_ico.png")).getImage();
 		setIconImage(formIcon);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -117,12 +119,14 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 		setContentPane(contentPane);
 		addWindowListener(this);
 
+		this.part = part;
+		
 		createControls();
 		addActionListenersForControls();
-
+		
 		prepareLayout();
 		contentPane.setLayout(gl_contentPane);
-
+	
 	}
 
 	private void prepareLayout() {
@@ -135,13 +139,13 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 				Alignment.TRAILING,
 				gl_contentPane.createSequentialGroup().addContainerGap(26, Short.MAX_VALUE)
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(btnCreate, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnChange, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)
 								.addComponent(panel, GroupLayout.PREFERRED_SIZE, 391, GroupLayout.PREFERRED_SIZE))
 						.addGap(25)));
 		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup().addGap(28)
 						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 582, GroupLayout.PREFERRED_SIZE).addGap(30)
-						.addComponent(btnCreate, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnChange, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
 						.addGap(89)));
 
 		GroupLayout gl_panel = new GroupLayout(panel);
@@ -276,19 +280,19 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 	private void createControls() {
 
 		lblPartName = new JLabel("Part name:");
-		txtPartName = new JTextField();
+		txtPartName = new JTextField(part.getPartName());
 		txtPartName.setColumns(15);
 
 		lblProductCode = new JLabel("Product code:");
-		txtProductCode = new JTextField();
+		txtProductCode = new JTextField(part.getProductCode());
 		txtProductCode.setColumns(15);
 
 		lblOrderCode = new JLabel("Order code:");
-		txtOrderCode = new JTextField();
+		txtOrderCode = new JTextField(part.getOrderCode());
 		txtOrderCode.setColumns(15);
 
 		lblDescription = new JLabel("Description:");
-		txtrDescription = new JTextArea();
+		txtrDescription = new JTextArea(part.getDescription());
 		txtrDescription.setLineWrap(true);
 		txtrDescription.setFont(new Font("Tahoma", Font.PLAIN, 13));
 
@@ -305,29 +309,29 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 		lblShelf = new JLabel("Shelf:");
 
 		lblQuantityMin = new JLabel("Quantity min:");
-		txtQuantityMin = new JTextField();
+		txtQuantityMin = new JTextField(part.getQuantityMin().toString());
 		txtQuantityMin.setColumns(15);
 
 		lblQuantityMax = new JLabel("Quantity max:");
-		txtQuantityMax = new JTextField();
+		txtQuantityMax = new JTextField(part.getQuantityMax().toString());
 		txtQuantityMax.setColumns(15);
 
 		btnImage = new JButton("Load image");
 		Image btnLoadImageIcon = new ImageIcon(this.getClass().getResource("/load-image-32.png")).getImage();
 		btnImage.setIcon(new ImageIcon(btnLoadImageIcon));
-
-		lblImage = new JLabel("");
-
-		btnCreate = new JButton("Create");
+				
+		lblImage = new JLabel("");		
+		
+		btnChange = new JButton("Update");
 		Image btnCreateIcon = new ImageIcon(this.getClass().getResource("/new-part-32.png")).getImage();
-		btnCreate.setIcon(new ImageIcon(btnCreateIcon));
+		btnChange.setIcon(new ImageIcon(btnCreateIcon));
 
 		prepareComboBoxes();
 	}
 
 	private void addActionListenersForControls() {
 
-		btnCreate.addActionListener(new ActionListener() {
+		btnChange.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
 				int q_min = 0;
@@ -421,7 +425,7 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 								LocalDateTime dateTime = LocalDateTime.now();
 								Timestamp sqlDateTime = Timestamp.valueOf(dateTime);
 
-								part.setCreationDate(sqlDateTime);
+								part.setLastChangeDate(sqlDateTime);
 
 								partImage = null;
 								if (partImagePath != null) {
@@ -429,19 +433,18 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 									File file = new File(partImagePath);
 									try {
 										partImage = Files.readAllBytes(file.toPath());
+										part.setImage(partImage);
 									} catch (IOException e) {
 										LOGGER.log(Level.WARNING, e.toString());
 									}
 								}
 
-								part.setImage(partImage);
+								Boolean partSuccessfullyChanged = controller.dbManagerForParts.changePart(part);
 
-								Boolean partSuccessfullyCreated = controller.dbManagerForParts.newPart(part);
-
-								if (partSuccessfullyCreated) {
+								if (partSuccessfullyChanged) {
 
 									clearAllTextFields();
-									JOptionPane.showMessageDialog(null, "Part successfully created", "Message",
+									JOptionPane.showMessageDialog(null, "Part successfully changed", "Message",
 											JOptionPane.INFORMATION_MESSAGE);
 
 								} else {
@@ -488,7 +491,7 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 						}
 
 					} else {
-						JOptionPane.showMessageDialog(null, "Current user don't have rights to create parts!",
+						JOptionPane.showMessageDialog(null, "Current user don't have rights to change parts!",
 								"Warning", JOptionPane.WARNING_MESSAGE);
 					}
 
@@ -502,7 +505,7 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 
 		btnImage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
+					
 				JFileChooser file = new JFileChooser();
 				file.setCurrentDirectory(new File(System.getProperty("user.home")));
 
@@ -532,7 +535,7 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 	public void setUser(User user) {
 		this.user = user;
 	}
-
+	
 	private void prepareComboBoxes() {
 
 		controller = new Controller();
@@ -548,7 +551,7 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 
 		stringArray = manufacturerList.toArray(new String[manufacturerList.size()]);
 		cBoxManufacturer = new JComboBox<Object>(stringArray);
-
+		 
 		stringArray = partGroupList.toArray(new String[partGroupList.size()]);
 		cBoxPartGroup = new JComboBox<Object>(stringArray);
 
@@ -609,7 +612,40 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 		ImageIcon image = new ImageIcon(img2);
 		return image;
 	}
+	
+	private void showPartImage() {
+		
+		byte[] image;
+		image = part.getImage();
+		if (image != null) {
+		lblImage.setIcon(resizeImage(null, image));			 
+		}
+	}
 
+	public static void setSelectedValueOfComboBox(JComboBox<Object> comboBox, String value) {
+          
+        for (int i = 0; i < comboBox.getItemCount(); i++)
+        {             
+            if (comboBox.getItemAt(i).toString().equals(value))
+            {
+                comboBox.setSelectedIndex(i);
+                break;
+            }
+        }
+    }	
+	
+	public static void setSelectedValueOfComboBox(JComboBox<Object> comboBox, int value) {
+        
+        for (int i = 0; i < comboBox.getItemCount(); i++)
+        {             
+            if (comboBox.getItemAt(i).equals(value))
+            {
+                comboBox.setSelectedIndex(i);
+                break;
+            }
+        }
+    }	
+	
 	@Override
 	public void windowDeactivated(WindowEvent e) {
 	}
@@ -624,6 +660,13 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 
 	@Override
 	public void windowOpened(WindowEvent e) {
+		showPartImage();
+		setSelectedValueOfComboBox(cBoxManufacturer, part.getManufacturer());
+		setSelectedValueOfComboBox(cBoxPartGroup, part.getPartGroup());
+		setSelectedValueOfComboBox(cBoxUnit, part.getUnit());
+		setSelectedValueOfComboBox(cBoxArea, part.getArea());
+		setSelectedValueOfComboBox(cBoxRack, part.getRack());
+		setSelectedValueOfComboBox(cBoxShelf, part.getShelf());
 	}
 
 	@Override

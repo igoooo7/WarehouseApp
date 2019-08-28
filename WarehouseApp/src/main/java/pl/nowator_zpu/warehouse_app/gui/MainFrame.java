@@ -13,6 +13,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.GroupLayout;
@@ -36,6 +38,7 @@ import pl.nowator_zpu.warehouse_app.application_classes.Part;
 import pl.nowator_zpu.warehouse_app.application_classes.PartsTableModel;
 import pl.nowator_zpu.warehouse_app.application_classes.User;
 import pl.nowator_zpu.warehouse_app.data_access.Controller;
+import pl.nowator_zpu.warehouse_app.entities.Manufacturers;
 import pl.nowator_zpu.warehouse_app.interfaces.UserLoginListener;
 
 public class MainFrame extends JFrame implements KeyListener {
@@ -52,6 +55,7 @@ public class MainFrame extends JFrame implements KeyListener {
 	private JLabel lblJobTitle;
 	private JLabel lblUserRights;
 	private JLabel lblNewLabel;
+	private JLabel lblImage;
 
 	private JTextField txtUserName;
 	private JTextField txtJobTitle;
@@ -65,11 +69,13 @@ public class MainFrame extends JFrame implements KeyListener {
 	private JButton btnDeletePart;
 	private JButton btnUpdate;
 	private JButton btnNewPart;
-	private JButton btnShowPicture; 
+	private JButton btnShowPicture;
+	private JButton btnChangePart;
 
 	private LoginFrame loginFrame;
 	private NewUserFrame newUserFrame;
 	private NewPartFrame newPartFrame;
+	private ChangePartFrame changePartFrame;
 
 	private PartsTableModel partsTableModel;
 	private JTable partsTable;
@@ -101,11 +107,11 @@ public class MainFrame extends JFrame implements KeyListener {
 	 */
 	public MainFrame() {
 
-		setTitle("AVERNA Wrocław - Warehouse Management");
+		setTitle("AVERNA Wrocław - Warehouse Management V1.0.0");
 		Image formIcon = new ImageIcon(this.getClass().getResource("/averna_ico.png")).getImage();
 		setIconImage(formIcon);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1200, 750);
+		setBounds(100, 100, 1200, 950);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 
 		contentPane = new JPanel();
@@ -128,69 +134,79 @@ public class MainFrame extends JFrame implements KeyListener {
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(195, 203, 43));
 		panel.setBorder(new TitledBorder(new LineBorder(new Color(195, 203, 43), 2, true), "User data",
-				TitledBorder.LEFT, TitledBorder.TOP, null, new Color(64, 64, 64)));		
+				TitledBorder.LEFT, TitledBorder.TOP, null, new Color(64, 64, 64)));
 
 		gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(94)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
+				.createSequentialGroup().addGap(94)
+				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(btnShowPicture, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-									.addComponent(btnUpdate, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addComponent(btnDeletePart, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(btnNewPart, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)))
-								.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE))
-							.addGap(31)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup().addGroup(gl_contentPane
+								.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(lblImage, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnShowPicture, GroupLayout.PREFERRED_SIZE, 212,
+										GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnUpdate, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 212,
+										GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnChangePart, GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+								.addGroup(Alignment.TRAILING, gl_contentPane
+										.createParallelGroup(Alignment.LEADING, false)
+										.addComponent(btnExit, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+												Short.MAX_VALUE)
+										.addComponent(btnNewPart, GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+										.addComponent(btnDeletePart, GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)))
+								.addGap(64)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_contentPane.createSequentialGroup().addComponent(lblNewLabel)
+												.addPreferredGap(ComponentPlacement.RELATED).addComponent(txtFilter,
+														GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE))
+										.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+												.addComponent(scrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
+														517, Short.MAX_VALUE)
+												.addGroup(Alignment.LEADING,
+														gl_contentPane.createSequentialGroup()
+																.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 154,
+																		GroupLayout.PREFERRED_SIZE)
+																.addGap(32)
+																.addComponent(btnNewUser, GroupLayout.PREFERRED_SIZE,
+																		149, GroupLayout.PREFERRED_SIZE)
+																.addGap(33).addComponent(btnDeleteUser,
+																		GroupLayout.PREFERRED_SIZE, 149,
+																		GroupLayout.PREFERRED_SIZE))))))
+				.addGap(293)));
+		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPane.createSequentialGroup().addGap(41)
+						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnNewUser, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnDeleteUser, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE))
+						.addGap(56)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
+								.createSequentialGroup()
+								.addComponent(btnDeletePart, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
+								.addGap(18)
+								.addComponent(btnNewPart, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
+								.addGap(18)
+								.addComponent(btnChangePart, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
+								.addGap(18)
+								.addComponent(btnUpdate, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
+								.addGap(18)
+								.addComponent(btnShowPicture, GroupLayout.PREFERRED_SIZE, 56,
+										GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(
+										ComponentPlacement.UNRELATED)
+								.addComponent(lblImage, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE))
 								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)
-									.addGap(32)
-									.addComponent(btnNewUser, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)
-									.addGap(33)
-									.addComponent(btnDeleteUser, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(scrollPane)
-									.addGap(65))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblNewLabel)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(txtFilter, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE)))))
-					.addGap(384))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(21)
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnNewUser, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnDeleteUser, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE))
-					.addGap(21)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel)
-						.addComponent(txtFilter, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(btnDeletePart, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(btnNewPart, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(btnUpdate, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
-							.addGap(31)
-							.addComponent(btnShowPicture, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE))
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE))
-					.addContainerGap())
-		);
+										.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+												.addComponent(lblNewLabel).addComponent(txtFilter,
+														GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+														GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(ComponentPlacement.UNRELATED)
+										.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)))
+						.addContainerGap()));
 
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
@@ -270,6 +286,8 @@ public class MainFrame extends JFrame implements KeyListener {
 
 		btnNewPart = new JButton("New part");
 
+		btnChangePart = new JButton("Change part");
+
 		btnUpdate = new JButton("Update");
 		Image btnUpdateIcon = new ImageIcon(this.getClass().getResource("/update-32.png")).getImage();
 		btnUpdate.setIcon(new ImageIcon(btnUpdateIcon));
@@ -277,10 +295,13 @@ public class MainFrame extends JFrame implements KeyListener {
 		lblNewLabel = new JLabel("Filter:");
 		txtFilter = new JTextField();
 		txtFilter.setColumns(10);
-		
-		btnShowPicture = new JButton("Show picture");		
+
+		btnShowPicture = new JButton("Show picture");
 		Image btnShowPictureIcon = new ImageIcon(this.getClass().getResource("/show-picture-32.png")).getImage();
 		btnShowPicture.setIcon(new ImageIcon(btnShowPictureIcon));
+
+		lblImage = new JLabel("");
+
 	}
 
 	private void addActionListenersForControls() {
@@ -306,8 +327,8 @@ public class MainFrame extends JFrame implements KeyListener {
 					if (loginFrame == null) {
 
 						closeOtherFramesBeforeOpeningLoginFrme();
-						
-						loginFrame = new LoginFrame();						
+
+						loginFrame = new LoginFrame();
 						loginFrame.setVisible(true);
 
 					} else {
@@ -377,22 +398,16 @@ public class MainFrame extends JFrame implements KeyListener {
 								refreshForm();
 
 							} else {
-
 								JOptionPane.showMessageDialog(null, "Some problems appeared, user wasn't deleted!",
 										"Warning", JOptionPane.WARNING_MESSAGE);
-
 							}
 						}
 					} else {
-
 						JOptionPane.showMessageDialog(null, "This user could not be deleted !", "Warning",
 								JOptionPane.WARNING_MESSAGE);
-
 					}
 				} else {
-
 					JOptionPane.showMessageDialog(null, "User isn't logged", "Warning", JOptionPane.WARNING_MESSAGE);
-
 				}
 
 			}
@@ -419,12 +434,38 @@ public class MainFrame extends JFrame implements KeyListener {
 			public void actionPerformed(ActionEvent arg0) {
 
 				if (newPartFrame == null) {
-					
-					newPartFrame = new NewPartFrame();				 
+					newPartFrame = new NewPartFrame();
 					newPartFrame.setUser(user);
 					newPartFrame.setVisible(true);
-				} else {					 
+				} else {
 					newPartFrame.setVisible(true);
+				}
+			}
+		});
+
+		btnChangePart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				int selectedRow = partsTable.getSelectedRow();
+
+				if (selectedRow > -1) {
+
+					String manufacturer = (String) partsTable.getValueAt(selectedRow, 0);
+					String orderCode = (String) partsTable.getValueAt(selectedRow, 3);
+
+					controller = new Controller();
+
+					Manufacturers m = controller.dbManagerForParts.getManufacturerByManufacturer(manufacturer);
+					Part part = controller.dbManagerForParts.getPartByOrderCodeAndManufacturerId(orderCode,
+							m.getManufacturerId());
+
+					changePartFrame = new ChangePartFrame(part);
+					changePartFrame.setUser(user);
+					changePartFrame.setVisible(true);
+
+				} else {
+					JOptionPane.showMessageDialog(null, "Please select parts you want to change!", "Warning",
+							JOptionPane.WARNING_MESSAGE);
 				}
 			}
 		});
@@ -441,17 +482,23 @@ public class MainFrame extends JFrame implements KeyListener {
 
 				String query = txtFilter.getText();
 				partsTableFilter(query);
-
 			}
 		});
-		
+
 		btnShowPicture.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				//Show part image
+				showImageForSelectedPart();
 			}
 		});
-		
+
+		partsTable.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent mouseEvent) {
+
+				if (mouseEvent.getClickCount() == 2) {
+					showImageForSelectedPart();
+				}
+			}
+		});
 	}
 
 	private void refreshForm() {
@@ -513,7 +560,7 @@ public class MainFrame extends JFrame implements KeyListener {
 						Boolean partsSuccessfullyDeleted = true;
 
 						for (int row : selectedRows) {
-							System.out.println(row);
+
 							String manufacturer = (String) partsTable.getValueAt(row, 0);
 							String orderCode = (String) partsTable.getValueAt(row, 3);
 
@@ -550,6 +597,7 @@ public class MainFrame extends JFrame implements KeyListener {
 						}
 					}
 				} else {
+
 					JOptionPane.showMessageDialog(null, "Please select parts you want to delete!", "Warning",
 							JOptionPane.WARNING_MESSAGE);
 				}
@@ -557,7 +605,6 @@ public class MainFrame extends JFrame implements KeyListener {
 
 				JOptionPane.showMessageDialog(null, "Current user don't have rights to delete parts!", "Warning",
 						JOptionPane.WARNING_MESSAGE);
-
 			}
 		}
 
@@ -574,19 +621,68 @@ public class MainFrame extends JFrame implements KeyListener {
 		sorter.setRowFilter(RowFilter.regexFilter(query));
 
 	}
-	
+
 	private void closeOtherFramesBeforeOpeningLoginFrme() {
-		
-		if(!(newUserFrame == null)) {
+
+		if (!(newUserFrame == null)) {
 			newUserFrame.dispose();
 			newUserFrame.setVisible(false);
 		}
-		
-		if(!(newPartFrame ==null)) {
+
+		if (!(newPartFrame == null)) {
 			newPartFrame.dispose();
 			newPartFrame.setVisible(false);
-		}	 
-	}	
+		}
+		
+		if (!(changePartFrame == null)) {
+			changePartFrame.dispose();
+			changePartFrame.setVisible(false);
+		}
+	}
+
+	private ImageIcon resizeImage(String imagePath, byte[] picture) {
+
+		ImageIcon myImage = null;
+
+		if (imagePath != null) {
+			myImage = new ImageIcon(imagePath);
+		} else {
+			myImage = new ImageIcon(picture);
+		}
+
+		Image img1 = myImage.getImage();
+		Image img2 = img1.getScaledInstance(lblImage.getWidth(), lblImage.getHeight(), Image.SCALE_SMOOTH);
+		ImageIcon image = new ImageIcon(img2);
+		return image;
+	}
+
+	private void showImageForSelectedPart() {
+
+		int selectedRow = partsTable.getSelectedRow();
+		String orderCode = "";
+		String manufacturer = "";
+
+		if (selectedRow != -1) {
+			manufacturer = (String) partsTable.getValueAt(selectedRow, 0);
+			orderCode = (String) partsTable.getValueAt(selectedRow, 3);
+
+			controller = new Controller();
+
+			Manufacturers m = controller.dbManagerForParts.getManufacturerByManufacturer(manufacturer);
+			byte[] image = controller.dbManagerForParts.getImageByOrderCodeAndManufacturerId(orderCode,
+					m.getManufacturerId());
+
+			if (image != null) {
+				lblImage.setIcon(resizeImage(null, image));
+			} else {
+				JOptionPane.showMessageDialog(null, "Image for selected part could not be found !", "Warning",
+						JOptionPane.WARNING_MESSAGE);
+			}
+
+		} else {
+			JOptionPane.showMessageDialog(null, "Please select parts !", "Warning", JOptionPane.WARNING_MESSAGE);
+		}
+	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {

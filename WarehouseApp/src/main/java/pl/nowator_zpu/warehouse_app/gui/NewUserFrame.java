@@ -289,13 +289,11 @@ public class NewUserFrame extends JFrame implements WindowListener, KeyListener 
 									Boolean userSuccessfullyCreated = controller.dbManagerForUsers.newUser(newUser);
 
 									if (userSuccessfullyCreated) {
-
+										
 										clearAllTextFields();
 										JOptionPane.showMessageDialog(null, "User successfully created", "Message",
 												JOptionPane.INFORMATION_MESSAGE);
-
 									} else {
-
 										JOptionPane.showMessageDialog(null,
 												"Some problems appeared, user wasn't created!", "Warning",
 												JOptionPane.WARNING_MESSAGE);
@@ -315,7 +313,6 @@ public class NewUserFrame extends JFrame implements WindowListener, KeyListener 
 							JOptionPane.showMessageDialog(null,
 									"User already exist, please specify different user name", "Warning",
 									JOptionPane.WARNING_MESSAGE);
-
 						}
 
 					} else {
@@ -359,9 +356,7 @@ public class NewUserFrame extends JFrame implements WindowListener, KeyListener 
 								JOptionPane.WARNING_MESSAGE);
 					}
 				} else {
-
 					JOptionPane.showMessageDialog(null, "User isn't logged!", "Warning", JOptionPane.WARNING_MESSAGE);
-
 				}
 			}
 		});
