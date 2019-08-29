@@ -120,13 +120,13 @@ public class ChangePartFrame extends JFrame implements WindowListener, KeyListen
 		addWindowListener(this);
 
 		this.part = part;
-		
+
 		createControls();
 		addActionListenersForControls();
-		
+
 		prepareLayout();
 		contentPane.setLayout(gl_contentPane);
-	
+
 	}
 
 	private void prepareLayout() {
@@ -319,9 +319,9 @@ public class ChangePartFrame extends JFrame implements WindowListener, KeyListen
 		btnImage = new JButton("Load image");
 		Image btnLoadImageIcon = new ImageIcon(this.getClass().getResource("/load-image-32.png")).getImage();
 		btnImage.setIcon(new ImageIcon(btnLoadImageIcon));
-				
-		lblImage = new JLabel("");		
-		
+
+		lblImage = new JLabel("");
+
 		btnChange = new JButton("Update");
 		Image btnCreateIcon = new ImageIcon(this.getClass().getResource("/new-part-32.png")).getImage();
 		btnChange.setIcon(new ImageIcon(btnCreateIcon));
@@ -372,7 +372,7 @@ public class ChangePartFrame extends JFrame implements WindowListener, KeyListen
 										"Warning", JOptionPane.WARNING_MESSAGE);
 							} else {
 
-								Parts part = new Parts();
+								Parts partToChange = new Parts();
 
 								Manufacturers m = controller.dbManagerForParts
 										.getManufacturerByManufacturer(cBoxManufacturer.getSelectedItem().toString());
@@ -392,18 +392,19 @@ public class ChangePartFrame extends JFrame implements WindowListener, KeyListen
 								Shelfs s = controller.dbManagerForParts
 										.getShelfByShelf(cBoxShelf.getSelectedItem().toString());
 
-								part.setPartName(txtPartName.getText());
-								part.setProductCode(txtProductCode.getText());
-								part.setOrderCode(txtOrderCode.getText());
-								part.setDescription(txtrDescription.getText());
-								part.setManufacturers(m);
-								part.setPartGroups(p);
-								part.setUnits(u);
-								part.setAreas(a);
-								part.setRacks(r);
-								part.setShelfs(s);
-								part.setQuantityMin(q_min);
-								part.setQuantityMax(q_max);
+								partToChange.setPartId(part.getPartId());
+								partToChange.setPartName(txtPartName.getText());
+								partToChange.setProductCode(txtProductCode.getText());
+								partToChange.setOrderCode(txtOrderCode.getText());
+								partToChange.setDescription(txtrDescription.getText());
+								partToChange.setManufacturers(m);
+								partToChange.setPartGroups(p);
+								partToChange.setUnits(u);
+								partToChange.setAreas(a);
+								partToChange.setRacks(r);
+								partToChange.setShelfs(s);
+								partToChange.setQuantityMin(q_min);
+								partToChange.setQuantityMax(q_max);
 
 								Users us = new Users();
 								us.setUserId(user.getUserId());
@@ -420,12 +421,12 @@ public class ChangePartFrame extends JFrame implements WindowListener, KeyListen
 								us.setJobTitles(jt);
 								us.setUserRights(ur);
 
-								part.setUsers(us);
+								partToChange.setUsers(us);
 
 								LocalDateTime dateTime = LocalDateTime.now();
 								Timestamp sqlDateTime = Timestamp.valueOf(dateTime);
 
-								part.setLastChangeDate(sqlDateTime);
+								partToChange.setLastChangeDate(sqlDateTime);
 
 								partImage = null;
 								if (partImagePath != null) {
@@ -433,26 +434,23 @@ public class ChangePartFrame extends JFrame implements WindowListener, KeyListen
 									File file = new File(partImagePath);
 									try {
 										partImage = Files.readAllBytes(file.toPath());
-										part.setImage(partImage);
+										partToChange.setImage(partImage);
 									} catch (IOException e) {
 										LOGGER.log(Level.WARNING, e.toString());
 									}
 								}
 
-								Boolean partSuccessfullyChanged = controller.dbManagerForParts.changePart(part);
+								Boolean partSuccessfullyChanged = controller.dbManagerForParts.changePart(partToChange);
 
 								if (partSuccessfullyChanged) {
 
-									clearAllTextFields();
 									JOptionPane.showMessageDialog(null, "Part successfully changed", "Message",
 											JOptionPane.INFORMATION_MESSAGE);
 
 								} else {
-
 									JOptionPane.showMessageDialog(null, "Some problems appeared, part wasn't created!",
 											"Warning", JOptionPane.WARNING_MESSAGE);
 								}
-
 							}
 
 						} else {
@@ -505,7 +503,7 @@ public class ChangePartFrame extends JFrame implements WindowListener, KeyListen
 
 		btnImage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-					
+
 				JFileChooser file = new JFileChooser();
 				file.setCurrentDirectory(new File(System.getProperty("user.home")));
 
@@ -535,7 +533,7 @@ public class ChangePartFrame extends JFrame implements WindowListener, KeyListen
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
 	private void prepareComboBoxes() {
 
 		controller = new Controller();
@@ -551,7 +549,7 @@ public class ChangePartFrame extends JFrame implements WindowListener, KeyListen
 
 		stringArray = manufacturerList.toArray(new String[manufacturerList.size()]);
 		cBoxManufacturer = new JComboBox<Object>(stringArray);
-		 
+
 		stringArray = partGroupList.toArray(new String[partGroupList.size()]);
 		cBoxPartGroup = new JComboBox<Object>(stringArray);
 
@@ -612,40 +610,36 @@ public class ChangePartFrame extends JFrame implements WindowListener, KeyListen
 		ImageIcon image = new ImageIcon(img2);
 		return image;
 	}
-	
+
 	private void showPartImage() {
-		
+
 		byte[] image;
 		image = part.getImage();
 		if (image != null) {
-		lblImage.setIcon(resizeImage(null, image));			 
+			lblImage.setIcon(resizeImage(null, image));
 		}
 	}
 
 	public static void setSelectedValueOfComboBox(JComboBox<Object> comboBox, String value) {
-          
-        for (int i = 0; i < comboBox.getItemCount(); i++)
-        {             
-            if (comboBox.getItemAt(i).toString().equals(value))
-            {
-                comboBox.setSelectedIndex(i);
-                break;
-            }
-        }
-    }	
-	
+
+		for (int i = 0; i < comboBox.getItemCount(); i++) {
+			if (comboBox.getItemAt(i).toString().equals(value)) {
+				comboBox.setSelectedIndex(i);
+				break;
+			}
+		}
+	}
+
 	public static void setSelectedValueOfComboBox(JComboBox<Object> comboBox, int value) {
-        
-        for (int i = 0; i < comboBox.getItemCount(); i++)
-        {             
-            if (comboBox.getItemAt(i).equals(value))
-            {
-                comboBox.setSelectedIndex(i);
-                break;
-            }
-        }
-    }	
-	
+
+		for (int i = 0; i < comboBox.getItemCount(); i++) {
+			if (comboBox.getItemAt(i).equals(value)) {
+				comboBox.setSelectedIndex(i);
+				break;
+			}
+		}
+	}
+
 	@Override
 	public void windowDeactivated(WindowEvent e) {
 	}

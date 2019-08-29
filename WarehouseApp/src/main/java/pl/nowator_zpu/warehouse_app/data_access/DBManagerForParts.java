@@ -228,8 +228,11 @@ public class DBManagerForParts {
 
 			createManager();
 
+			Parts p = em.find(Parts.class, part.getPartId());
+			p = part;
+			
 			em.getTransaction().begin();
-			em.merge(part);
+			em.merge(p);
 			em.getTransaction().commit();
 
 			destroyManager();

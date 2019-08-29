@@ -486,12 +486,10 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 							JOptionPane.showMessageDialog(null, "Please specify:" + sb.toString(), "Warning",
 									JOptionPane.WARNING_MESSAGE);
 						}
-
 					} else {
 						JOptionPane.showMessageDialog(null, "Current user don't have rights to create parts!",
 								"Warning", JOptionPane.WARNING_MESSAGE);
 					}
-
 				} else {
 					JOptionPane.showMessageDialog(null, "User isn't logged!", "Warning", JOptionPane.WARNING_MESSAGE);
 				}

@@ -34,7 +34,7 @@ public class PartsTableModel extends AbstractTableModel {
 	public int getRowCount() {
 		return parts.size();
 	}
-
+	
 	@Override
 	public Object getValueAt(int row, int col) {
 

@@ -276,6 +276,7 @@ public class MainFrame extends JFrame implements KeyListener {
 
 		partsTableModel = new PartsTableModel();
 		partsTable = new JTable(partsTableModel);
+		partsTable.setSelectionBackground(Color.LIGHT_GRAY);
 
 		refreshPartsTableModel();
 
@@ -368,6 +369,7 @@ public class MainFrame extends JFrame implements KeyListener {
 					newUserFrame.setUser(user);
 					newUserFrame.setVisible(true);
 				} else {
+					newUserFrame.setUser(user);
 					newUserFrame.setVisible(true);
 				}
 			}
@@ -427,6 +429,9 @@ public class MainFrame extends JFrame implements KeyListener {
 				if (keyCode == KeyEvent.VK_DELETE) {
 					deletePart();
 				}
+				if (keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_DOWN) {					 
+					partsTable.setSelectionBackground(Color.LIGHT_GRAY);
+				}
 			}
 		});
 
@@ -438,6 +443,7 @@ public class MainFrame extends JFrame implements KeyListener {
 					newPartFrame.setUser(user);
 					newPartFrame.setVisible(true);
 				} else {
+					newPartFrame.setUser(user);
 					newPartFrame.setVisible(true);
 				}
 			}
@@ -495,7 +501,13 @@ public class MainFrame extends JFrame implements KeyListener {
 			public void mousePressed(MouseEvent mouseEvent) {
 
 				if (mouseEvent.getClickCount() == 2) {
-					showImageForSelectedPart();
+					int result = showImageForSelectedPart();
+
+					if (result == 1) {
+						partsTable.setSelectionBackground(Color.GREEN);
+					} else if (result == -1) {
+						partsTable.setSelectionBackground(Color.RED);
+					}
 				}
 			}
 		});
@@ -633,7 +645,7 @@ public class MainFrame extends JFrame implements KeyListener {
 			newPartFrame.dispose();
 			newPartFrame.setVisible(false);
 		}
-		
+
 		if (!(changePartFrame == null)) {
 			changePartFrame.dispose();
 			changePartFrame.setVisible(false);
@@ -656,7 +668,7 @@ public class MainFrame extends JFrame implements KeyListener {
 		return image;
 	}
 
-	private void showImageForSelectedPart() {
+	private int showImageForSelectedPart() {
 
 		int selectedRow = partsTable.getSelectedRow();
 		String orderCode = "";
@@ -674,23 +686,21 @@ public class MainFrame extends JFrame implements KeyListener {
 
 			if (image != null) {
 				lblImage.setIcon(resizeImage(null, image));
+				return 1;
 			} else {
 				JOptionPane.showMessageDialog(null, "Image for selected part could not be found !", "Warning",
 						JOptionPane.WARNING_MESSAGE);
+				return -1;
 			}
 
 		} else {
 			JOptionPane.showMessageDialog(null, "Please select parts !", "Warning", JOptionPane.WARNING_MESSAGE);
+			return 0;
 		}
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-
-		int keyCode = e.getKeyCode();
-		if (keyCode == KeyEvent.VK_DELETE) {
-			deletePart();
-		}
 	}
 
 	@Override
