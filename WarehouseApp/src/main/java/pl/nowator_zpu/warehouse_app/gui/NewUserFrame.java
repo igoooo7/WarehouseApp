@@ -77,7 +77,7 @@ public class NewUserFrame extends JFrame implements WindowListener, KeyListener 
 		Image formIcon = new ImageIcon(this.getClass().getResource("/averna_ico.png")).getImage();
 		setIconImage(formIcon);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 370, 550);
+		setBounds(100, 100, 395, 550);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(119, 136, 153));
@@ -99,18 +99,24 @@ public class NewUserFrame extends JFrame implements WindowListener, KeyListener 
 		panel.setBackground(new Color(195, 203, 43));
 
 		gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(
-				Alignment.TRAILING,
-				gl_contentPane.createSequentialGroup().addContainerGap(24, Short.MAX_VALUE)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(panel, GroupLayout.PREFERRED_SIZE, 312, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnCreate, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE))
-						.addGap(27)));
-		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPane.createSequentialGroup().addGap(32)
-						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE).addGap(80)
-						.addComponent(btnCreate, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
-						.addGap(291)));
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap(34, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(btnCreate, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)
+						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 327, GroupLayout.PREFERRED_SIZE))
+					.addGap(30))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(37)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE)
+					.addGap(75)
+					.addComponent(btnCreate, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
+					.addGap(291))
+		);
 
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
@@ -118,33 +124,32 @@ public class NewUserFrame extends JFrame implements WindowListener, KeyListener 
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGap(25)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(lblEmail, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-								.addComponent(lblUserName, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-								.addComponent(lblPassword, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-								.addComponent(lblLastName, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-								.addComponent(lblRepeatPass, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-								.addComponent(lblFirstName, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(txtUserName)
-								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-									.addComponent(passUserPassword, Alignment.TRAILING)
-									.addComponent(txtLastName)
-									.addComponent(txtEmail, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-									.addComponent(txtFirstName, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-									.addComponent(passUserRepeatedPassword, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE))))
+						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
+							.addComponent(lblEmail, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+							.addComponent(lblUserName, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+							.addComponent(lblPassword, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+							.addComponent(lblLastName, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+							.addComponent(lblFirstName, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(lblRepeatPass, Alignment.LEADING))
+						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+							.addComponent(lblUserRights, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblJobTitle, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-								.addComponent(lblUserRights, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblJobTitle, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(cBoxUserRights, 0, 171, Short.MAX_VALUE)
-									.addPreferredGap(ComponentPlacement.RELATED))
-								.addComponent(cBoxJobTitle, 0, 171, Short.MAX_VALUE))))
+								.addComponent(cBoxUserRights, 0, 181, Short.MAX_VALUE)
+								.addComponent(cBoxJobTitle, 0, 171, Short.MAX_VALUE))
+							.addPreferredGap(ComponentPlacement.RELATED))
+						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+							.addComponent(txtUserName, 171, 171, 171)
+							.addComponent(passUserPassword, Alignment.TRAILING, 171, 171, 171)
+							.addComponent(txtLastName, 171, 171, 171)
+							.addComponent(txtEmail, GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+							.addComponent(passUserRepeatedPassword, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE)
+							.addGroup(gl_panel.createSequentialGroup()
+								.addComponent(txtFirstName, GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+								.addPreferredGap(ComponentPlacement.RELATED))))
 					.addGap(43))
 		);
 		gl_panel.setVerticalGroup(
