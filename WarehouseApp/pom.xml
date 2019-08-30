@@ -5,6 +5,7 @@
 	<groupId>pl.nowator_zpu</groupId>
 	<artifactId>WarehouseApp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<name>WarehouseApp</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -35,41 +36,55 @@
 			<version>5.4.3.Final</version>
 		</dependency>
 
-		<dependency>
-			<groupId>com.sun</groupId>
-			<artifactId>tools</artifactId>
-			<version>1.8.0</version>
-			<scope>system</scope>
-			<systemPath>C:\Program Files\Java\jdk1.8.0_191\lib\tools.jar</systemPath>
-		</dependency>
+		<!--<dependency> <groupId>com.sun</groupId> <artifactId>tools</artifactId> 
+			<version>1.8.0</version> <scope>system</scope> <systemPath>C:\Program Files\Java\jdk1.8.0_191\lib\tools.jar</systemPath> 
+			</dependency> -->
 
 	</dependencies>
 
 	<build>
 		<plugins>
 			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
 				<executions>
 					<execution>
-						<phase>package</phase>
+						<id>copy-dependencies</id>
+						<phase>prepare-package</phase>
 						<goals>
-							<goal>single</goal>
+							<goal>copy-dependencies</goal>
 						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/lib</outputDirectory>
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>false</overWriteSnapshots>
+							<overWriteIfNewer>true</overWriteIfNewer>
+						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
 				<configuration>
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
 							<mainClass>pl.nowator_zpu.warehouse_app.gui.MainFrame</mainClass>
 						</manifest>
 					</archive>
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
 				</configuration>
 			</plugin>
 		</plugins>
+		<resources>
+			<resource>
+				<directory>images</directory>
+				<includes>
+					<include>*.png</include>
+				</includes>
+			</resource>
+		</resources>
 	</build>
 
 </project>
