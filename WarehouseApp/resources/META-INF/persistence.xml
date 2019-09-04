@@ -6,6 +6,18 @@
 	<persistence-unit name="db_warehouse"
 		transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<!--<properties>
+			<property name="javax.persistence.jdbc.driver"
+				value="com.mysql.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.user" value="igor-ThinkPad-T550" />
+			<property name="javax.persistence.jdbc.password" value="leskiewicz20" />
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://192.168.24.156:3306/db_warehouse?serverTimezone=UTC" />
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.MySQLDialect" />
+         	<property name="hibernate.hbm2ddl.auto"
+         	 	value="" />         
+		</properties>-->
 		<properties>
 			<property name="javax.persistence.jdbc.driver"
 				value="com.mysql.jdbc.Driver" />

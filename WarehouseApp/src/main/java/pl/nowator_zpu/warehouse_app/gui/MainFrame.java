@@ -500,8 +500,15 @@ public class MainFrame extends JFrame implements KeyListener {
 
 		btnShowPicture.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				showImageForSelectedPart();
-			}
+				
+				int result = showImageForSelectedPart();
+
+				if (result == 1) {
+					partsTable.setSelectionBackground(Color.GREEN);
+				} else if (result == -1) {
+					partsTable.setSelectionBackground(Color.ORANGE);
+				}
+			}			
 		});
 
 		partsTable.addMouseListener(new MouseAdapter() {
@@ -513,7 +520,7 @@ public class MainFrame extends JFrame implements KeyListener {
 					if (result == 1) {
 						partsTable.setSelectionBackground(Color.GREEN);
 					} else if (result == -1) {
-						partsTable.setSelectionBackground(Color.RED);
+						partsTable.setSelectionBackground(Color.ORANGE);
 					}
 				}
 
@@ -568,7 +575,9 @@ public class MainFrame extends JFrame implements KeyListener {
 				int selectedRow = partsTable.getSelectedRow();
 
 				if (selectedRow > -1) {
-
+					
+					partsTable.setSelectionBackground(Color.RED);
+					
 					int userDecision = JOptionPane.showConfirmDialog(null,
 							"Are you sure you want to delete selected parts?", "Question", JOptionPane.YES_NO_OPTION);
 

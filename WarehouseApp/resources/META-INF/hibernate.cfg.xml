@@ -3,10 +3,19 @@
 		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
 		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-    <session-factory>
+    <!--<session-factory>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://192.168.24.156:3306/db_warehouse</property>
+        <property name="hibernate.connection.username">igor-ThinkPad-T550</property>
+         <property name="hibernate.connection.password">leskiewicz20</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
+    </session-factory>-->
+     <session-factory>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/db_warehouse</property>
         <property name="hibernate.connection.username">root</property>
+         <property name="hibernate.connection.password"></property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
     </session-factory>
