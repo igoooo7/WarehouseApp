@@ -36,6 +36,7 @@ import pl.nowator_zpu.warehouse_app.application_classes.User;
 import pl.nowator_zpu.warehouse_app.data_access.Controller;
 import pl.nowator_zpu.warehouse_app.entities.Manufacturers;
 import pl.nowator_zpu.warehouse_app.interfaces.UserLoginListener;
+import javax.swing.JComboBox;
 
 public class MainFrame extends JFrame implements KeyListener {
 
@@ -50,8 +51,10 @@ public class MainFrame extends JFrame implements KeyListener {
 	private JLabel lblUserName;
 	private JLabel lblJobTitle;
 	private JLabel lblUserRights;
-	private JLabel lblNewLabel;
+	private JLabel lblSearch;
 	private JLabel lblImage;
+	private JLabel lblManufacturer;
+	private JLabel lblPartGroup;
 
 	private JTextField txtUserName;
 	private JTextField txtJobTitle;
@@ -67,6 +70,9 @@ public class MainFrame extends JFrame implements KeyListener {
 	private JButton btnNewPart;
 	private JButton btnShowPicture;
 	private JButton btnChangePart;
+
+	JComboBox<Object> cBoxManufacturer;
+	JComboBox<Object> cBoxPartGroup;
 
 	private LoginFrame loginFrame;
 	private NewUserFrame newUserFrame;
@@ -138,29 +144,34 @@ public class MainFrame extends JFrame implements KeyListener {
 				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_contentPane.createSequentialGroup().addGroup(gl_contentPane
-								.createParallelGroup(Alignment.LEADING, false)
+								.createParallelGroup(Alignment.TRAILING, false)
 								.addComponent(lblImage, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
 								.addComponent(btnShowPicture, GroupLayout.PREFERRED_SIZE, 212,
 										GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnUpdate, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 212,
-										GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnUpdate, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
 								.addComponent(btnChangePart, GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
-								.addGroup(Alignment.TRAILING, gl_contentPane
-										.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(btnExit, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)
-										.addComponent(btnNewPart, GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
-										.addComponent(btnDeletePart, GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)))
+								.addComponent(btnExit, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(btnNewPart, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 154,
+										Short.MAX_VALUE)
+								.addComponent(btnDeletePart, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 212,
+										Short.MAX_VALUE))
 								.addGap(64)
 								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addGroup(gl_contentPane.createSequentialGroup().addComponent(lblNewLabel)
-												.addPreferredGap(ComponentPlacement.RELATED).addComponent(txtFilter,
+										.addGroup(gl_contentPane.createSequentialGroup()
+												.addComponent(lblPartGroup, GroupLayout.PREFERRED_SIZE, 97,
+														GroupLayout.PREFERRED_SIZE)
+												.addGap(25)
+												.addComponent(cBoxPartGroup, GroupLayout.PREFERRED_SIZE, 234,
+														GroupLayout.PREFERRED_SIZE)
+												.addGap(21).addComponent(lblSearch)
+												.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(txtFilter,
 														GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE))
-										.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-												.addComponent(scrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
-														517, Short.MAX_VALUE)
-												.addGroup(Alignment.LEADING,
-														gl_contentPane.createSequentialGroup()
+										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+												.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+														.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 1255,
+																Short.MAX_VALUE)
+														.addGroup(gl_contentPane.createSequentialGroup()
 																.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 154,
 																		GroupLayout.PREFERRED_SIZE)
 																.addGap(32)
@@ -168,7 +179,13 @@ public class MainFrame extends JFrame implements KeyListener {
 																		149, GroupLayout.PREFERRED_SIZE)
 																.addGap(33).addComponent(btnDeleteUser,
 																		GroupLayout.PREFERRED_SIZE, 149,
-																		GroupLayout.PREFERRED_SIZE))))))
+																		GroupLayout.PREFERRED_SIZE)))
+												.addGroup(gl_contentPane.createSequentialGroup()
+														.addComponent(lblManufacturer, GroupLayout.PREFERRED_SIZE, 98,
+																GroupLayout.PREFERRED_SIZE)
+														.addGap(24).addComponent(cBoxManufacturer,
+																GroupLayout.PREFERRED_SIZE, 234,
+																GroupLayout.PREFERRED_SIZE))))))
 				.addGap(293)));
 		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup().addGap(41)
@@ -179,7 +196,15 @@ public class MainFrame extends JFrame implements KeyListener {
 								.addComponent(btnNewUser, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
 								.addComponent(btnDeleteUser, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
 								.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE))
-						.addGap(56)
+						.addGap(20)
+						.addGroup(gl_contentPane
+								.createParallelGroup(Alignment.LEADING)
+								.addGroup(
+										gl_contentPane.createSequentialGroup().addGap(5).addComponent(lblManufacturer))
+								.addComponent(
+										cBoxManufacturer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE))
+						.addGap(12)
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
 								.createSequentialGroup()
 								.addComponent(btnDeletePart, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
@@ -196,48 +221,52 @@ public class MainFrame extends JFrame implements KeyListener {
 										ComponentPlacement.UNRELATED)
 								.addComponent(lblImage, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE))
 								.addGroup(gl_contentPane.createSequentialGroup()
-										.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-												.addComponent(lblNewLabel).addComponent(txtFilter,
-														GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-														GroupLayout.PREFERRED_SIZE))
-										.addPreferredGap(ComponentPlacement.UNRELATED)
-										.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)))
+										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+												.addGroup(gl_contentPane.createSequentialGroup().addGap(5)
+														.addComponent(lblPartGroup))
+												.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+														.addComponent(cBoxPartGroup, GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+														.addComponent(txtFilter, GroupLayout.PREFERRED_SIZE, 22,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(lblSearch)))
+										.addGap(7)
+										.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)))
 						.addContainerGap()));
 
 		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(23)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblUserRights, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblUserName, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblJobTitle, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE))
-					.addGap(11)
-					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup().addGap(23)
 						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-							.addComponent(txtJobTitle, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE)
-							.addComponent(txtUserRights, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE))
-						.addComponent(txtUserName, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
-		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(txtUserName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblUserName))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(txtJobTitle, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblJobTitle))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(txtUserRights, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblUserRights))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
+								.addComponent(lblUserRights, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblUserName, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblJobTitle, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE))
+						.addGap(11)
+						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+										.addComponent(txtJobTitle, GroupLayout.PREFERRED_SIZE, 141,
+												GroupLayout.PREFERRED_SIZE)
+										.addComponent(txtUserRights, GroupLayout.PREFERRED_SIZE, 141,
+												GroupLayout.PREFERRED_SIZE))
+								.addComponent(txtUserName, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE))
+						.addContainerGap()));
+		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup().addContainerGap()
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(txtUserName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblUserName))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(txtJobTitle, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblJobTitle))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(txtUserRights, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblUserRights))
+						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 		panel.setLayout(gl_panel);
 
 	}
@@ -285,7 +314,7 @@ public class MainFrame extends JFrame implements KeyListener {
 		partsTable = new JTable(partsTableModel);
 		partsTable.setSelectionBackground(Color.LIGHT_GRAY);
 
-		refreshPartsTableModel();
+		getAllPartsAndRefreshPartsTableModel();
 
 		scrollPane = new JScrollPane();
 		scrollPane.setViewportView(partsTable);
@@ -300,7 +329,7 @@ public class MainFrame extends JFrame implements KeyListener {
 		Image btnUpdateIcon = new ImageIcon(this.getClass().getResource("/update-32.png")).getImage();
 		btnUpdate.setIcon(new ImageIcon(btnUpdateIcon));
 
-		lblNewLabel = new JLabel("Filter:");
+		lblSearch = new JLabel("Search:");
 		txtFilter = new JTextField();
 		txtFilter.setColumns(10);
 
@@ -309,6 +338,11 @@ public class MainFrame extends JFrame implements KeyListener {
 		btnShowPicture.setIcon(new ImageIcon(btnShowPictureIcon));
 
 		lblImage = new JLabel("");
+
+		lblManufacturer = new JLabel("Manufacturer:");
+		lblPartGroup = new JLabel("Part group:");
+
+		prepareComboBoxes();
 
 	}
 
@@ -485,7 +519,7 @@ public class MainFrame extends JFrame implements KeyListener {
 
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				refreshPartsTableModel();
+				getAllPartsAndRefreshPartsTableModel();
 			}
 		});
 
@@ -500,7 +534,7 @@ public class MainFrame extends JFrame implements KeyListener {
 
 		btnShowPicture.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+
 				int result = showImageForSelectedPart();
 
 				if (result == 1) {
@@ -508,7 +542,7 @@ public class MainFrame extends JFrame implements KeyListener {
 				} else if (result == -1) {
 					partsTable.setSelectionBackground(Color.ORANGE);
 				}
-			}			
+			}
 		});
 
 		partsTable.addMouseListener(new MouseAdapter() {
@@ -529,6 +563,21 @@ public class MainFrame extends JFrame implements KeyListener {
 				}
 			}
 		});
+
+		cBoxManufacturer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				getFilteredPartsAndRefreshPartsTableModel();
+			}
+		});
+
+		cBoxPartGroup.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				getFilteredPartsAndRefreshPartsTableModel();
+			}
+		});
+
 	}
 
 	private void refreshForm() {
@@ -558,11 +607,36 @@ public class MainFrame extends JFrame implements KeyListener {
 		btnLogin.setText("Login");
 	}
 
-	private void refreshPartsTableModel() {
+	private void getAllPartsAndRefreshPartsTableModel() {
 
 		controller = new Controller();
 		partsTableModel.setData(controller.dbManagerForParts.getAllParts());
 		partsTableModel.fireTableDataChanged();
+
+	}
+
+	private void getFilteredPartsAndRefreshPartsTableModel() {
+
+		controller = new Controller();
+
+		if ((cBoxManufacturer.getSelectedItem() == "All") && (cBoxPartGroup.getSelectedItem() == "All")) {
+			getAllPartsAndRefreshPartsTableModel();
+		} else if ((cBoxManufacturer.getSelectedItem() != "All") && (cBoxPartGroup.getSelectedItem() == "All")) {
+
+			partsTableModel.setData(
+					controller.dbManagerForParts.getPartsByManufacturer(cBoxManufacturer.getSelectedItem().toString()));
+			partsTableModel.fireTableDataChanged();
+		} else if ((cBoxManufacturer.getSelectedItem() == "All") && (cBoxPartGroup.getSelectedItem() != "All")) {
+
+			partsTableModel.setData(
+					controller.dbManagerForParts.getPartsByPartGroup(cBoxPartGroup.getSelectedItem().toString()));
+			partsTableModel.fireTableDataChanged();
+		} else {
+
+			partsTableModel.setData(controller.dbManagerForParts.getPartsByManufacturerAndPartGroup(
+					cBoxManufacturer.getSelectedItem().toString(), cBoxPartGroup.getSelectedItem().toString()));
+			partsTableModel.fireTableDataChanged();
+		}
 
 	}
 
@@ -575,9 +649,9 @@ public class MainFrame extends JFrame implements KeyListener {
 				int selectedRow = partsTable.getSelectedRow();
 
 				if (selectedRow > -1) {
-					
+
 					partsTable.setSelectionBackground(Color.RED);
-					
+
 					int userDecision = JOptionPane.showConfirmDialog(null,
 							"Are you sure you want to delete selected parts?", "Question", JOptionPane.YES_NO_OPTION);
 
@@ -615,7 +689,7 @@ public class MainFrame extends JFrame implements KeyListener {
 							}
 						}
 
-						refreshPartsTableModel();
+						getAllPartsAndRefreshPartsTableModel();
 
 						if (partsSuccessfullyDeleted) {
 
@@ -717,6 +791,24 @@ public class MainFrame extends JFrame implements KeyListener {
 			JOptionPane.showMessageDialog(null, "Please select parts !", "Warning", JOptionPane.WARNING_MESSAGE);
 			return 0;
 		}
+	}
+
+	private void prepareComboBoxes() {
+
+		controller = new Controller();
+		String[] stringArray;
+
+		ArrayList<String> manufacturerList = controller.dbManagerForParts.getAllManufacturers();
+		manufacturerList.add(0, "All");
+		ArrayList<String> partGroupList = controller.dbManagerForParts.getAllPartGroups();
+		partGroupList.add(0, "All");
+
+		stringArray = manufacturerList.toArray(new String[manufacturerList.size()]);
+		cBoxManufacturer = new JComboBox<Object>(stringArray);
+
+		stringArray = partGroupList.toArray(new String[partGroupList.size()]);
+		cBoxPartGroup = new JComboBox<Object>(stringArray);
+
 	}
 
 	@Override
