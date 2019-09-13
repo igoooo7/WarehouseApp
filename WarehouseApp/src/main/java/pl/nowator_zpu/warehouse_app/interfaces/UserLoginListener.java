@@ -4,6 +4,6 @@ import pl.nowator_zpu.warehouse_app.application_classes.User;
 
 public interface UserLoginListener {
 
-	public void loginEventPerformed(User ui);	
+	public void loginEventPerformed(User u);	
 	
 }

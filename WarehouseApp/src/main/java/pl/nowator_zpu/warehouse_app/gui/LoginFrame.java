@@ -136,9 +136,7 @@ public class LoginFrame extends JFrame implements WindowListener, KeyListener {
 	}
 
 	public void setUserLoginListener(UserLoginListener userLoginListener) {
-
 		this.userLoginListener = userLoginListener;
-
 	}
 
 	private void addActionListenersForControls() {
