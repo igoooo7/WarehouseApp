@@ -123,7 +123,7 @@ FOREIGN KEY(shelf_id) REFERENCES shelfs(shelf_id),
 FOREIGN KEY(part_group_id) REFERENCES part_groups(part_group_id),
 FOREIGN KEY(unit_id) REFERENCES units(unit_id)
 );
-/*ALTER TABLE parts ADD UNIQUE (manufacturer_id , order_code);*/
+ALTER TABLE parts ADD UNIQUE (manufacturer_id , order_code);
 
 CREATE TABLE projects
 (
