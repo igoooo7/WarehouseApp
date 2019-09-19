@@ -525,7 +525,7 @@ public class MainFrame extends JFrame implements KeyListener {
 							}
 						}
 					} else {
-						JOptionPane.showMessageDialog(null, "This user could not be deleted !", "Warning",
+						JOptionPane.showMessageDialog(null, "This user could not be deleted!", "Warning",
 								JOptionPane.WARNING_MESSAGE);
 					}
 				} else {
@@ -713,15 +713,27 @@ public class MainFrame extends JFrame implements KeyListener {
 		btnOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				if (orderFrame == null) {
-					orderFrame = new OrderFrame();
-					orderFrame.setUser(user);
-					orderFrame.setPartsList(partsToOrder, partsToOrderCount);
-					orderFrame.setVisible(true);
+				if (user.getUserRightsLevel() >= 2) {
+
+					if (partsToOrderCount > 0) {
+
+						if (orderFrame == null) {
+							orderFrame = new OrderFrame();
+							orderFrame.setUser(user);
+							orderFrame.setPartsList(partsToOrder, partsToOrderCount);
+							orderFrame.setVisible(true);
+						} else {
+							orderFrame.setUser(user);
+							orderFrame.setPartsList(partsToOrder, partsToOrderCount);
+							orderFrame.setVisible(true);
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "You don't have any items added to basket!", "Warning",
+								JOptionPane.WARNING_MESSAGE);
+					}
 				} else {
-					orderFrame.setUser(user);
-					orderFrame.setPartsList(partsToOrder, partsToOrderCount);
-					orderFrame.setVisible(true);
+					JOptionPane.showMessageDialog(null, "Current user don't have rights to create orders!", "Warning",
+							JOptionPane.WARNING_MESSAGE);
 				}
 
 				orderFrame.setItemDeleteListener(new ItemDeleteListener() {
@@ -944,13 +956,13 @@ public class MainFrame extends JFrame implements KeyListener {
 				lblImage.setIcon(resizeImage(null, image));
 				return 1;
 			} else {
-				JOptionPane.showMessageDialog(null, "Image for selected part could not be found !", "Warning",
+				JOptionPane.showMessageDialog(null, "Image for selected part could not be found!", "Warning",
 						JOptionPane.WARNING_MESSAGE);
 				return -1;
 			}
 
 		} else {
-			JOptionPane.showMessageDialog(null, "Please select parts !", "Warning", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Please select parts!", "Warning", JOptionPane.WARNING_MESSAGE);
 			return 0;
 		}
 	}

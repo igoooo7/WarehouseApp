@@ -18,6 +18,7 @@ import javassist.bytecode.stackmap.TypeData.ClassName;
 import pl.nowator_zpu.warehouse_app.application_classes.Part;
 import pl.nowator_zpu.warehouse_app.entities.Areas;
 import pl.nowator_zpu.warehouse_app.entities.Manufacturers;
+import pl.nowator_zpu.warehouse_app.entities.Orders;
 import pl.nowator_zpu.warehouse_app.entities.PartGroups;
 import pl.nowator_zpu.warehouse_app.entities.Parts;
 import pl.nowator_zpu.warehouse_app.entities.Projects;
@@ -69,6 +70,55 @@ public class DBManagerForOrders {
 		} catch (Exception e) {
 			LOGGER.log(Level.WARNING, e.toString());
 			return null;
+		}
+	}
+
+	public Projects getProjectEntityByProject(String project) {
+
+		Projects result = new Projects();
+
+		try {
+
+			createManager();
+
+			CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+			CriteriaQuery<Projects> criteriaQuery = criteriaBuilder.createQuery(Projects.class);
+			Root<Projects> projectRoot = criteriaQuery.from(Projects.class);
+
+			Path<String> p = projectRoot.get("projectName");
+
+			criteriaQuery.select(projectRoot);
+
+			criteriaQuery.where(criteriaBuilder.equal(p, project));
+
+			TypedQuery<Projects> query = em.createQuery(criteriaQuery);
+
+			result = query.getSingleResult();
+
+			return result;
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING, e.toString());
+			return null;
+		}
+	}
+	
+	// Order
+	public Boolean newOrder(Orders order) {
+
+		try {
+
+			createManager();
+
+			em.getTransaction().begin();
+			em.persist(order);
+			em.getTransaction().commit();
+
+			destroyManager();
+
+			return true;
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING, e.toString());
+			return false;
 		}
 	}
 }

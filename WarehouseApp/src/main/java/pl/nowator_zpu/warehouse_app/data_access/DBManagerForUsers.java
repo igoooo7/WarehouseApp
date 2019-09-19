@@ -17,6 +17,7 @@ import javax.persistence.criteria.Root;
 import javassist.bytecode.stackmap.TypeData.ClassName;
 import pl.nowator_zpu.warehouse_app.application_classes.User;
 import pl.nowator_zpu.warehouse_app.entities.JobTitles;
+import pl.nowator_zpu.warehouse_app.entities.Projects;
 import pl.nowator_zpu.warehouse_app.entities.UserRights;
 import pl.nowator_zpu.warehouse_app.entities.Users;
 
@@ -142,6 +143,35 @@ public class DBManagerForUsers {
 		}
 	}
 
+	public Users getUserEntityByUserName(String userName) {
+
+		Users result = new Users();
+
+		try {
+
+			createManager();
+
+			CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+			CriteriaQuery<Users> criteriaQuery = criteriaBuilder.createQuery(Users.class);
+			Root<Users> userRoot = criteriaQuery.from(Users.class);
+
+			Path<String> u = userRoot.get("userName");
+
+			criteriaQuery.select(userRoot);
+
+			criteriaQuery.where(criteriaBuilder.equal(u, userName));
+
+			TypedQuery<Users> query = em.createQuery(criteriaQuery);
+
+			result = query.getSingleResult();
+
+			return result;
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING, e.toString());
+			return null;
+		}
+	}
+	
 	public Boolean newUser(Users user) {
 
 		try {

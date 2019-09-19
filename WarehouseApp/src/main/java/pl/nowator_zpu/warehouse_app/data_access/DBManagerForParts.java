@@ -202,6 +202,57 @@ public class DBManagerForParts {
 			return null;
 		}
 	}
+	
+	public Parts getPartEntityByOrderCodeAndManufacturerId(String orderCode, Integer manufacturerId) {
+
+		Parts result = new Parts();
+
+		try {
+
+			createManager();
+
+			CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+			CriteriaQuery<Parts> criteriaQuery = criteriaBuilder.createQuery(Parts.class);
+			Root<Parts> partRoot = criteriaQuery.from(Parts.class);
+
+			Path<String> c = partRoot.get("orderCode");
+			Path<Integer> m = partRoot.get("manufacturers");
+
+			Root<PartGroups> partsGroupRoot = criteriaQuery.from(PartGroups.class);
+			Root<Manufacturers> manufacturerRoot = criteriaQuery.from(Manufacturers.class);
+			Root<Areas> areaRoot = criteriaQuery.from(Areas.class);
+			Root<Racks> rackRoot = criteriaQuery.from(Racks.class);
+			Root<Shelfs> shelfRoot = criteriaQuery.from(Shelfs.class);
+			Root<Units> unitRoot = criteriaQuery.from(Units.class);
+
+			Root<Users> userRoot = criteriaQuery.from(Users.class);
+			userRoot.join("jobTitles");
+			userRoot.join("userRights");
+
+			criteriaQuery.select(partRoot);
+
+			criteriaQuery.where(criteriaBuilder.and(criteriaBuilder.and(
+					criteriaBuilder.equal(partRoot.get("partGroups"), partsGroupRoot.get("partGroupId")),
+					criteriaBuilder.equal(partRoot.get("manufacturers"), manufacturerRoot.get("manufacturerId")),
+					criteriaBuilder.equal(partRoot.get("areas"), areaRoot.get("areaId")),
+					criteriaBuilder.equal(partRoot.get("racks"), rackRoot.get("rackId")),
+					criteriaBuilder.equal(partRoot.get("shelfs"), shelfRoot.get("shelfId")),
+					criteriaBuilder.equal(partRoot.get("units"), unitRoot.get("unitId")),
+					criteriaBuilder.equal(partRoot.get("users"), userRoot.get("userId")),
+					criteriaBuilder.equal(c, orderCode)), (criteriaBuilder.equal(m, manufacturerId))));
+
+			TypedQuery<Parts> query = em.createQuery(criteriaQuery);
+
+			result = query.getSingleResult();
+
+			destroyManager();
+
+			return result;
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING, e.toString());
+			return null;
+		}
+	}
 
 	public ArrayList<Part> getPartsByManufacturer(String manufacturer) {
 
