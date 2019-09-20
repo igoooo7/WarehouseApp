@@ -13,14 +13,17 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -30,7 +33,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.TableRowSorter;
 
-import pl.nowator_zpu.warehouse_app.application_classes.Order;
+import pl.nowator_zpu.warehouse_app.application_classes.OrdersTableModel;
 import pl.nowator_zpu.warehouse_app.application_classes.Part;
 import pl.nowator_zpu.warehouse_app.application_classes.PartsTableModel;
 import pl.nowator_zpu.warehouse_app.application_classes.User;
@@ -38,8 +41,6 @@ import pl.nowator_zpu.warehouse_app.data_access.Controller;
 import pl.nowator_zpu.warehouse_app.entities.Manufacturers;
 import pl.nowator_zpu.warehouse_app.interfaces.ItemDeleteListener;
 import pl.nowator_zpu.warehouse_app.interfaces.UserLoginListener;
-import javax.swing.JComboBox;
-import java.awt.GridLayout;
 
 public class MainFrame extends JFrame implements KeyListener {
 
@@ -56,6 +57,7 @@ public class MainFrame extends JFrame implements KeyListener {
 	private JPanel panel3;
 	private JPanel panel4;
 	private JPanel panel5;
+	private JPanel panel6;
 
 	private JLabel lblUserName;
 	private JLabel lblJobTitle;
@@ -82,6 +84,11 @@ public class MainFrame extends JFrame implements KeyListener {
 	private JButton btnAddToOrder;
 	private JButton btnOrder;
 
+	private JRadioButton rdbtnParts;
+	private JRadioButton rdbtnOrders;
+
+	private ButtonGroup bgPartsOrders;
+
 	private JComboBox<Object> cBoxManufacturer;
 	private JComboBox<Object> cBoxPartGroup;
 
@@ -92,12 +99,13 @@ public class MainFrame extends JFrame implements KeyListener {
 	private OrderFrame orderFrame;
 
 	private PartsTableModel partsTableModel;
-	private JTable partsTable;
+	private OrdersTableModel ordersTableModel;
+	private JTable table;
 	private JScrollPane scrollPane;
 
 	private User user;
 
-	private Controller controller;
+	private Controller controller = new Controller();
 
 	private ArrayList<Part> partsToOrder = new ArrayList<>();
 	private Integer partsToOrderCount = 0;
@@ -160,49 +168,65 @@ public class MainFrame extends JFrame implements KeyListener {
 		panel3.setBackground(new Color(119, 136, 153));
 
 		panel4 = new JPanel();
+		panel4.setBorder(new TitledBorder(null, "Filter", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel4.setBackground(new Color(119, 136, 153));
 
 		panel5 = new JPanel();
 		panel5.setBackground(new Color(119, 136, 153));
 
+		panel6 = new JPanel();
+		panel6.setBorder(new TitledBorder(null, "View", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel6.setBackground(new Color(119, 136, 153));
+
 		gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup().addGroup(gl_contentPane
-						.createParallelGroup(
-								Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup().addContainerGap(19, Short.MAX_VALUE)
-								.addComponent(panel5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addComponent(lblImage, GroupLayout.PREFERRED_SIZE, 212,
-												GroupLayout.PREFERRED_SIZE)
-										.addComponent(panel3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-												GroupLayout.PREFERRED_SIZE))
-								.addPreferredGap(ComponentPlacement.RELATED))
-						.addGroup(gl_contentPane.createSequentialGroup().addGap(66)
-								.addComponent(panel1, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED)))
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup().addGap(18).addComponent(panel2,
-										GroupLayout.PREFERRED_SIZE, 703, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_contentPane.createSequentialGroup().addGap(30)
-										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-												.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 1455,
-														Short.MAX_VALUE)
-												.addComponent(panel4, GroupLayout.PREFERRED_SIZE, 701,
-														GroupLayout.PREFERRED_SIZE))))
-						.addContainerGap()));
-		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING).addGroup(gl_contentPane
+		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
 				.createSequentialGroup()
 				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup().addGap(36)
-								.addComponent(panel2, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
-								.addGap(78)
-								.addComponent(panel4, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup().addGap(49).addComponent(panel1,
-								GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)))
-				.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup().addGap(68)
+										.addComponent(panel1, GroupLayout.PREFERRED_SIZE, 280,
+												GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED))
+								.addGroup(Alignment.TRAILING,
+										gl_contentPane.createSequentialGroup().addContainerGap(19, Short.MAX_VALUE)
+												.addComponent(panel5, GroupLayout.PREFERRED_SIZE,
+														GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED)
+												.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+														.addComponent(lblImage, GroupLayout.PREFERRED_SIZE, 212,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(panel3, GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+												.addPreferredGap(ComponentPlacement.RELATED)))
+						.addGroup(Alignment.TRAILING,
+								gl_contentPane.createSequentialGroup().addContainerGap()
+										.addComponent(panel6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+												GroupLayout.PREFERRED_SIZE)
+										.addGap(28)))
+				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup().addGap(18).addComponent(panel2,
+								GroupLayout.PREFERRED_SIZE, 703, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createSequentialGroup().addGap(30)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 1455, Short.MAX_VALUE)
+										.addComponent(panel4, GroupLayout.PREFERRED_SIZE, 701,
+												GroupLayout.PREFERRED_SIZE))))
+				.addContainerGap()));
+		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING).addGroup(gl_contentPane
+				.createSequentialGroup().addGap(36)
+				.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING).addGroup(gl_contentPane
+						.createSequentialGroup()
+						.addComponent(panel2, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE).addGap(78)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(panel4, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE)
+								.addComponent(panel6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)))
+						.addGroup(
+								gl_contentPane.createSequentialGroup()
+										.addComponent(panel1, GroupLayout.PREFERRED_SIZE, 122,
+												GroupLayout.PREFERRED_SIZE)
+										.addGap(135)))
+				.addGap(6)
 				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(scrollPane, 0, 0, Short.MAX_VALUE)
 						.addGroup(gl_contentPane.createSequentialGroup()
@@ -214,6 +238,14 @@ public class MainFrame extends JFrame implements KeyListener {
 								.addGap(18)
 								.addComponent(lblImage, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE)))
 				.addContainerGap()));
+
+		GroupLayout gl_panel6 = new GroupLayout(panel6);
+		gl_panel6.setHorizontalGroup(gl_panel6.createParallelGroup(Alignment.LEADING).addGroup(gl_panel6
+				.createSequentialGroup().addGap(5).addComponent(rdbtnParts).addGap(5).addComponent(rdbtnOrders)));
+		gl_panel6.setVerticalGroup(gl_panel6.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel6.createSequentialGroup().addGap(5).addGroup(gl_panel6
+						.createParallelGroup(Alignment.LEADING).addComponent(rdbtnParts).addComponent(rdbtnOrders))));
+		panel6.setLayout(gl_panel6);
 
 		GroupLayout gl_panel5 = new GroupLayout(panel5);
 		gl_panel5.setHorizontalGroup(gl_panel5.createParallelGroup(Alignment.TRAILING)
@@ -378,16 +410,19 @@ public class MainFrame extends JFrame implements KeyListener {
 		txtUserRights.setColumns(10);
 
 		partsTableModel = new PartsTableModel();
-		partsTable = new JTable(partsTableModel);
-		partsTable.setFont(new Font("Dialog", Font.PLAIN, 11));
-		partsTable.setSelectionBackground(Color.LIGHT_GRAY);
+		table = new JTable();
+		table.setModel(partsTableModel);
 
-		controller = new Controller();
+		table.setFont(new Font("Dialog", Font.PLAIN, 11));
+		table.setSelectionBackground(Color.LIGHT_GRAY);
+
 		partsTableModel.setData(controller.dbManagerForParts.getAllParts());
 		partsTableModel.fireTableDataChanged();
 
+		ordersTableModel = new OrdersTableModel();
+
 		scrollPane = new JScrollPane();
-		scrollPane.setViewportView(partsTable);
+		scrollPane.setViewportView(table);
 
 		btnDeletePart = new JButton("Delete part");
 
@@ -420,6 +455,17 @@ public class MainFrame extends JFrame implements KeyListener {
 		Image btnOrderIcon = new ImageIcon(this.getClass().getResource("/order-32.png")).getImage();
 		btnOrder = new JButton("Order");
 		btnOrder.setIcon(new ImageIcon(btnOrderIcon));
+
+		rdbtnParts = new JRadioButton("Parts");
+		rdbtnParts.setBackground(new Color(119, 136, 153));
+		rdbtnParts.setSelected(true);
+
+		rdbtnOrders = new JRadioButton("Orders");
+		rdbtnOrders.setBackground(new Color(119, 136, 153));
+
+		bgPartsOrders = new ButtonGroup();
+		bgPartsOrders.add(rdbtnParts);
+		bgPartsOrders.add(rdbtnOrders);
 
 		prepareComboBoxes();
 
@@ -507,7 +553,6 @@ public class MainFrame extends JFrame implements KeyListener {
 
 						if (userDecision == JOptionPane.YES_OPTION) {
 
-							controller = new Controller();
 							Boolean userSuccessfullyDeleted = controller.dbManagerForUsers.deleteUser(user);
 
 							if (userSuccessfullyDeleted) {
@@ -541,7 +586,7 @@ public class MainFrame extends JFrame implements KeyListener {
 			}
 		});
 
-		partsTable.addKeyListener(new KeyAdapter() {
+		table.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 
@@ -550,7 +595,7 @@ public class MainFrame extends JFrame implements KeyListener {
 					deletePart();
 				}
 				if (keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_DOWN) {
-					partsTable.setSelectionBackground(Color.LIGHT_GRAY);
+					table.setSelectionBackground(Color.LIGHT_GRAY);
 				}
 			}
 		});
@@ -572,14 +617,12 @@ public class MainFrame extends JFrame implements KeyListener {
 		btnChangePart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				int selectedRow = partsTable.getSelectedRow();
+				int selectedRow = table.getSelectedRow();
 
 				if (selectedRow > -1) {
 
-					String manufacturer = (String) partsTable.getValueAt(selectedRow, 0);
-					String orderCode = (String) partsTable.getValueAt(selectedRow, 3);
-
-					controller = new Controller();
+					String manufacturer = (String) table.getValueAt(selectedRow, 0);
+					String orderCode = (String) table.getValueAt(selectedRow, 3);
 
 					Manufacturers m = controller.dbManagerForParts.getManufacturerByManufacturer(manufacturer);
 					Part part = controller.dbManagerForParts.getPartByOrderCodeAndManufacturerId(orderCode,
@@ -598,7 +641,14 @@ public class MainFrame extends JFrame implements KeyListener {
 
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				getAllPartsAndRefreshPartsTableModel();
+
+				if (rdbtnParts.isSelected()) {
+					getAllPartsAndRefreshPartsTableModel();
+				}
+
+				if (rdbtnOrders.isSelected()) {
+					getAllOrdersAndRefreshOrdersTableModel();
+				}
 			}
 		});
 
@@ -607,7 +657,14 @@ public class MainFrame extends JFrame implements KeyListener {
 			public void keyReleased(KeyEvent arg0) {
 
 				String query = txtFilter.getText();
-				partsTableFilter(query);
+
+				if (rdbtnParts.isSelected()) {
+					partsTableFilter(query);
+				}
+
+				if (rdbtnOrders.isSelected()) {
+					ordersTableFilter(query);
+				}
 			}
 		});
 
@@ -617,28 +674,28 @@ public class MainFrame extends JFrame implements KeyListener {
 				int result = showImageForSelectedPart();
 
 				if (result == 1) {
-					partsTable.setSelectionBackground(Color.GREEN);
+					table.setSelectionBackground(Color.GREEN);
 				} else if (result == -1) {
-					partsTable.setSelectionBackground(Color.ORANGE);
+					table.setSelectionBackground(Color.ORANGE);
 				}
 			}
 		});
 
-		partsTable.addMouseListener(new MouseAdapter() {
+		table.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent mouseEvent) {
 
 				if (mouseEvent.getClickCount() == 2) {
 					int result = showImageForSelectedPart();
 
 					if (result == 1) {
-						partsTable.setSelectionBackground(Color.GREEN);
+						table.setSelectionBackground(Color.GREEN);
 					} else if (result == -1) {
-						partsTable.setSelectionBackground(Color.ORANGE);
+						table.setSelectionBackground(Color.ORANGE);
 					}
 				}
 
 				if (mouseEvent.getClickCount() == 1) {
-					partsTable.setSelectionBackground(Color.LIGHT_GRAY);
+					table.setSelectionBackground(Color.LIGHT_GRAY);
 				}
 			}
 		});
@@ -647,6 +704,7 @@ public class MainFrame extends JFrame implements KeyListener {
 			public void actionPerformed(ActionEvent arg0) {
 
 				getFilteredPartsAndRefreshPartsTableModel();
+
 			}
 		});
 
@@ -654,6 +712,7 @@ public class MainFrame extends JFrame implements KeyListener {
 			public void actionPerformed(ActionEvent arg0) {
 
 				getFilteredPartsAndRefreshPartsTableModel();
+
 			}
 		});
 
@@ -667,19 +726,18 @@ public class MainFrame extends JFrame implements KeyListener {
 
 				if (user.getLogged()) {
 
-					int selectedRow = partsTable.getSelectedRow();
+					int selectedRow = table.getSelectedRow();
 
 					if (selectedRow > -1) {
 
-						controller = new Controller();
 						ArrayList<Part> allParts = controller.dbManagerForParts.getAllParts();
 
-						int[] selectedRows = partsTable.getSelectedRows();
+						int[] selectedRows = table.getSelectedRows();
 
 						for (int row : selectedRows) {
 
-							String manufacturer = (String) partsTable.getValueAt(row, 0);
-							String orderCode = (String) partsTable.getValueAt(row, 3);
+							String manufacturer = (String) table.getValueAt(row, 0);
+							String orderCode = (String) table.getValueAt(row, 3);
 
 							for (Part part : allParts) {
 								if (part.getManufacturer().equals(manufacturer)
@@ -748,6 +806,44 @@ public class MainFrame extends JFrame implements KeyListener {
 				});
 			}
 		});
+
+		rdbtnOrders.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+												
+				btnDeletePart.setEnabled(false);
+				btnChangePart.setEnabled(false);
+				btnShowPicture.setEnabled(false);
+				btnAddToOrder.setEnabled(false);
+				lblManufacturer.setVisible(false);
+				lblPartGroup.setVisible(false);
+				cBoxManufacturer.setVisible(false);
+				cBoxPartGroup.setVisible(false);
+				
+				table.setRowSorter(null);	
+				
+				table.setModel(ordersTableModel);
+				getAllOrdersAndRefreshOrdersTableModel();
+			}
+		});
+
+		rdbtnParts.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {					
+		 				
+				btnDeletePart.setEnabled(true);
+				btnChangePart.setEnabled(true);
+				btnShowPicture.setEnabled(true);
+				btnAddToOrder.setEnabled(true);
+				lblManufacturer.setVisible(true);
+				lblPartGroup.setVisible(true);
+				cBoxManufacturer.setVisible(true);
+				cBoxPartGroup.setVisible(true);
+				
+				table.setRowSorter(null);	
+				
+				table.setModel(partsTableModel);
+				getAllPartsAndRefreshPartsTableModel();				
+			}
+		});
 	}
 
 	private void refreshForm() {
@@ -780,7 +876,6 @@ public class MainFrame extends JFrame implements KeyListener {
 
 	private void getAllPartsAndRefreshPartsTableModel() {
 
-		controller = new Controller();
 		partsTableModel.setData(controller.dbManagerForParts.getAllParts());
 		partsTableModel.fireTableDataChanged();
 
@@ -789,9 +884,17 @@ public class MainFrame extends JFrame implements KeyListener {
 
 	}
 
-	private void getFilteredPartsAndRefreshPartsTableModel() {
+	private void getAllOrdersAndRefreshOrdersTableModel() {
 
-		controller = new Controller();
+		ordersTableModel.setData(controller.dbManagerForOrders.getAllOrders());
+		ordersTableModel.fireTableDataChanged();
+
+		cBoxManufacturer.setSelectedIndex(0);
+		cBoxPartGroup.setSelectedIndex(0);
+
+	}
+
+	private void getFilteredPartsAndRefreshPartsTableModel() {
 
 		if ((cBoxManufacturer.getSelectedItem() == "All") && (cBoxPartGroup.getSelectedItem() == "All")) {
 			getAllPartsAndRefreshPartsTableModel();
@@ -811,7 +914,6 @@ public class MainFrame extends JFrame implements KeyListener {
 					cBoxManufacturer.getSelectedItem().toString(), cBoxPartGroup.getSelectedItem().toString()));
 			partsTableModel.fireTableDataChanged();
 		}
-
 	}
 
 	private void deletePart() {
@@ -820,29 +922,28 @@ public class MainFrame extends JFrame implements KeyListener {
 
 			if (user.getUserRightsLevel() >= 2) {
 
-				int selectedRow = partsTable.getSelectedRow();
+				int selectedRow = table.getSelectedRow();
 
 				if (selectedRow > -1) {
 
-					partsTable.setSelectionBackground(Color.RED);
+					table.setSelectionBackground(Color.RED);
 
 					int userDecision = JOptionPane.showConfirmDialog(null,
 							"Are you sure you want to delete selected parts?", "Question", JOptionPane.YES_NO_OPTION);
 
 					if (userDecision == JOptionPane.YES_OPTION) {
 
-						controller = new Controller();
 						ArrayList<Part> allParts = controller.dbManagerForParts.getAllParts();
 						ArrayList<Part> partsToDelete = new ArrayList<Part>();
 
-						int[] selectedRows = partsTable.getSelectedRows();
+						int[] selectedRows = table.getSelectedRows();
 
 						Boolean partsSuccessfullyDeleted = true;
 
 						for (int row : selectedRows) {
 
-							String manufacturer = (String) partsTable.getValueAt(row, 0);
-							String orderCode = (String) partsTable.getValueAt(row, 3);
+							String manufacturer = (String) table.getValueAt(row, 0);
+							String orderCode = (String) table.getValueAt(row, 3);
 
 							for (Part part : allParts) {
 								if (part.getManufacturer().equals(manufacturer)
@@ -897,7 +998,15 @@ public class MainFrame extends JFrame implements KeyListener {
 	private void partsTableFilter(String query) {
 
 		TableRowSorter<PartsTableModel> sorter = new TableRowSorter<PartsTableModel>(partsTableModel);
-		partsTable.setRowSorter(sorter);
+		table.setRowSorter(sorter);
+		sorter.setRowFilter(RowFilter.regexFilter(query));
+
+	}
+
+	private void ordersTableFilter(String query) {
+
+		TableRowSorter<OrdersTableModel> sorter = new TableRowSorter<OrdersTableModel>(ordersTableModel);
+		table.setRowSorter(sorter);
 		sorter.setRowFilter(RowFilter.regexFilter(query));
 
 	}
@@ -938,15 +1047,13 @@ public class MainFrame extends JFrame implements KeyListener {
 
 	private int showImageForSelectedPart() {
 
-		int selectedRow = partsTable.getSelectedRow();
+		int selectedRow = table.getSelectedRow();
 		String orderCode = "";
 		String manufacturer = "";
 
 		if (selectedRow != -1) {
-			manufacturer = (String) partsTable.getValueAt(selectedRow, 0);
-			orderCode = (String) partsTable.getValueAt(selectedRow, 3);
-
-			controller = new Controller();
+			manufacturer = (String) table.getValueAt(selectedRow, 0);
+			orderCode = (String) table.getValueAt(selectedRow, 3);
 
 			Manufacturers m = controller.dbManagerForParts.getManufacturerByManufacturer(manufacturer);
 			byte[] image = controller.dbManagerForParts.getImageByOrderCodeAndManufacturerId(orderCode,
@@ -969,7 +1076,6 @@ public class MainFrame extends JFrame implements KeyListener {
 
 	private void prepareComboBoxes() {
 
-		controller = new Controller();
 		String[] stringArray;
 
 		ArrayList<String> manufacturerList = controller.dbManagerForParts.getAllManufacturers();

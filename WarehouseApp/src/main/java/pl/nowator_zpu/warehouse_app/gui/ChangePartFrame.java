@@ -99,7 +99,7 @@ public class ChangePartFrame extends JFrame implements WindowListener, KeyListen
 	private User user;
 	private Part part;
 
-	private Controller controller;
+	private Controller controller = new Controller();
 
 	/**
 	 * Create the frame.
@@ -455,6 +455,8 @@ public class ChangePartFrame extends JFrame implements WindowListener, KeyListen
 									JOptionPane.showMessageDialog(null, "Some problems appeared, part wasn't created!",
 											"Warning", JOptionPane.WARNING_MESSAGE);
 								}
+								
+								closeFrame();
 							}
 
 						} else {
@@ -539,8 +541,7 @@ public class ChangePartFrame extends JFrame implements WindowListener, KeyListen
 	}
 
 	private void prepareComboBoxes() {
-
-		controller = new Controller();
+	
 		String[] stringArray;
 		Integer[] integerArray;
 

@@ -35,7 +35,6 @@ import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import javassist.bytecode.stackmap.TypeData.ClassName;
-import pl.nowator_zpu.warehouse_app.application_classes.Part;
 import pl.nowator_zpu.warehouse_app.application_classes.User;
 import pl.nowator_zpu.warehouse_app.data_access.Controller;
 import pl.nowator_zpu.warehouse_app.entities.Areas;
@@ -98,7 +97,7 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 
 	private User user;
 
-	private Controller controller;
+	private Controller controller = new Controller();
 
 	/**
 	 * Create the frame.
@@ -533,8 +532,7 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 	}
 
 	private void prepareComboBoxes() {
-
-		controller = new Controller();
+		
 		String[] stringArray;
 		Integer[] integerArray;
 

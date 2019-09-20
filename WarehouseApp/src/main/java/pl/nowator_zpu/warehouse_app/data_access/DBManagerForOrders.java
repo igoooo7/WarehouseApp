@@ -15,6 +15,7 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
 import javassist.bytecode.stackmap.TypeData.ClassName;
+import pl.nowator_zpu.warehouse_app.application_classes.Order;
 import pl.nowator_zpu.warehouse_app.application_classes.Part;
 import pl.nowator_zpu.warehouse_app.entities.Areas;
 import pl.nowator_zpu.warehouse_app.entities.Manufacturers;
@@ -101,7 +102,7 @@ public class DBManagerForOrders {
 			return null;
 		}
 	}
-	
+
 	// Order
 	public Boolean newOrder(Orders order) {
 
@@ -119,6 +120,72 @@ public class DBManagerForOrders {
 		} catch (Exception e) {
 			LOGGER.log(Level.WARNING, e.toString());
 			return false;
+		}
+	}
+
+	public ArrayList<Order> getAllOrders() {
+
+		ArrayList<Order> result = new ArrayList<>();
+
+		try {
+
+			createManager();
+
+			CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+			CriteriaQuery<Object[]> criteriaQuery = criteriaBuilder.createQuery(Object[].class);
+			Root<Orders> orderRoot = criteriaQuery.from(Orders.class);
+
+			Root<Parts> partRoot = criteriaQuery.from(Parts.class);
+			partRoot.join("manufacturers");
+
+			Root<Manufacturers> manufacturerRoot = criteriaQuery.from(Manufacturers.class);
+
+			Root<Projects> projectRoot = criteriaQuery.from(Projects.class);
+
+			Root<Users> userRoot = criteriaQuery.from(Users.class);
+			userRoot.join("jobTitles");
+			userRoot.join("userRights");
+
+			criteriaQuery.multiselect(orderRoot, partRoot, manufacturerRoot, projectRoot, userRoot);
+
+			criteriaQuery.where(criteriaBuilder
+					.and(criteriaBuilder.and(criteriaBuilder.equal(orderRoot.get("parts"), partRoot.get("partId")),
+							criteriaBuilder.equal(partRoot.get("manufacturers"),
+									manufacturerRoot.get("manufacturerId")),
+							criteriaBuilder.equal(orderRoot.get("projects"), projectRoot.get("projectId")),
+							criteriaBuilder.equal(orderRoot.get("users"), userRoot.get("userId")))));
+
+			TypedQuery<Object[]> query = em.createQuery(criteriaQuery);
+
+			List<Object[]> queryResult = query.getResultList();
+
+			for (Object[] objects : queryResult) {
+
+				Orders o = (Orders) objects[0];
+				Parts pa = (Parts) objects[1];
+				Manufacturers m = (Manufacturers) objects[2];
+				Projects pr = (Projects) objects[3];
+				Users us = (Users) objects[4];
+
+				Order order = new Order();
+
+				order.setManufacturer(m.getManufacturer());
+				order.setOrderCode(pa.getOrderCode());
+				order.setOrderDate(o.getOrderDate());
+				order.setOrderId(o.getOrderId());
+				order.setPartCount(o.getPartCount());
+				order.setProject(pr.getProjectName());
+				order.setUser(us.getFirstName() + " " + us.getLastName());
+
+				result.add(order);
+			}
+
+			destroyManager();
+
+			return result;
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING, e.toString());
+			return null;
 		}
 	}
 }

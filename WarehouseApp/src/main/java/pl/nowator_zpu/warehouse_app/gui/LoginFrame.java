@@ -49,7 +49,7 @@ public class LoginFrame extends JFrame implements WindowListener, KeyListener {
 
 	private User user;
 
-	private Controller controller;
+	private Controller controller = new Controller();
 	
 	
 
@@ -175,8 +175,7 @@ public class LoginFrame extends JFrame implements WindowListener, KeyListener {
 			String password = new String(pass);
 
 			if (!txtUserName.getText().isEmpty()) {
-
-				controller = new Controller();
+			
 				user = controller.dbManagerForUsers.getUserByUserName(txtUserName.getText());
 
 				if (!(user == null)) {

@@ -65,7 +65,7 @@ public class NewUserFrame extends JFrame implements WindowListener, KeyListener 
 
 	private User user;
 
-	private Controller controller;
+	private Controller controller = new Controller();
 
 	/**
 	 * Create the frame.
@@ -248,18 +248,10 @@ public class NewUserFrame extends JFrame implements WindowListener, KeyListener 
 					if (!txtFirstName.getText().isEmpty() && !txtLastName.getText().isEmpty()
 							&& !txtUserName.getText().isEmpty() && !txtEmail.getText().isEmpty() && !password.isEmpty()
 							&& !repeatedPassword.isEmpty()) {
-
-						ArrayList<User> allUsers = new ArrayList<>();
-						allUsers = controller.dbManagerForUsers.getAllUsers();
-
-						Boolean userAlreadyExist = false;
-						for (User user : allUsers) {
-							if (user.getUserName().equals(txtUserName.getText())) {
-								userAlreadyExist = true;
-							}
-						}
-
-						if (!userAlreadyExist) {
+						 
+						User userToCheck = controller.dbManagerForUsers.getUserByUserName(txtUserName.getText());
+						
+						if (userToCheck == null) {
 
 							if (password.equals(repeatedPassword)) {
 
@@ -383,8 +375,7 @@ public class NewUserFrame extends JFrame implements WindowListener, KeyListener 
 	}
 
 	private void prepareComboBoxes() {
-
-		controller = new Controller();
+		 
 		String[] array;
 
 		ArrayList<String> jobTitleList = controller.dbManagerForUsers.getAllJobTitles();
