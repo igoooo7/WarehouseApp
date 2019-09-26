@@ -82,7 +82,7 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 
 	JComboBox<Object> cBoxProject;
 
-	private ArrayList<Part> partList = new ArrayList<>();;
+	private ArrayList<Part> partList = new ArrayList<>();
 	private ArrayList<Order> orderList = new ArrayList<>();
 
 	private Integer partsCount;
@@ -136,85 +136,81 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 						.addContainerGap(25, Short.MAX_VALUE)));
 
 		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
+		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup().addContainerGap(198, Short.MAX_VALUE)
+						.addComponent(btnPreviousPart).addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(btnNextPart).addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(lblPartNumber).addGap(32))
+				.addGroup(gl_panel.createSequentialGroup().addGap(25)
+						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel.createSequentialGroup()
+										.addComponent(lblProject, GroupLayout.PREFERRED_SIZE, 93,
+												GroupLayout.PREFERRED_SIZE)
+										.addGap(274))
+								.addGroup(gl_panel
+										.createSequentialGroup()
+										.addComponent(lblCount, GroupLayout.PREFERRED_SIZE, 98,
+												GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(txtCount,
+												GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING).addGroup(gl_panel
+										.createSequentialGroup()
+										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+												.addComponent(lblManufacturer).addComponent(lblOrderCode,
+														GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE))
+										.addGap(23)
+										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+												.addComponent(txtManufacturer, GroupLayout.DEFAULT_SIZE, 214,
+														Short.MAX_VALUE)
+												.addComponent(txtOrderCode))
+										.addGap(32))
+										.addGroup(gl_panel.createSequentialGroup().addGroup(gl_panel
+												.createParallelGroup(Alignment.TRAILING)
+												.addComponent(cBoxProject, Alignment.LEADING, 0, 337, Short.MAX_VALUE)
+												.addGroup(gl_panel.createSequentialGroup()
+														.addComponent(btnDeleteItem, GroupLayout.DEFAULT_SIZE, 123,
+																Short.MAX_VALUE)
+														.addPreferredGap(ComponentPlacement.RELATED)
+														.addComponent(btnDeleteAll, GroupLayout.PREFERRED_SIZE, 107,
+																GroupLayout.PREFERRED_SIZE)
+														.addPreferredGap(ComponentPlacement.RELATED)
+														.addComponent(btnSave))
+												.addComponent(btnOk)).addGap(30))))));
+		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap(198, Short.MAX_VALUE)
-					.addComponent(btnPreviousPart)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnNextPart)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(lblPartNumber)
-					.addGap(32))
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(25)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(lblProject, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
-							.addGap(274))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(lblCount, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(txtCount, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-							.addGroup(gl_panel.createSequentialGroup()
-								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-									.addComponent(lblManufacturer)
-									.addComponent(lblOrderCode, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE))
-								.addGap(23)
-								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-									.addComponent(txtManufacturer, GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
-									.addComponent(txtOrderCode))
-								.addGap(32))
-							.addGroup(gl_panel.createSequentialGroup()
-								.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-									.addComponent(cBoxProject, Alignment.LEADING, 0, 337, Short.MAX_VALUE)
-									.addGroup(gl_panel.createSequentialGroup()
-										.addComponent(btnDeleteItem, GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(btnDeleteAll, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(btnSave))
-									.addComponent(btnOk))
-								.addGap(30)))))
-		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(31)
-							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnNextPart)
-								.addComponent(btnPreviousPart)))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(36)
-							.addComponent(lblPartNumber)))
-					.addGap(29)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(txtManufacturer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblManufacturer))
-					.addGap(14)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(txtOrderCode, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblOrderCode))
-					.addGap(18)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(txtCount, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblCount))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(lblProject)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(cBoxProject, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnOk, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnDeleteItem, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnDeleteAll, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnSave, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
-		);
+						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel.createSequentialGroup().addGap(31)
+										.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+												.addComponent(btnNextPart).addComponent(btnPreviousPart)))
+								.addGroup(gl_panel.createSequentialGroup().addGap(36).addComponent(lblPartNumber)))
+						.addGap(29)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(txtManufacturer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblManufacturer))
+						.addGap(14)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(txtOrderCode, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblOrderCode))
+						.addGap(18)
+						.addGroup(
+								gl_panel.createParallelGroup(Alignment.BASELINE)
+										.addComponent(txtCount, GroupLayout.PREFERRED_SIZE, 22,
+												GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblCount))
+						.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(lblProject)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(cBoxProject, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(btnOk, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(btnDeleteItem, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnDeleteAll, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnSave, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+						.addContainerGap()));
 		panel.setLayout(gl_panel);
 
 	}
@@ -253,7 +249,6 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 		Image btnPreviousIcon = new ImageIcon(this.getClass().getResource("/back-16.png")).getImage();
 		btnPreviousPart.setIcon(new ImageIcon(btnPreviousIcon));
 
-
 		lblPartNumber = new JLabel("1 of n");
 
 		btnDeleteAll = new JButton("Delete All");
@@ -272,7 +267,7 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 	}
 
 	private void prepareComboBoxes() {
-	
+
 		String[] stringArray;
 
 		ArrayList<String> projectList = controller.dbManagerForOrders.getAllProjects();
@@ -328,6 +323,8 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 
 						itemDeleteListener.itemDeleteEventPerformed(partList, partsCount);
 
+						closeFrame();
+
 					}
 				}
 			}
@@ -358,6 +355,9 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 
 						itemDeleteListener.itemDeleteEventPerformed(partList, partsCount);
 
+						if (partsCount == 0) {
+							closeFrame();
+						}
 					}
 				}
 			}
@@ -414,7 +414,7 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 								Timestamp sqlDateTime = Timestamp.valueOf(dateTime);
 
 								o.setOrderDate(sqlDateTime);
-								
+
 								Boolean orderSuccessfullyCreated = controller.dbManagerForOrders.newOrder(o);
 
 								if (!orderSuccessfullyCreated) {
@@ -434,55 +434,66 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 
 									Date date = new Date();
 									SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-																											
-									Document document = new Document();	
-									Font DocumentTitleFont = FontFactory.getFont(FontFactory.TIMES_ROMAN, 18, Font.BOLD, new CMYKColor(0, 0, 0, 255));
-									Font SectionTitleFont = FontFactory.getFont(FontFactory.TIMES_ROMAN, 14, Font.BOLD, new CMYKColor(0, 0, 0, 255));
-									Font textFont = FontFactory.getFont(FontFactory.TIMES_ROMAN, 11, Font.NORMAL, new CMYKColor(0, 0, 0, 255));
-																			
+
+									Document document = new Document();
+									Font DocumentTitleFont = FontFactory.getFont(FontFactory.TIMES_ROMAN, 18, Font.BOLD,
+											new CMYKColor(0, 0, 0, 255));
+									Font SectionTitleFont = FontFactory.getFont(FontFactory.TIMES_ROMAN, 14, Font.BOLD,
+											new CMYKColor(0, 0, 0, 255));
+									Font textFont = FontFactory.getFont(FontFactory.TIMES_ROMAN, 11, Font.NORMAL,
+											new CMYKColor(0, 0, 0, 255));
+
 									try {
 										PdfWriter writer = PdfWriter.getInstance(document,
 												new FileOutputStream(fileToSave));
-										document.open();										
-										
+										document.open();
+
 										try {
-											com.itextpdf.text.Image image = com.itextpdf.text.Image.getInstance(this.getClass().getResource("/logo_averna.png"));
+											com.itextpdf.text.Image image = com.itextpdf.text.Image
+													.getInstance(this.getClass().getResource("/logo_averna.png"));
 											image.scaleAbsolute(165f, 50f);
 											document.add(image);
-										} catch (BadElementException | IOException e1) {										
+										} catch (BadElementException | IOException e1) {
 											e1.printStackTrace();
-										} catch (DocumentException e) {										
+										} catch (DocumentException e) {
 											e.printStackTrace();
-										}		
-																			
-										document.add(new Paragraph("AVERNA Test & Measurement Solutions, Poland", SectionTitleFont));
+										}
+
+										document.add(new Paragraph("AVERNA Test & Measurement Solutions, Poland",
+												SectionTitleFont));
 										document.add(new Paragraph(" "));
 										document.add(new Paragraph(" "));
 										document.add(new Paragraph(" "));
-										
-										Paragraph title = new Paragraph("ORDER REQUEST",DocumentTitleFont); 										 
-										title.setAlignment(Element.ALIGN_CENTER);										
+
+										Paragraph title = new Paragraph("ORDER REQUEST", DocumentTitleFont);
+										title.setAlignment(Element.ALIGN_CENTER);
 										document.add(title);
-										
+
 										document.add(new Paragraph(" "));
 										document.add(new Paragraph(" "));
 										document.add(new Paragraph(" "));
-										
-										document.add(new Paragraph("Creation date: " + formatter.format(date), textFont));
-										document.add(new Paragraph("User name: " + user.getFirstName() + " " + user.getLastName(), textFont));
+
+										document.add(
+												new Paragraph("Creation date: " + formatter.format(date), textFont));
+										document.add(new Paragraph(
+												"User name: " + user.getFirstName() + " " + user.getLastName(),
+												textFont));
 										document.add(new Paragraph(" "));
-										
+
 										int i = 0;
 										for (Order order : orderList) {
-											
+
 											i++;
-											document.add(new Paragraph("=====================================================", textFont));
+											document.add(new Paragraph(
+													"=====================================================", textFont));
 											document.add(new Paragraph("Position number: " + i, textFont));
-											
-											document.add(new Paragraph("Manufacturer: " + order.getManufacturer(), textFont));
-											document.add(new Paragraph("Order code: " + order.getOrderCode(), textFont));
+
+											document.add(new Paragraph("Manufacturer: " + order.getManufacturer(),
+													textFont));
+											document.add(
+													new Paragraph("Order code: " + order.getOrderCode(), textFont));
 											document.add(new Paragraph("Quantity: " + order.getPartCount(), textFont));
-											document.add(new Paragraph("Project: " + 	order.getProject(), textFont));										
+											document.add(new Paragraph("Project: " + order.getProject(), textFont));
 											document.add(new Paragraph(" "));
 										}
 
@@ -512,7 +523,7 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 						}
 
 					} else {
-						JOptionPane.showMessageDialog(null, "Current user don't have rights to create orders!",
+						JOptionPane.showMessageDialog(null, "Current user doesn't have rights to create orders!",
 								"Warning", JOptionPane.WARNING_MESSAGE);
 					}
 

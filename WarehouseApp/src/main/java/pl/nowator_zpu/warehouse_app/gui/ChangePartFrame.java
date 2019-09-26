@@ -495,7 +495,7 @@ public class ChangePartFrame extends JFrame implements WindowListener, KeyListen
 						}
 
 					} else {
-						JOptionPane.showMessageDialog(null, "Current user don't have rights to change parts!",
+						JOptionPane.showMessageDialog(null, "Current user doesn't have rights to change parts!",
 								"Warning", JOptionPane.WARNING_MESSAGE);
 					}
 

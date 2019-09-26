@@ -264,7 +264,7 @@ public class NewUserFrame extends JFrame implements WindowListener, KeyListener 
 										|| (user.getUserRightsLevel() < 2 && ur.getUserRightsId() >= 2)) {
 
 									JOptionPane.showMessageDialog(null,
-											"Current user don't have rights to create new user!", "Warning",
+											"Current user doesn't have rights to create new user!", "Warning",
 											JOptionPane.WARNING_MESSAGE);
 
 								} else {

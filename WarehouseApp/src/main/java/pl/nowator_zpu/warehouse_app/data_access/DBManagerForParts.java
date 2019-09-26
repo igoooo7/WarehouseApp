@@ -13,6 +13,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
+import javax.swing.JOptionPane;
 
 import javassist.bytecode.stackmap.TypeData.ClassName;
 import pl.nowator_zpu.warehouse_app.application_classes.Part;
@@ -120,6 +121,8 @@ public class DBManagerForParts {
 			return result;
 		} catch (Exception e) {
 			LOGGER.log(Level.WARNING, e.toString());
+			JOptionPane.showMessageDialog(null, "Data could't be read for database", "Error",
+					JOptionPane.ERROR_MESSAGE);
 			return null;
 		}
 	}
@@ -197,8 +200,8 @@ public class DBManagerForParts {
 			destroyManager();
 
 			return result;
-		} catch (Exception e) {
-			LOGGER.log(Level.WARNING, e.toString());
+		} catch (Exception e) {			
+			LOGGER.log(Level.WARNING, e.toString());			
 			return null;
 		}
 	}
@@ -249,7 +252,7 @@ public class DBManagerForParts {
 
 			return result;
 		} catch (Exception e) {
-			LOGGER.log(Level.WARNING, e.toString());
+			LOGGER.log(Level.WARNING, e.toString());			
 			return null;
 		}
 	}
@@ -334,7 +337,7 @@ public class DBManagerForParts {
 
 			return result;
 		} catch (Exception e) {
-			LOGGER.log(Level.WARNING, e.toString());
+			LOGGER.log(Level.WARNING, e.toString());			
 			return null;
 		}
 	}
@@ -419,7 +422,7 @@ public class DBManagerForParts {
 
 			return result;
 		} catch (Exception e) {
-			LOGGER.log(Level.WARNING, e.toString());
+			LOGGER.log(Level.WARNING, e.toString());		
 			return null;
 		}
 	}
@@ -507,7 +510,7 @@ public class DBManagerForParts {
 
 			return result;
 		} catch (Exception e) {
-			LOGGER.log(Level.WARNING, e.toString());
+			LOGGER.log(Level.WARNING, e.toString());			
 			return null;
 		}
 	}
@@ -526,7 +529,7 @@ public class DBManagerForParts {
 
 			return true;
 		} catch (Exception e) {
-			LOGGER.log(Level.WARNING, e.toString());
+			LOGGER.log(Level.WARNING, e.toString());			
 			return false;
 		}
 	}

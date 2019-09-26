@@ -183,6 +183,7 @@ public class LoginFrame extends JFrame implements WindowListener, KeyListener {
 					if (user.getUserPassword().equals(password)) {
 
 						user.setLogged(true);
+						user.setUserPassword("");
 						userLoginListener.loginEventPerformed(user);
 
 						JOptionPane.showMessageDialog(null, "User successfully logged!", "Message",

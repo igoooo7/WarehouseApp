@@ -790,7 +790,7 @@ public class MainFrame extends JFrame implements KeyListener {
 								JOptionPane.WARNING_MESSAGE);
 					}
 				} else {
-					JOptionPane.showMessageDialog(null, "Current user don't have rights to create orders!", "Warning",
+					JOptionPane.showMessageDialog(null, "Current user doesn't have rights to create orders!", "Warning",
 							JOptionPane.WARNING_MESSAGE);
 				}
 
@@ -984,7 +984,7 @@ public class MainFrame extends JFrame implements KeyListener {
 				}
 			} else {
 
-				JOptionPane.showMessageDialog(null, "Current user don't have rights to delete parts!", "Warning",
+				JOptionPane.showMessageDialog(null, "Current user doesn't have rights to delete parts!", "Warning",
 						JOptionPane.WARNING_MESSAGE);
 			}
 		}
@@ -1063,6 +1063,7 @@ public class MainFrame extends JFrame implements KeyListener {
 				lblImage.setIcon(resizeImage(null, image));
 				return 1;
 			} else {
+				lblImage.setIcon(null);
 				JOptionPane.showMessageDialog(null, "Image for selected part could not be found!", "Warning",
 						JOptionPane.WARNING_MESSAGE);
 				return -1;
