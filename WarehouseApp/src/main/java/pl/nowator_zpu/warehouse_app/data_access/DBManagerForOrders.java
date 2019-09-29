@@ -1,6 +1,8 @@
 package pl.nowator_zpu.warehouse_app.data_access;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -169,6 +171,7 @@ public class DBManagerForOrders {
 
 				Order order = new Order();
 
+				order.setDescription(pa.getDescription());
 				order.setManufacturer(m.getManufacturer());
 				order.setOrderCode(pa.getOrderCode());
 				order.setOrderDate(o.getOrderDate());
@@ -181,6 +184,16 @@ public class DBManagerForOrders {
 			}
 
 			destroyManager();
+
+			Collections.sort(result, new Comparator<Order>() {
+				public int compare(Order o1, Order o2) {
+					if (o1.getOrderDate() == null || o2.getOrderDate() == null)
+						return 0;
+					return o1.getOrderDate().compareTo(o2.getOrderDate());
+				}
+			});
+
+			Collections.reverse(result);
 
 			return result;
 		} catch (Exception e) {

@@ -7,17 +7,19 @@ public class Order {
 	private Integer orderId;
 	private String orderCode;	
 	private String manufacturer;
+	private String description;
 	private Integer partCount;
 	private String user;
 	private String project;
 	private Date orderDate;
 	
-	public Order(Integer orderId, String orderCode, String manufacturer, Integer partCount, String user, String project,
+	public Order(Integer orderId, String orderCode, String manufacturer,String description, Integer partCount, String user, String project,
 			Date orderDate) {
 		super();
 		this.orderId = orderId;
 		this.orderCode = orderCode;
 		this.manufacturer = manufacturer;
+		this.description = description;
 		this.partCount = partCount;
 		this.user = user;
 		this.project = project;
@@ -29,6 +31,7 @@ public class Order {
 		this.orderId = 0;
 		this.orderCode = "";
 		this.manufacturer = "";
+		this.description = "";
 		this.partCount = 0;
 		this.user = "";
 		this.project = "";
@@ -57,6 +60,14 @@ public class Order {
 
 	public void setManufacturer(String manufacturer) {
 		this.manufacturer = manufacturer;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Integer getPartCount() {
@@ -95,6 +106,7 @@ public class Order {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((manufacturer == null) ? 0 : manufacturer.hashCode());
 		result = prime * result + ((orderCode == null) ? 0 : orderCode.hashCode());
 		result = prime * result + ((orderDate == null) ? 0 : orderDate.hashCode());
@@ -114,6 +126,11 @@ public class Order {
 		if (getClass() != obj.getClass())
 			return false;
 		Order other = (Order) obj;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
 		if (manufacturer == null) {
 			if (other.manufacturer != null)
 				return false;
@@ -155,8 +172,8 @@ public class Order {
 	@Override
 	public String toString() {
 		return "Order [orderId=" + orderId + ", orderCode=" + orderCode + ", manufacturer=" + manufacturer
-				+ ", partCount=" + partCount + ", user=" + user + ", project=" + project + ", orderDate=" + orderDate
-				+ "]";
+				+ ", description=" + description + ", partCount=" + partCount + ", user=" + user + ", project="
+				+ project + ", orderDate=" + orderDate + "]";
 	}
-	
+		
 }

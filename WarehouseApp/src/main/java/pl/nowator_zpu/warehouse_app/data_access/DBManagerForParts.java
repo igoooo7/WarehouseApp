@@ -1,6 +1,8 @@
 package pl.nowator_zpu.warehouse_app.data_access;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,6 +18,7 @@ import javax.persistence.criteria.Root;
 import javax.swing.JOptionPane;
 
 import javassist.bytecode.stackmap.TypeData.ClassName;
+import pl.nowator_zpu.warehouse_app.application_classes.Order;
 import pl.nowator_zpu.warehouse_app.application_classes.Part;
 import pl.nowator_zpu.warehouse_app.entities.Areas;
 import pl.nowator_zpu.warehouse_app.entities.Manufacturers;
@@ -118,6 +121,16 @@ public class DBManagerForParts {
 
 			destroyManager();
 
+			Collections.sort(result, new Comparator<Part>() {
+				public int compare(Part p1, Part p2) {
+					if (p1.getCreationDate() == null || p2.getCreationDate() == null)
+						return 0;
+					return p1.getCreationDate().compareTo(p2.getCreationDate());
+				}
+			});
+
+			Collections.reverse(result);
+
 			return result;
 		} catch (Exception e) {
 			LOGGER.log(Level.WARNING, e.toString());
@@ -200,12 +213,12 @@ public class DBManagerForParts {
 			destroyManager();
 
 			return result;
-		} catch (Exception e) {			
-			LOGGER.log(Level.WARNING, e.toString());			
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING, e.toString());
 			return null;
 		}
 	}
-	
+
 	public Parts getPartEntityByOrderCodeAndManufacturerId(String orderCode, Integer manufacturerId) {
 
 		Parts result = new Parts();
@@ -252,7 +265,7 @@ public class DBManagerForParts {
 
 			return result;
 		} catch (Exception e) {
-			LOGGER.log(Level.WARNING, e.toString());			
+			LOGGER.log(Level.WARNING, e.toString());
 			return null;
 		}
 	}
@@ -267,12 +280,12 @@ public class DBManagerForParts {
 
 			CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 			CriteriaQuery<Object[]> criteriaQuery = criteriaBuilder.createQuery(Object[].class);
-			Root<Parts> partRoot = criteriaQuery.from(Parts.class);				
+			Root<Parts> partRoot = criteriaQuery.from(Parts.class);
 			Root<PartGroups> partsGroupRoot = criteriaQuery.from(PartGroups.class);
 			Root<Manufacturers> manufacturerRoot = criteriaQuery.from(Manufacturers.class);
-			
+
 			Path<String> m = manufacturerRoot.get("manufacturer");
-			
+
 			Root<Areas> areaRoot = criteriaQuery.from(Areas.class);
 			Root<Racks> rackRoot = criteriaQuery.from(Racks.class);
 			Root<Shelfs> shelfRoot = criteriaQuery.from(Shelfs.class);
@@ -337,11 +350,11 @@ public class DBManagerForParts {
 
 			return result;
 		} catch (Exception e) {
-			LOGGER.log(Level.WARNING, e.toString());			
+			LOGGER.log(Level.WARNING, e.toString());
 			return null;
 		}
 	}
-	
+
 	public ArrayList<Part> getPartsByPartGroup(String partGroup) {
 
 		ArrayList<Part> result = new ArrayList<>();
@@ -352,11 +365,11 @@ public class DBManagerForParts {
 
 			CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 			CriteriaQuery<Object[]> criteriaQuery = criteriaBuilder.createQuery(Object[].class);
-			Root<Parts> partRoot = criteriaQuery.from(Parts.class);			
+			Root<Parts> partRoot = criteriaQuery.from(Parts.class);
 			Root<PartGroups> partsGroupRoot = criteriaQuery.from(PartGroups.class);
-			
+
 			Path<String> pgr = partsGroupRoot.get("partGroup");
-			
+
 			Root<Manufacturers> manufacturerRoot = criteriaQuery.from(Manufacturers.class);
 			Root<Areas> areaRoot = criteriaQuery.from(Areas.class);
 			Root<Racks> rackRoot = criteriaQuery.from(Racks.class);
@@ -422,11 +435,11 @@ public class DBManagerForParts {
 
 			return result;
 		} catch (Exception e) {
-			LOGGER.log(Level.WARNING, e.toString());		
+			LOGGER.log(Level.WARNING, e.toString());
 			return null;
 		}
 	}
-	
+
 	public ArrayList<Part> getPartsByManufacturerAndPartGroup(String manufacturer, String partGroup) {
 
 		ArrayList<Part> result = new ArrayList<>();
@@ -437,15 +450,15 @@ public class DBManagerForParts {
 
 			CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 			CriteriaQuery<Object[]> criteriaQuery = criteriaBuilder.createQuery(Object[].class);
-			Root<Parts> partRoot = criteriaQuery.from(Parts.class);			
+			Root<Parts> partRoot = criteriaQuery.from(Parts.class);
 			Root<PartGroups> partsGroupRoot = criteriaQuery.from(PartGroups.class);
-			
+
 			Path<String> pgr = partsGroupRoot.get("partGroup");
-			
+
 			Root<Manufacturers> manufacturerRoot = criteriaQuery.from(Manufacturers.class);
-			
+
 			Path<String> m = manufacturerRoot.get("manufacturer");
-			
+
 			Root<Areas> areaRoot = criteriaQuery.from(Areas.class);
 			Root<Racks> rackRoot = criteriaQuery.from(Racks.class);
 			Root<Shelfs> shelfRoot = criteriaQuery.from(Shelfs.class);
@@ -466,7 +479,7 @@ public class DBManagerForParts {
 					criteriaBuilder.equal(partRoot.get("shelfs"), shelfRoot.get("shelfId")),
 					criteriaBuilder.equal(partRoot.get("units"), unitRoot.get("unitId")),
 					criteriaBuilder.equal(partRoot.get("users"), userRoot.get("userId")),
-					criteriaBuilder.equal(m, manufacturer),	criteriaBuilder.equal(pgr, partGroup))));
+					criteriaBuilder.equal(m, manufacturer), criteriaBuilder.equal(pgr, partGroup))));
 
 			TypedQuery<Object[]> query = em.createQuery(criteriaQuery);
 
@@ -510,11 +523,11 @@ public class DBManagerForParts {
 
 			return result;
 		} catch (Exception e) {
-			LOGGER.log(Level.WARNING, e.toString());			
+			LOGGER.log(Level.WARNING, e.toString());
 			return null;
 		}
 	}
-	
+
 	public Boolean newPart(Parts part) {
 
 		try {
@@ -529,7 +542,7 @@ public class DBManagerForParts {
 
 			return true;
 		} catch (Exception e) {
-			LOGGER.log(Level.WARNING, e.toString());			
+			LOGGER.log(Level.WARNING, e.toString());
 			return false;
 		}
 	}
@@ -542,7 +555,7 @@ public class DBManagerForParts {
 
 			Parts p = em.find(Parts.class, part.getPartId());
 			p = part;
-			
+
 			em.getTransaction().begin();
 			em.merge(p);
 			em.getTransaction().commit();

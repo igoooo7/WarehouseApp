@@ -51,6 +51,7 @@ import pl.nowator_zpu.warehouse_app.entities.Orders;
 import pl.nowator_zpu.warehouse_app.entities.Projects;
 import pl.nowator_zpu.warehouse_app.entities.Users;
 import pl.nowator_zpu.warehouse_app.interfaces.ItemDeleteListener;
+import javax.swing.JTextArea;
 
 public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 
@@ -68,10 +69,13 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 	private JLabel lblProject;
 	private JLabel lblCount;
 	private JLabel lblPartNumber;
+	private JLabel lblDescription;
 
 	private JTextField txtManufacturer;
 	private JTextField txtOrderCode;
 	private JTextField txtCount;
+	
+	private JTextArea txtrDescription;
 
 	private JButton btnNextPart;
 	private JButton btnPreviousPart;
@@ -80,7 +84,7 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 	private JButton btnSave;
 	private JButton btnOk;
 
-	JComboBox<Object> cBoxProject;
+	private JComboBox<Object> cBoxProject;
 
 	private ArrayList<Part> partList = new ArrayList<>();
 	private ArrayList<Order> orderList = new ArrayList<>();
@@ -104,7 +108,7 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 		Image formIcon = new ImageIcon(this.getClass().getResource("/averna_ico.png")).getImage();
 		setIconImage(formIcon);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 430, 415);
+		setBounds(100, 100, 430, 515);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(119, 136, 153));
@@ -126,91 +130,105 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 		panel.setBackground(new Color(195, 203, 43));
 
 		gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup().addGap(21)
-						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 378, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(27, Short.MAX_VALUE)));
-		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup().addGap(26)
-						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 335, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(25, Short.MAX_VALUE)));
-
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addContainerGap(25, Short.MAX_VALUE)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 378, GroupLayout.PREFERRED_SIZE)
+					.addGap(23))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(21)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 440, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(25, Short.MAX_VALUE))
+		);
+		
 		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup().addContainerGap(198, Short.MAX_VALUE)
-						.addComponent(btnPreviousPart).addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(btnNextPart).addPreferredGap(ComponentPlacement.UNRELATED)
-						.addComponent(lblPartNumber).addGap(32))
-				.addGroup(gl_panel.createSequentialGroup().addGap(25)
-						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel.createSequentialGroup()
-										.addComponent(lblProject, GroupLayout.PREFERRED_SIZE, 93,
-												GroupLayout.PREFERRED_SIZE)
-										.addGap(274))
-								.addGroup(gl_panel
-										.createSequentialGroup()
-										.addComponent(lblCount, GroupLayout.PREFERRED_SIZE, 98,
-												GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(txtCount,
-												GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING).addGroup(gl_panel
-										.createSequentialGroup()
-										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-												.addComponent(lblManufacturer).addComponent(lblOrderCode,
-														GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE))
-										.addGap(23)
-										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-												.addComponent(txtManufacturer, GroupLayout.DEFAULT_SIZE, 214,
-														Short.MAX_VALUE)
-												.addComponent(txtOrderCode))
-										.addGap(32))
-										.addGroup(gl_panel.createSequentialGroup().addGroup(gl_panel
-												.createParallelGroup(Alignment.TRAILING)
-												.addComponent(cBoxProject, Alignment.LEADING, 0, 337, Short.MAX_VALUE)
-												.addGroup(gl_panel.createSequentialGroup()
-														.addComponent(btnDeleteItem, GroupLayout.DEFAULT_SIZE, 123,
-																Short.MAX_VALUE)
-														.addPreferredGap(ComponentPlacement.RELATED)
-														.addComponent(btnDeleteAll, GroupLayout.PREFERRED_SIZE, 107,
-																GroupLayout.PREFERRED_SIZE)
-														.addPreferredGap(ComponentPlacement.RELATED)
-														.addComponent(btnSave))
-												.addComponent(btnOk)).addGap(30))))));
-		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel.createSequentialGroup().addGap(31)
-										.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-												.addComponent(btnNextPart).addComponent(btnPreviousPart)))
-								.addGroup(gl_panel.createSequentialGroup().addGap(36).addComponent(lblPartNumber)))
-						.addGap(29)
-						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(txtManufacturer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblManufacturer))
-						.addGap(14)
-						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(txtOrderCode, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblOrderCode))
-						.addGap(18)
-						.addGroup(
-								gl_panel.createParallelGroup(Alignment.BASELINE)
-										.addComponent(txtCount, GroupLayout.PREFERRED_SIZE, 22,
-												GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblCount))
-						.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(lblProject)
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addComponent(cBoxProject, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(btnOk, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnDeleteItem, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnDeleteAll, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnSave, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
-						.addContainerGap()));
+					.addContainerGap(198, Short.MAX_VALUE)
+					.addComponent(btnPreviousPart)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnNextPart)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(lblPartNumber)
+					.addGap(32))
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(25)
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(lblProject, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap(274, Short.MAX_VALUE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+								.addComponent(btnOk)
+								.addGroup(gl_panel.createSequentialGroup()
+									.addComponent(btnDeleteItem, GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnDeleteAll, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnSave))
+								.addComponent(cBoxProject, Alignment.LEADING, 0, 337, Short.MAX_VALUE))
+							.addGap(30))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addGroup(Alignment.TRAILING, gl_panel.createParallelGroup(Alignment.LEADING)
+									.addComponent(lblManufacturer)
+									.addComponent(lblOrderCode, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE))
+								.addComponent(lblDescription, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblCount, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE))
+							.addGap(23)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(txtCount, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtManufacturer, GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+								.addComponent(txtOrderCode)
+								.addComponent(txtrDescription))
+							.addGap(32))))
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(31)
+							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(btnNextPart)
+								.addComponent(btnPreviousPart)))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(36)
+							.addComponent(lblPartNumber)))
+					.addGap(29)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(txtManufacturer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblManufacturer))
+					.addGap(14)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(txtOrderCode, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblOrderCode))
+					.addGap(18)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblCount)
+						.addComponent(txtCount, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblDescription)
+						.addComponent(txtrDescription, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+					.addComponent(lblProject)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(cBoxProject, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnOk, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+					.addGap(32)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnDeleteItem, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnDeleteAll, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnSave, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap())
+		);
 		panel.setLayout(gl_panel);
 
 	}
@@ -248,6 +266,13 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 		btnPreviousPart = new JButton();
 		Image btnPreviousIcon = new ImageIcon(this.getClass().getResource("/back-16.png")).getImage();
 		btnPreviousPart.setIcon(new ImageIcon(btnPreviousIcon));
+		
+		lblDescription = new JLabel("Description:");
+		
+		txtrDescription = new JTextArea((String) null);
+		txtrDescription.setEditable(false);
+		txtrDescription.setLineWrap(true);
+		txtrDescription.setFont(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 13));
 
 		lblPartNumber = new JLabel("1 of n");
 
@@ -445,13 +470,13 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 
 									try {
 										PdfWriter writer = PdfWriter.getInstance(document,
-												new FileOutputStream(fileToSave));
+												new FileOutputStream(fileToSave + ".pdf"));
 										document.open();
 
 										try {
 											com.itextpdf.text.Image image = com.itextpdf.text.Image
 													.getInstance(this.getClass().getResource("/logo_averna.png"));
-											image.scaleAbsolute(165f, 50f);
+											image.scaleAbsolute(165f, 45f);
 											document.add(image);
 										} catch (BadElementException | IOException e1) {
 											e1.printStackTrace();
@@ -493,6 +518,7 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 											document.add(
 													new Paragraph("Order code: " + order.getOrderCode(), textFont));
 											document.add(new Paragraph("Quantity: " + order.getPartCount(), textFont));
+											document.add(new Paragraph("Description: " + order.getDescription(), textFont));
 											document.add(new Paragraph("Project: " + order.getProject(), textFont));
 											document.add(new Paragraph(" "));
 										}
@@ -540,6 +566,7 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 		txtManufacturer.setText(orderList.get(partNumber - 1).getManufacturer());
 		txtOrderCode.setText(orderList.get(partNumber - 1).getOrderCode());
 		txtCount.setText(orderList.get(partNumber - 1).getPartCount().toString());
+		txtrDescription.setText(orderList.get(partNumber - 1).getDescription());
 
 		int i;
 		for (i = 0; i < cBoxProject.getItemCount(); i++) {
@@ -565,7 +592,7 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 		txtManufacturer.setText("");
 		txtOrderCode.setText("");
 		txtCount.setText("");
-
+		txtrDescription.setText("");
 	}
 
 	public void setPartsList(ArrayList<Part> partsToOrder, Integer partsToOrderCount) {
@@ -587,6 +614,7 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 			order.setManufacturer(part.getManufacturer());
 			order.setOrderCode(part.getOrderCode());
 			order.setPartCount(0);
+			order.setDescription(part.getDescription());
 
 			if (!orderList.contains(order)) {
 				orderList.add(order);

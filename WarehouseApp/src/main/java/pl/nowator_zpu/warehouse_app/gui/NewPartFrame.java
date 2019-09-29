@@ -28,9 +28,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -94,7 +96,7 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 	private String partImagePath;
 
 	private JButton btnCreate;
-
+	
 	private User user;
 
 	private Controller controller = new Controller();
@@ -288,7 +290,7 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 		txtrDescription = new JTextArea();
 		txtrDescription.setLineWrap(true);
 		txtrDescription.setFont(new Font("Tahoma", Font.PLAIN, 13));
-
+			
 		lblManufacturer = new JLabel("Manufacturer:");
 
 		lblPartGroup = new JLabel("Part group:");
