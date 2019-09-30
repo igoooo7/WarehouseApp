@@ -103,7 +103,7 @@ public class MainFrame extends JFrame implements KeyListener {
 	private JTable table;
 	private JScrollPane scrollPane;
 
-	private User user;
+	private User user = new User();
 
 	private Controller controller = new Controller();
 
@@ -148,9 +148,7 @@ public class MainFrame extends JFrame implements KeyListener {
 		addActionListenersForControls();
 
 		prepareLayout();
-		contentPane.setLayout(gl_contentPane);
-
-		user = new User();
+		contentPane.setLayout(gl_contentPane);		 
 
 	}
 
@@ -556,8 +554,7 @@ public class MainFrame extends JFrame implements KeyListener {
 
 								JOptionPane.showMessageDialog(null, "User successfully deleted", "Message",
 										JOptionPane.INFORMATION_MESSAGE);
-
-								user = new User();
+								 
 								setEmptyUser();
 								refreshForm();
 

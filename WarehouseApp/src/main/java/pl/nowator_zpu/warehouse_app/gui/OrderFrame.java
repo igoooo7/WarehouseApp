@@ -547,7 +547,6 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 							JOptionPane.showMessageDialog(null, "Please enter valid values for quantity field!",
 									"Warning", JOptionPane.WARNING_MESSAGE);
 						}
-
 					} else {
 						JOptionPane.showMessageDialog(null, "Current user doesn't have rights to create orders!",
 								"Warning", JOptionPane.WARNING_MESSAGE);

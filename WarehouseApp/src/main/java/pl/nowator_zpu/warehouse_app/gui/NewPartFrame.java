@@ -92,11 +92,13 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 
 	private JButton btnImage;
 
+	private JScrollPane scrollPane;
+
 	private byte[] partImage;
 	private String partImagePath;
 
 	private JButton btnCreate;
-	
+
 	private User user;
 
 	private Controller controller = new Controller();
@@ -152,7 +154,7 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 						.addGroup(gl_panel.createSequentialGroup().addComponent(btnImage).addContainerGap(230,
 								Short.MAX_VALUE))
 						.addGroup(gl_panel.createSequentialGroup().addGroup(gl_panel
-								.createParallelGroup(Alignment.LEADING)
+								.createParallelGroup(Alignment.TRAILING)
 								.addGroup(gl_panel.createSequentialGroup()
 										.addComponent(lblQuantityMin, GroupLayout.PREFERRED_SIZE, 97,
 												GroupLayout.PREFERRED_SIZE)
@@ -169,49 +171,44 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 														.addPreferredGap(ComponentPlacement.RELATED)
 														.addComponent(txtQuantityMax, GroupLayout.PREFERRED_SIZE, 47,
 																GroupLayout.PREFERRED_SIZE))))
-								.addGroup(Alignment.TRAILING,
-										gl_panel.createSequentialGroup()
+								.addGroup(gl_panel.createSequentialGroup().addGroup(gl_panel
+										.createParallelGroup(Alignment.LEADING)
+										.addComponent(lblOrderCode, GroupLayout.PREFERRED_SIZE, 97,
+												GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblProductCode, GroupLayout.PREFERRED_SIZE, 97,
+												GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblPartName, GroupLayout.PREFERRED_SIZE, 79,
+												GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblDescription, GroupLayout.PREFERRED_SIZE, 97,
+												GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblManufacturer)
+										.addComponent(lblPartGroup, GroupLayout.PREFERRED_SIZE, 97,
+												GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblUnit, GroupLayout.PREFERRED_SIZE, 97,
+												GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblArea, GroupLayout.PREFERRED_SIZE, 97,
+												GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblRack, GroupLayout.PREFERRED_SIZE, 97,
+												GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblShelf, GroupLayout.PREFERRED_SIZE, 97,
+												GroupLayout.PREFERRED_SIZE))
+										.addGap(24)
+										.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 												.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-														.addComponent(lblOrderCode, GroupLayout.PREFERRED_SIZE, 97,
-																GroupLayout.PREFERRED_SIZE)
-														.addComponent(lblProductCode, GroupLayout.PREFERRED_SIZE, 97,
-																GroupLayout.PREFERRED_SIZE)
-														.addComponent(lblPartName, GroupLayout.PREFERRED_SIZE, 79,
-																GroupLayout.PREFERRED_SIZE)
-														.addComponent(lblDescription, GroupLayout.PREFERRED_SIZE, 97,
-																GroupLayout.PREFERRED_SIZE)
-														.addComponent(lblManufacturer)
-														.addComponent(lblPartGroup, GroupLayout.PREFERRED_SIZE, 97,
-																GroupLayout.PREFERRED_SIZE)
-														.addComponent(lblUnit, GroupLayout.PREFERRED_SIZE, 97,
-																GroupLayout.PREFERRED_SIZE)
-														.addComponent(lblArea, GroupLayout.PREFERRED_SIZE, 97,
-																GroupLayout.PREFERRED_SIZE)
-														.addComponent(lblRack, GroupLayout.PREFERRED_SIZE, 97,
-																GroupLayout.PREFERRED_SIZE)
-														.addComponent(
-																lblShelf, GroupLayout.PREFERRED_SIZE, 97,
-																GroupLayout.PREFERRED_SIZE))
-												.addGap(24)
-												.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-														.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-																.addComponent(cBoxUnit, 0, 234, Short.MAX_VALUE)
-																.addComponent(cBoxArea, 0, 234, Short.MAX_VALUE)
-																.addComponent(cBoxRack, 0, 234, Short.MAX_VALUE)
-																.addComponent(cBoxShelf, 0, 234, Short.MAX_VALUE)
-																.addComponent(cBoxPartGroup, Alignment.TRAILING, 0, 234,
-																		Short.MAX_VALUE))
-														.addGroup(Alignment.TRAILING, gl_panel
-																.createParallelGroup(Alignment.LEADING, false)
-																.addComponent(cBoxManufacturer, 0,
-																		GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-																.addComponent(txtrDescription, GroupLayout.DEFAULT_SIZE,
-																		234, Short.MAX_VALUE)
-																.addComponent(txtOrderCode, Alignment.TRAILING)
-																.addComponent(txtProductCode, Alignment.TRAILING)
-																.addComponent(txtPartName, Alignment.TRAILING,
-																		GroupLayout.DEFAULT_SIZE, 234,
-																		Short.MAX_VALUE)))))
+														.addComponent(cBoxUnit, 0, 234, Short.MAX_VALUE)
+														.addComponent(cBoxArea, 0, 234, Short.MAX_VALUE)
+														.addComponent(cBoxRack, 0, 234, Short.MAX_VALUE)
+														.addComponent(cBoxShelf, 0, 234, Short.MAX_VALUE)
+														.addComponent(cBoxPartGroup, Alignment.TRAILING, 0, 234,
+																Short.MAX_VALUE))
+												.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+														.addComponent(cBoxManufacturer, 0, GroupLayout.DEFAULT_SIZE,
+																Short.MAX_VALUE)
+														.addComponent(txtOrderCode, Alignment.TRAILING)
+														.addComponent(txtProductCode, Alignment.TRAILING)
+														.addComponent(txtPartName, Alignment.TRAILING,
+																GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+														.addComponent(scrollPane)))))
 								.addGap(23)))));
 		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
 				.createSequentialGroup().addGap(23)
@@ -225,9 +222,9 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 				.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(lblOrderCode).addComponent(
 						txtOrderCode, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 				.addGap(18)
-				.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(lblDescription)
-						.addComponent(txtrDescription, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE))
-				.addGap(18)
+				.addGroup(gl_panel.createParallelGroup(Alignment.LEADING).addComponent(lblDescription)
+						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE))
+				.addGap(17)
 				.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(lblManufacturer).addComponent(
 						cBoxManufacturer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 						GroupLayout.PREFERRED_SIZE))
@@ -288,9 +285,13 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 
 		lblDescription = new JLabel("Description:");
 		txtrDescription = new JTextArea();
+		txtrDescription.setToolTipText("describe part, please add link to site.");
 		txtrDescription.setLineWrap(true);
 		txtrDescription.setFont(new Font("Tahoma", Font.PLAIN, 13));
-			
+
+		scrollPane = new JScrollPane();
+		scrollPane.setViewportView(txtrDescription);
+
 		lblManufacturer = new JLabel("Manufacturer:");
 
 		lblPartGroup = new JLabel("Part group:");
@@ -305,10 +306,12 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 
 		lblQuantityMin = new JLabel("Quantity min:");
 		txtQuantityMin = new JTextField();
+		txtQuantityMin.setToolTipText("minimum amount that could be ordered");
 		txtQuantityMin.setColumns(15);
 
 		lblQuantityMax = new JLabel("Quantity max:");
 		txtQuantityMax = new JTextField();
+		txtQuantityMax.setToolTipText("maximum amount that could be ordered");
 		txtQuantityMax.setColumns(15);
 
 		btnImage = new JButton("Load image");
@@ -534,7 +537,7 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 	}
 
 	private void prepareComboBoxes() {
-		
+
 		String[] stringArray;
 		Integer[] integerArray;
 
