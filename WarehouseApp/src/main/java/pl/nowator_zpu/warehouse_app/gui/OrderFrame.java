@@ -476,7 +476,7 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 										try {
 											com.itextpdf.text.Image image = com.itextpdf.text.Image
 													.getInstance(this.getClass().getResource("/logo_averna.png"));
-											image.scaleAbsolute(165f, 45f);
+											image.scaleAbsolute(165f, 35f);
 											document.add(image);
 										} catch (BadElementException | IOException e1) {
 											e1.printStackTrace();
@@ -510,7 +510,7 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 
 											i++;
 											document.add(new Paragraph(
-													"=====================================================", textFont));
+													"-------------------------------------------------------------------------------------", textFont));
 											document.add(new Paragraph("Position number: " + i, textFont));
 
 											document.add(new Paragraph("Manufacturer: " + order.getManufacturer(),
