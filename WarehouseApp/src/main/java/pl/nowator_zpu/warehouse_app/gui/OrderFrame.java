@@ -39,6 +39,7 @@ import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.BarcodeQRCode;
 import com.itextpdf.text.pdf.CMYKColor;
 import com.itextpdf.text.pdf.PdfWriter;
 
@@ -257,6 +258,7 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 
 		lblCount = new JLabel("Count:");
 		txtCount = new JTextField();
+		txtCount.setToolTipText("");
 		txtCount.setColumns(10);
 
 		btnNextPart = new JButton();
@@ -484,7 +486,7 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 											e.printStackTrace();
 										}
 
-										document.add(new Paragraph("AVERNA Test & Measurement Solutions, Poland",
+										document.add(new Paragraph("AVERNA Automated Test & Quality Solutions, Poland",
 												SectionTitleFont));
 										document.add(new Paragraph(" "));
 										document.add(new Paragraph(" "));
@@ -510,7 +512,7 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 
 											i++;
 											document.add(new Paragraph(
-													"-------------------------------------------------------------------------------------", textFont));
+													"------------------------------------------------------------------------------------------", textFont));
 											document.add(new Paragraph("Position number: " + i, textFont));
 
 											document.add(new Paragraph("Manufacturer: " + order.getManufacturer(),
@@ -519,8 +521,15 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 													new Paragraph("Order code: " + order.getOrderCode(), textFont));
 											document.add(new Paragraph("Quantity: " + order.getPartCount(), textFont));
 											document.add(new Paragraph("Description: " + order.getDescription(), textFont));
-											document.add(new Paragraph("Project: " + order.getProject(), textFont));
-											document.add(new Paragraph(" "));
+											document.add(new Paragraph("Project: " + order.getProject(), textFont));											 
+											document.add(new Paragraph("Link: " + order.getLink(), textFont));
+											
+											//QR code
+											
+											BarcodeQRCode barcodeQRCode = new BarcodeQRCode(order.getLink(), 1000, 1000, null);
+											com.itextpdf.text.Image codeQrImage = barcodeQRCode.getImage();
+											codeQrImage.scaleAbsolute(100, 100);
+											document.add(codeQrImage);		
 										}
 
 										document.close();
@@ -555,7 +564,6 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 				} else {
 					JOptionPane.showMessageDialog(null, "User isn't logged!", "Warning", JOptionPane.WARNING_MESSAGE);
 				}
-
 			}
 		});
 
@@ -565,8 +573,9 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 		txtManufacturer.setText(orderList.get(partNumber - 1).getManufacturer());
 		txtOrderCode.setText(orderList.get(partNumber - 1).getOrderCode());
 		txtCount.setText(orderList.get(partNumber - 1).getPartCount().toString());
+		txtCount.setToolTipText(partList.get(partNumber - 1).getQuantityMin() + "-" + partList.get(partNumber - 1).getQuantityMax());
 		txtrDescription.setText(orderList.get(partNumber - 1).getDescription());
-
+		
 		int i;
 		for (i = 0; i < cBoxProject.getItemCount(); i++) {
 
@@ -614,6 +623,7 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 			order.setOrderCode(part.getOrderCode());
 			order.setPartCount(0);
 			order.setDescription(part.getDescription());
+			order.setLink(part.getLink());
 
 			if (!orderList.contains(order)) {
 				orderList.add(order);

@@ -110,6 +110,7 @@ public class DBManagerForParts {
 				part.setProductCode(p.getProductCode());
 				part.setPartName(p.getPartName());
 				part.setDescription(p.getDescription());
+				part.setLink(p.getLink());
 				part.setQuantityMin(p.getQuantityMin());
 				part.setQuantityMax(p.getQuantityMax());
 				part.setCreationDate(p.getCreationDate());
@@ -204,6 +205,7 @@ public class DBManagerForParts {
 			result.setProductCode(p.getProductCode());
 			result.setPartName(p.getPartName());
 			result.setDescription(p.getDescription());
+			result.setLink(p.getLink());
 			result.setQuantityMin(p.getQuantityMin());
 			result.setQuantityMax(p.getQuantityMax());
 			result.setCreationDate(p.getCreationDate());
@@ -337,6 +339,7 @@ public class DBManagerForParts {
 				part.setProductCode(p.getProductCode());
 				part.setPartName(p.getPartName());
 				part.setDescription(p.getDescription());
+				part.setLink(p.getLink());
 				part.setQuantityMin(p.getQuantityMin());
 				part.setQuantityMax(p.getQuantityMax());
 				part.setCreationDate(p.getCreationDate());
@@ -422,6 +425,7 @@ public class DBManagerForParts {
 				part.setProductCode(p.getProductCode());
 				part.setPartName(p.getPartName());
 				part.setDescription(p.getDescription());
+				part.setLink(p.getLink());
 				part.setQuantityMin(p.getQuantityMin());
 				part.setQuantityMax(p.getQuantityMax());
 				part.setCreationDate(p.getCreationDate());
@@ -510,6 +514,7 @@ public class DBManagerForParts {
 				part.setProductCode(p.getProductCode());
 				part.setPartName(p.getPartName());
 				part.setDescription(p.getDescription());
+				part.setLink(p.getLink());
 				part.setQuantityMin(p.getQuantityMin());
 				part.setQuantityMax(p.getQuantityMax());
 				part.setCreationDate(p.getCreationDate());

@@ -36,6 +36,7 @@ public class Parts implements java.io.Serializable {
 	private String productCode;
 	private String partName;
 	private String description;
+	private String link;
 	private int quantityMin;
 	private int quantityMax;
 	private Date creationDate;
@@ -62,7 +63,7 @@ public class Parts implements java.io.Serializable {
 
 	public Parts(Areas areas, Manufacturers manufacturers, PartGroups partGroups, Racks racks, Shelfs shelfs,
 			Units units, Users users, String orderCode, String productCode, String partName, String description,
-			int quantityMin, int quantityMax, Date creationDate, Date lastChangeDate, byte[] image,
+			String link, int quantityMin, int quantityMax, Date creationDate, Date lastChangeDate, byte[] image,
 			Set<Orders> orders) {
 		this.areas = areas;
 		this.manufacturers = manufacturers;
@@ -75,6 +76,7 @@ public class Parts implements java.io.Serializable {
 		this.productCode = productCode;
 		this.partName = partName;
 		this.description = description;
+		this.link = link;
 		this.quantityMin = quantityMin;
 		this.quantityMax = quantityMax;
 		this.creationDate = creationDate;
@@ -199,6 +201,15 @@ public class Parts implements java.io.Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	@Column(name = "link")
+	public String getLink() {
+		return this.link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
 	}
 
 	@Column(name = "quantity_min", nullable = false)

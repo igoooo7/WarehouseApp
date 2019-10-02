@@ -9,7 +9,7 @@ public class PartsTableModel extends AbstractTableModel {
 	private ArrayList<Part> parts = new ArrayList<>();
 
 	private String[] columnNames = { "Manufacturer", "Part group", "Part name", "Order code", "Product code", "Area", "Rack", "Shelf", "Unit", "User",
-			"Description", "Quantity min.", "Quantity max", "Creation date",
+			"Description", "Link", "Quantity min.", "Quantity max", "Creation date",
 			"Last change" };
 
 	public PartsTableModel() {
@@ -27,7 +27,7 @@ public class PartsTableModel extends AbstractTableModel {
 
 	@Override
 	public int getColumnCount() {
-		return 15;
+		return 16;
 	}
 
 	@Override
@@ -65,12 +65,14 @@ public class PartsTableModel extends AbstractTableModel {
 		case 10:
 			return part.getDescription();
 		case 11:
-			return part.getQuantityMin();
+			return part.getLink();
 		case 12:
-			return part.getQuantityMax();
+			return part.getQuantityMin();
 		case 13:
-			return part.getCreationDate();
+			return part.getQuantityMax();
 		case 14:
+			return part.getCreationDate();
+		case 15:
 			return part.getLastChangeDate();
 		}
 		return null;

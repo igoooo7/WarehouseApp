@@ -17,6 +17,7 @@ public class Part {
 	private String productCode;
 	private String partName;
 	private String description;
+	private String link;
 	private Integer quantityMin;
 	private Integer quantityMax;
 	private Date creationDate;
@@ -25,7 +26,7 @@ public class Part {
 	
 	public Part(Integer partId, String area, String manufacturer, String partGroup, Integer rack, Integer shelf,
 			String unit, String user, String orderCode, String productCode, String partName, String description,
-			Integer quantityMin, Integer quantityMax, Date creationDate, Date lastChangeDate, byte[] image) {
+			String link, Integer quantityMin, Integer quantityMax, Date creationDate, Date lastChangeDate, byte[] image) {
 		super();
 		this.partId = partId;
 		this.area = area;
@@ -39,6 +40,7 @@ public class Part {
 		this.productCode = productCode;
 		this.partName = partName;
 		this.description = description;
+		this.link = link;
 		this.quantityMin = quantityMin;
 		this.quantityMax = quantityMax;
 		this.creationDate = creationDate;
@@ -59,6 +61,7 @@ public class Part {
 		this.productCode = "";
 		this.partName = "";
 		this.description = "";
+		this.link = "";
 		this.quantityMin = 0;
 		this.quantityMax = 0;
 		this.creationDate = null;
@@ -161,6 +164,14 @@ public class Part {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
 
 	public Integer getQuantityMin() {
 		return quantityMin;
@@ -211,6 +222,7 @@ public class Part {
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + Arrays.hashCode(image);
 		result = prime * result + ((lastChangeDate == null) ? 0 : lastChangeDate.hashCode());
+		result = prime * result + ((link == null) ? 0 : link.hashCode());
 		result = prime * result + ((manufacturer == null) ? 0 : manufacturer.hashCode());
 		result = prime * result + ((orderCode == null) ? 0 : orderCode.hashCode());
 		result = prime * result + ((partGroup == null) ? 0 : partGroup.hashCode());
@@ -256,6 +268,11 @@ public class Part {
 			if (other.lastChangeDate != null)
 				return false;
 		} else if (!lastChangeDate.equals(other.lastChangeDate))
+			return false;
+		if (link == null) {
+			if (other.link != null)
+				return false;
+		} else if (!link.equals(other.link))
 			return false;
 		if (manufacturer == null) {
 			if (other.manufacturer != null)
@@ -325,9 +342,9 @@ public class Part {
 		return "Part [partId=" + partId + ", area=" + area + ", manufacturer=" + manufacturer + ", partGroup="
 				+ partGroup + ", rack=" + rack + ", shelf=" + shelf + ", unit=" + unit + ", user=" + user
 				+ ", orderCode=" + orderCode + ", productCode=" + productCode + ", partName=" + partName
-				+ ", description=" + description + ", quantityMin=" + quantityMin + ", quantityMax=" + quantityMax
-				+ ", creationDate=" + creationDate + ", lastChangeDate=" + lastChangeDate + ", image="
+				+ ", description=" + description + ", link=" + link + ", quantityMin=" + quantityMin + ", quantityMax="
+				+ quantityMax + ", creationDate=" + creationDate + ", lastChangeDate=" + lastChangeDate + ", image="
 				+ Arrays.toString(image) + "]";
 	}
-
+	
 }

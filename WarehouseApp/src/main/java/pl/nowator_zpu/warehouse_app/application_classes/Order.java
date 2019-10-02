@@ -8,30 +8,32 @@ public class Order {
 	private String orderCode;	
 	private String manufacturer;
 	private String description;
+	private String link;
 	private Integer partCount;
 	private String user;
 	private String project;
 	private Date orderDate;
 	
-	public Order(Integer orderId, String orderCode, String manufacturer,String description, Integer partCount, String user, String project,
+	public Order(Integer orderId, String orderCode, String manufacturer,String description, String link, Integer partCount, String user, String project,
 			Date orderDate) {
 		super();
 		this.orderId = orderId;
 		this.orderCode = orderCode;
 		this.manufacturer = manufacturer;
 		this.description = description;
+		this.link = link;
 		this.partCount = partCount;
 		this.user = user;
 		this.project = project;
 		this.orderDate = orderDate;
 	}
 	
-	public Order() {
-		 
+	public Order() {		 
 		this.orderId = 0;
 		this.orderCode = "";
 		this.manufacturer = "";
 		this.description = "";
+		this.link = "";
 		this.partCount = 0;
 		this.user = "";
 		this.project = "";
@@ -68,6 +70,14 @@ public class Order {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
 	}
 
 	public Integer getPartCount() {
@@ -107,6 +117,7 @@ public class Order {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((link == null) ? 0 : link.hashCode());
 		result = prime * result + ((manufacturer == null) ? 0 : manufacturer.hashCode());
 		result = prime * result + ((orderCode == null) ? 0 : orderCode.hashCode());
 		result = prime * result + ((orderDate == null) ? 0 : orderDate.hashCode());
@@ -130,6 +141,11 @@ public class Order {
 			if (other.description != null)
 				return false;
 		} else if (!description.equals(other.description))
+			return false;
+		if (link == null) {
+			if (other.link != null)
+				return false;
+		} else if (!link.equals(other.link))
 			return false;
 		if (manufacturer == null) {
 			if (other.manufacturer != null)
@@ -172,8 +188,8 @@ public class Order {
 	@Override
 	public String toString() {
 		return "Order [orderId=" + orderId + ", orderCode=" + orderCode + ", manufacturer=" + manufacturer
-				+ ", description=" + description + ", partCount=" + partCount + ", user=" + user + ", project="
-				+ project + ", orderDate=" + orderDate + "]";
+				+ ", description=" + description + ", link=" + link + ", partCount=" + partCount + ", user=" + user
+				+ ", project=" + project + ", orderDate=" + orderDate + "]";
 	}
 		
 }
