@@ -10,8 +10,6 @@ import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,7 +18,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.LineBorder;
 
 import pl.nowator_zpu.warehouse_app.application_classes.User;
@@ -29,12 +26,8 @@ import pl.nowator_zpu.warehouse_app.interfaces.UserLoginListener;
 
 public class LoginFrame extends JFrame implements WindowListener, KeyListener {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-
-	private GroupLayout gl_contentPane;
+	
 	private JPanel contentPane;
 	private JPanel panel;
 	
@@ -49,13 +42,8 @@ public class LoginFrame extends JFrame implements WindowListener, KeyListener {
 
 	private User user;
 
-	private Controller controller = new Controller();
+	private Controller controller = new Controller();	
 	
-	
-
-	/**
-	 * Create the frame.
-	 */
 	public LoginFrame() {
 
 		setResizable(false);
@@ -75,62 +63,40 @@ public class LoginFrame extends JFrame implements WindowListener, KeyListener {
 		addActionListenersForControls();
 
 		prepareLayout();
-		contentPane.setLayout(gl_contentPane);
-
+		
 	}
 
 	private void prepareLayout() {
 
 		panel = new JPanel();
+		panel.setBounds(26, 13, 267, 143);
 		panel.setBackground(new Color(195, 203, 43));
-
-		gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup().addGap(25)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)
-								.addComponent(panel, GroupLayout.PREFERRED_SIZE, 267, GroupLayout.PREFERRED_SIZE))
-						.addContainerGap(29, Short.MAX_VALUE)));
-		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPane.createSequentialGroup().addContainerGap()
-						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE).addGap(18)
-						.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
-						.addGap(22)));
-
-		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel.createSequentialGroup().addGap(28)
-						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING).addComponent(lblUserName)
-								.addComponent(lblPassword))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false).addComponent(passwordField)
-								.addComponent(txtUserName))
-						.addGap(25)));
-		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel.createSequentialGroup().addContainerGap(43, Short.MAX_VALUE)
-						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(txtUserName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblUserName))
-						.addGap(28)
-						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(lblPassword)
-								.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE))
-						.addGap(34)));
-		panel.setLayout(gl_panel);
-
+		panel.setLayout(null);
+		panel.add(lblUserName);
+		panel.add(lblPassword);
+		panel.add(passwordField);
+		panel.add(txtUserName);
+		
+		contentPane.setLayout(null);
+		contentPane.add(btnLogin);
+		contentPane.add(panel);
 	}
 
 	private void createControls() {
 
 		lblPassword = new JLabel("Password:");
+		lblPassword.setBounds(36, 92, 70, 15);
 		passwordField = new JPasswordField();
+		passwordField.setBounds(118, 90, 124, 19);
 
 		lblUserName = new JLabel("User name:");
+		lblUserName.setBounds(28, 45, 78, 15);
 		txtUserName = new JTextField();
+		txtUserName.setBounds(118, 43, 124, 19);
 		txtUserName.setColumns(10);
 
 		btnLogin = new JButton("Enter");
+		btnLogin.setBounds(157, 174, 136, 51);
 		Image btnLoginIcon = new ImageIcon(this.getClass().getResource("/user-enter-32.png")).getImage();
 		btnLogin.setIcon(new ImageIcon(btnLoginIcon));
 	}

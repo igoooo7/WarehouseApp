@@ -9,7 +9,7 @@ public class PartsTableModel extends AbstractTableModel {
 	private ArrayList<Part> parts = new ArrayList<>();
 
 	private String[] columnNames = { "Manufacturer", "Part group", "Part name", "Order code", "Product code", "Area", "Rack", "Shelf", "Unit", "User",
-			"Description", "Link", "Quantity min.", "Quantity max", "Creation date",
+			"Description", "Link", "Quantity min.", "Quantity max.", "Creation date",
 			"Last change" };
 
 	public PartsTableModel() {

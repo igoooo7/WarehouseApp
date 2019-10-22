@@ -11,8 +11,6 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
 
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -22,7 +20,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.LineBorder;
 
 import pl.nowator_zpu.warehouse_app.application_classes.User;
@@ -32,13 +29,9 @@ import pl.nowator_zpu.warehouse_app.entities.UserRights;
 import pl.nowator_zpu.warehouse_app.entities.Users;
 
 public class NewUserFrame extends JFrame implements WindowListener, KeyListener {
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
-
-	private GroupLayout gl_contentPane;
+	
 	private JPanel contentPane;
 
 	private JLabel lblFirstName;
@@ -66,10 +59,8 @@ public class NewUserFrame extends JFrame implements WindowListener, KeyListener 
 	private User user;
 
 	private Controller controller = new Controller();
+	private JPanel panel;
 
-	/**
-	 * Create the frame.
-	 */
 	public NewUserFrame() {
 
 		setResizable(false);
@@ -89,139 +80,82 @@ public class NewUserFrame extends JFrame implements WindowListener, KeyListener 
 		addActionListenersForControls();
 
 		prepareLayout();
-		contentPane.setLayout(gl_contentPane);
-
+	
 	}
 
 	private void prepareLayout() {
 
-		JPanel panel = new JPanel();
+		panel = new JPanel();
+		panel.setBounds(35, 38, 327, 326);
 		panel.setBackground(new Color(195, 203, 43));
-
-		gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(34, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(btnCreate, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)
-						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 327, GroupLayout.PREFERRED_SIZE))
-					.addGap(30))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(37)
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE)
-					.addGap(75)
-					.addComponent(btnCreate, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
-					.addGap(291))
-		);
-
-		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(25)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
-							.addComponent(lblEmail, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-							.addComponent(lblUserName, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-							.addComponent(lblPassword, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-							.addComponent(lblLastName, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-							.addComponent(lblFirstName, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(lblRepeatPass, Alignment.LEADING))
-						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-							.addComponent(lblUserRights, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
-							.addComponent(lblJobTitle, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-								.addComponent(cBoxUserRights, 0, 181, Short.MAX_VALUE)
-								.addComponent(cBoxJobTitle, 0, 171, Short.MAX_VALUE))
-							.addPreferredGap(ComponentPlacement.RELATED))
-						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-							.addComponent(txtUserName, 171, 171, 171)
-							.addComponent(passUserPassword, Alignment.TRAILING, 171, 171, 171)
-							.addComponent(txtLastName, 171, 171, 171)
-							.addComponent(txtEmail, GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-							.addComponent(passUserRepeatedPassword, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE)
-							.addGroup(gl_panel.createSequentialGroup()
-								.addComponent(txtFirstName, GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-								.addPreferredGap(ComponentPlacement.RELATED))))
-					.addGap(43))
-		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(23)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(txtFirstName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblFirstName))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(txtLastName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblLastName))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblUserName)
-						.addComponent(txtUserName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(txtEmail, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblEmail))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblPassword)
-						.addComponent(passUserPassword, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(passUserRepeatedPassword, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblRepeatPass))
-					.addGap(18)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(cBoxJobTitle, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblJobTitle))
-					.addGap(18)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(cBoxUserRights, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblUserRights))
-					.addGap(26))
-		);
-		panel.setLayout(gl_panel);
+		panel.setLayout(null);
+		panel.add(lblEmail);
+		panel.add(lblUserName);
+		panel.add(lblPassword);
+		panel.add(lblLastName);
+		panel.add(lblFirstName);
+		panel.add(lblRepeatPass);
+		panel.add(lblUserRights);
+		panel.add(lblJobTitle);
+		panel.add(cBoxUserRights);
+		panel.add(cBoxJobTitle);
+		panel.add(txtUserName);
+		panel.add(passUserPassword);
+		panel.add(txtLastName);
+		panel.add(txtEmail);
+		panel.add(passUserRepeatedPassword);
+		panel.add(txtFirstName);
+		
+		contentPane.setLayout(null);
+		contentPane.add(btnCreate);
+		contentPane.add(panel);
 
 	}
 
 	private void createControls() {
 
 		lblFirstName = new JLabel("First name:");
+		lblFirstName.setBounds(25, 25, 88, 15);
 		txtFirstName = new JTextField();
+		txtFirstName.setBounds(131, 23, 171, 19);
 		txtFirstName.setColumns(15);
 
 		lblLastName = new JLabel("Last name:");
+		lblLastName.setBounds(25, 56, 88, 15);
 		txtLastName = new JTextField();
+		txtLastName.setBounds(131, 54, 171, 19);
 		txtLastName.setColumns(15);
 
 		lblUserName = new JLabel("User name:");
+		lblUserName.setBounds(25, 87, 88, 15);
 		txtUserName = new JTextField();
+		txtUserName.setBounds(131, 85, 171, 19);
 		txtUserName.setColumns(15);
 
 		lblEmail = new JLabel("Email:");
+		lblEmail.setBounds(25, 118, 88, 15);
 		txtEmail = new JTextField();
+		txtEmail.setBounds(131, 116, 171, 19);
 		txtEmail.setColumns(25);
 
 		lblPassword = new JLabel("Password:");
+		lblPassword.setBounds(25, 149, 88, 15);
 		passUserPassword = new JPasswordField();
+		passUserPassword.setBounds(131, 147, 171, 19);
 
 		passUserRepeatedPassword = new JPasswordField();
+		passUserRepeatedPassword.setBounds(131, 178, 171, 19);
 		lblRepeatPass = new JLabel("Repeat pass:");
+		lblRepeatPass.setBounds(25, 180, 88, 15);
 
 		lblJobTitle = new JLabel("Job title:");
+		lblJobTitle.setBounds(25, 220, 78, 15);
 
 		lblUserRights = new JLabel("Rights:");
+		lblUserRights.setBounds(25, 262, 78, 15);
 
 		btnCreate = new JButton("Create");
+		btnCreate.setBounds(226, 439, 136, 51);
 		Image btnCreateIcon = new ImageIcon(this.getClass().getResource("/create-user-32.png")).getImage();
 		btnCreate.setIcon(new ImageIcon(btnCreateIcon));
 
@@ -383,9 +317,11 @@ public class NewUserFrame extends JFrame implements WindowListener, KeyListener 
 
 		array = jobTitleList.toArray(new String[jobTitleList.size()]);
 		cBoxJobTitle = new JComboBox<Object>(array);
+		cBoxJobTitle.setBounds(131, 215, 171, 24);
 
 		array = userRightsList.toArray(new String[userRightsList.size()]);
 		cBoxUserRights = new JComboBox<Object>(array);
+		cBoxUserRights.setBounds(131, 257, 171, 24);
 
 	}
 

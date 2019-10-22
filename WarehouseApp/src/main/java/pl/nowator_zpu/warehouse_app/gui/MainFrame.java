@@ -14,8 +14,6 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -27,7 +25,6 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.RowFilter;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
@@ -43,13 +40,9 @@ import pl.nowator_zpu.warehouse_app.interfaces.ItemDeleteListener;
 import pl.nowator_zpu.warehouse_app.interfaces.UserLoginListener;
 
 public class MainFrame extends JFrame implements KeyListener {
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
-
-	private GroupLayout gl_contentPane;
+	
 	private JPanel contentPane;
 
 	private JPanel panel1;
@@ -109,10 +102,7 @@ public class MainFrame extends JFrame implements KeyListener {
 
 	private ArrayList<Part> partsToOrder = new ArrayList<>();
 	private Integer partsToOrderCount = 0;
-
-	/**
-	 * Launch the application.
-	 */
+	
 	public static void main(String[] args) {
 
 		EventQueue.invokeLater(new Runnable() {
@@ -126,10 +116,7 @@ public class MainFrame extends JFrame implements KeyListener {
 			}
 		});
 	}
-
-	/**
-	 * Create the frame.
-	 */
+	
 	public MainFrame() {
 
 		setTitle("AVERNA Wrocław - Warehouse Management V1.0.0");
@@ -148,220 +135,81 @@ public class MainFrame extends JFrame implements KeyListener {
 		addActionListenersForControls();
 
 		prepareLayout();
-		contentPane.setLayout(gl_contentPane);		 
+		
+		contentPane.setLayout(null);
+		contentPane.add(panel5);
+		panel5.setLayout(null);
+		panel5.add(btnOrder);
+		panel5.add(btnAddToOrder);
+		contentPane.add(lblImage);
+		contentPane.add(panel3);
+		panel3.setLayout(null);
+		panel3.add(btnDeletePart);
+		panel3.add(btnNewPart);
+		panel3.add(btnChangePart);
+		panel3.add(btnUpdate);
+		panel3.add(btnShowPicture);
+		contentPane.add(panel1);
+		panel1.setLayout(null);
+		panel1.add(lblUserRights);
+		panel1.add(lblUserName);
+		panel1.add(lblJobTitle);
+		panel1.add(txtJobTitle);
+		panel1.add(txtUserRights);
+		panel1.add(txtUserName);
+		contentPane.add(panel2);
+		panel2.setLayout(null);
+		panel2.add(btnLogin);
+		panel2.add(btnNewUser);
+		panel2.add(btnDeleteUser);
+		panel2.add(btnExit);
+		contentPane.add(scrollPane);
+		contentPane.add(panel4);
+		panel4.setLayout(null);
+		panel4.add(lblManufacturer);
+		panel4.add(cBoxManufacturer);
+		panel4.add(lblSearch);
+		panel4.add(txtFilter);
+		panel4.add(lblPartGroup);
+		panel4.add(cBoxPartGroup);
+		contentPane.add(panel6);
+		panel6.setLayout(null);
+		panel6.add(rdbtnParts);
+		panel6.add(rdbtnOrders);
 
 	}
 
 	private void prepareLayout() {
 
 		panel1 = new JPanel();
+		panel1.setBounds(88, 47, 280, 122);
 		panel1.setBackground(new Color(119, 136, 153));
 		panel1.setBorder(new TitledBorder(new LineBorder(new Color(195, 203, 43)), "User data", TitledBorder.LEFT,
 				TitledBorder.TOP, null, new Color(64, 64, 64)));
 
 		panel2 = new JPanel();
+		panel2.setBounds(440, 37, 703, 80);
 		panel2.setBackground(new Color(119, 136, 153));
 
 		panel3 = new JPanel();
+		panel3.setBounds(182, 313, 240, 369);
 		panel3.setBackground(new Color(119, 136, 153));
 
 		panel4 = new JPanel();
+		panel4.setBounds(452, 189, 701, 112);
 		panel4.setBorder(new TitledBorder(new LineBorder(new Color(195, 203, 43)), "Filter", TitledBorder.LEADING,
 				TitledBorder.TOP, null, new Color(51, 51, 51)));
 		panel4.setBackground(new Color(119, 136, 153));
 
 		panel5 = new JPanel();
+		panel5.setBounds(20, 313, 150, 369);
 		panel5.setBackground(new Color(119, 136, 153));
 
 		panel6 = new JPanel();
+		panel6.setBounds(450, 129, 152, 50);
 		panel6.setBorder(new TitledBorder(new LineBorder(new Color(195, 203, 43)), "View", TitledBorder.LEADING,
 				TitledBorder.TOP, null, new Color(51, 51, 51)));
 		panel6.setBackground(new Color(119, 136, 153));
-
-		gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(19, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-							.addComponent(panel5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblImage, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
-								.addComponent(panel3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED))
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-							.addComponent(panel1, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
-							.addGap(64)))
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(18)
-							.addComponent(panel2, GroupLayout.PREFERRED_SIZE, 703, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(30)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 1455, Short.MAX_VALUE)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(panel4, GroupLayout.PREFERRED_SIZE, 701, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(panel6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))))
-					.addContainerGap())
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(36)
-							.addComponent(panel2, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
-							.addGap(78)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(panel4, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE)
-								.addComponent(panel6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(49)
-							.addComponent(panel1, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)))
-					.addGap(6)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(scrollPane, 0, 0, Short.MAX_VALUE)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(panel5, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(panel3, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE))
-							.addGap(18)
-							.addComponent(lblImage, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap())
-		);
-
-		GroupLayout gl_panel6 = new GroupLayout(panel6);
-		gl_panel6.setHorizontalGroup(gl_panel6.createParallelGroup(Alignment.LEADING).addGroup(gl_panel6
-				.createSequentialGroup().addGap(5).addComponent(rdbtnParts).addGap(5).addComponent(rdbtnOrders)));
-		gl_panel6.setVerticalGroup(gl_panel6.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel6.createSequentialGroup().addGap(5).addGroup(gl_panel6
-						.createParallelGroup(Alignment.LEADING).addComponent(rdbtnParts).addComponent(rdbtnOrders))));
-		panel6.setLayout(gl_panel6);
-
-		GroupLayout gl_panel5 = new GroupLayout(panel5);
-		gl_panel5.setHorizontalGroup(gl_panel5.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel5.createSequentialGroup()
-						.addGroup(gl_panel5.createParallelGroup(Alignment.TRAILING)
-								.addComponent(btnOrder, GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-								.addComponent(btnAddToOrder, GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))
-						.addContainerGap()));
-		gl_panel5.setVerticalGroup(gl_panel5.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel5.createSequentialGroup().addGap(23)
-						.addComponent(btnAddToOrder, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addComponent(btnOrder, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(220, Short.MAX_VALUE)));
-		panel5.setLayout(gl_panel5);
-		GroupLayout gl_panel4 = new GroupLayout(panel4);
-		gl_panel4.setHorizontalGroup(gl_panel4.createParallelGroup(Alignment.LEADING).addGroup(gl_panel4
-				.createSequentialGroup().addContainerGap()
-				.addGroup(gl_panel4.createParallelGroup(Alignment.LEADING).addGroup(gl_panel4.createSequentialGroup()
-						.addComponent(lblManufacturer).addGap(24)
-						.addComponent(cBoxManufacturer, GroupLayout.PREFERRED_SIZE, 234, GroupLayout.PREFERRED_SIZE)
-						.addGap(18).addComponent(lblSearch).addGap(24)
-						.addComponent(txtFilter, GroupLayout.PREFERRED_SIZE, 208, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel4.createSequentialGroup()
-								.addComponent(lblPartGroup, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
-								.addGap(25).addComponent(cBoxPartGroup, GroupLayout.PREFERRED_SIZE, 234,
-										GroupLayout.PREFERRED_SIZE)))
-				.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-		gl_panel4.setVerticalGroup(gl_panel4.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING,
-				gl_panel4.createSequentialGroup().addContainerGap(73, Short.MAX_VALUE)
-						.addGroup(gl_panel4.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel4.createSequentialGroup().addGap(5).addComponent(lblManufacturer))
-								.addComponent(cBoxManufacturer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_panel4.createSequentialGroup().addGap(5).addComponent(lblSearch))
-								.addGroup(gl_panel4.createSequentialGroup().addGap(2).addComponent(txtFilter,
-										GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)))
-						.addGap(12)
-						.addGroup(gl_panel4.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel4.createSequentialGroup().addGap(5).addComponent(lblPartGroup))
-								.addComponent(cBoxPartGroup, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE))
-						.addGap(25)));
-		panel4.setLayout(gl_panel4);
-
-		GroupLayout gl_panel3 = new GroupLayout(panel3);
-		gl_panel3.setHorizontalGroup(gl_panel3.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel3.createSequentialGroup().addGroup(gl_panel3.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnDeletePart, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnNewPart, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnChangePart, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnUpdate, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnShowPicture, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE))
-						.addContainerGap(28, Short.MAX_VALUE)));
-		gl_panel3
-				.setVerticalGroup(gl_panel3.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel3.createSequentialGroup().addGap(24)
-								.addComponent(btnDeletePart, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.UNRELATED)
-								.addComponent(btnNewPart, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.UNRELATED)
-								.addComponent(btnChangePart, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.UNRELATED)
-								.addComponent(btnUpdate, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(btnShowPicture,
-										GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
-								.addContainerGap(26, Short.MAX_VALUE)));
-		panel3.setLayout(gl_panel3);
-		GroupLayout gl_panel2 = new GroupLayout(panel2);
-		gl_panel2.setHorizontalGroup(gl_panel2.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel2.createSequentialGroup().addContainerGap()
-						.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE).addGap(18)
-						.addComponent(btnNewUser, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)
-						.addGap(18)
-						.addComponent(btnDeleteUser, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)
-						.addGap(18).addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 167, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(63, Short.MAX_VALUE)));
-		gl_panel2.setVerticalGroup(gl_panel2.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING,
-				gl_panel2.createSequentialGroup().addContainerGap(21, Short.MAX_VALUE)
-						.addGroup(gl_panel2.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnNewUser, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnDeleteUser, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE))
-						.addContainerGap()));
-		panel2.setLayout(gl_panel2);
-
-		GroupLayout gl_panel1 = new GroupLayout(panel1);
-		gl_panel1.setHorizontalGroup(gl_panel1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel1.createSequentialGroup().addGap(23)
-						.addGroup(gl_panel1.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblUserRights, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblUserName, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblJobTitle, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE))
-						.addGap(11)
-						.addGroup(gl_panel1.createParallelGroup(Alignment.TRAILING)
-								.addGroup(gl_panel1.createParallelGroup(Alignment.LEADING)
-										.addComponent(txtJobTitle, GroupLayout.PREFERRED_SIZE, 141,
-												GroupLayout.PREFERRED_SIZE)
-										.addComponent(txtUserRights, GroupLayout.PREFERRED_SIZE, 141,
-												GroupLayout.PREFERRED_SIZE))
-								.addComponent(txtUserName, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE))
-						.addContainerGap()));
-		gl_panel1.setVerticalGroup(gl_panel1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel1.createSequentialGroup().addContainerGap()
-						.addGroup(gl_panel1.createParallelGroup(Alignment.BASELINE)
-								.addComponent(txtUserName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblUserName))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_panel1.createParallelGroup(Alignment.BASELINE)
-								.addComponent(txtJobTitle, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblJobTitle))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_panel1.createParallelGroup(Alignment.BASELINE)
-								.addComponent(txtUserRights, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblUserRights))
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-		panel1.setLayout(gl_panel1);
 
 	}
 
@@ -369,38 +217,48 @@ public class MainFrame extends JFrame implements KeyListener {
 
 		Image btnLoginIcon = new ImageIcon(this.getClass().getResource("/login-form-open-32.png")).getImage();
 		btnLogin = new JButton("Login");
+		btnLogin.setBounds(12, 13, 154, 55);
 		btnLogin.setIcon(new ImageIcon(btnLoginIcon));
 
 		Image btnNewUserFormIcon = new ImageIcon(this.getClass().getResource("/new-user-32.png")).getImage();
 		btnNewUser = new JButton("New user");
+		btnNewUser.setBounds(184, 12, 149, 56);
 		btnNewUser.setIcon(new ImageIcon(btnNewUserFormIcon));
 
 		Image btnDeleteUserIcon = new ImageIcon(this.getClass().getResource("/delete-user-32.png")).getImage();
 		btnDeleteUser = new JButton("Delete user");
+		btnDeleteUser.setBounds(351, 12, 149, 56);
 		btnDeleteUser.setIcon(new ImageIcon(btnDeleteUserIcon));
 
 		Image btnExitIcon = new ImageIcon(this.getClass().getResource("/close-app-32.png")).getImage();
-		btnExit = new JButton("Exit");
-		btnExit.setIcon(new ImageIcon(btnExitIcon));
-
+		btnExit = new JButton("Exit");				
+		btnExit.setBounds(518, 12, 150, 56);
+		btnExit.setIcon(new ImageIcon(btnExitIcon));		
+		
 		lblUserName = new JLabel("User name:");
+		lblUserName.setBounds(28, 31, 71, 15);
 		lblUserName.setFont(new Font("Dialog", Font.PLAIN, 12));
 
 		txtUserName = new JTextField();
+		txtUserName.setBounds(120, 29, 141, 19);
 		txtUserName.setEditable(false);
 		txtUserName.setColumns(10);
 
 		lblJobTitle = new JLabel("Job title:");
+		lblJobTitle.setBounds(28, 56, 56, 15);
 		lblJobTitle.setFont(new Font("Dialog", Font.PLAIN, 12));
 
 		txtJobTitle = new JTextField();
+		txtJobTitle.setBounds(120, 54, 141, 19);
 		txtJobTitle.setEditable(false);
 		txtJobTitle.setColumns(10);
 
 		lblUserRights = new JLabel("User rights:");
+		lblUserRights.setBounds(28, 81, 81, 15);
 		lblUserRights.setFont(new Font("Dialog", Font.PLAIN, 12));
 
 		txtUserRights = new JTextField();
+		txtUserRights.setBounds(120, 79, 141, 19);
 		txtUserRights.setEditable(false);
 		txtUserRights.setColumns(10);
 
@@ -417,45 +275,60 @@ public class MainFrame extends JFrame implements KeyListener {
 		ordersTableModel = new OrdersTableModel();
 
 		scrollPane = new JScrollPane();
+		scrollPane.setBounds(452, 313, 1455, 695);
 		scrollPane.setViewportView(table);
 
 		btnDeletePart = new JButton("Delete part");
+		btnDeletePart.setBounds(0, 24, 212, 56);
 
 		btnNewPart = new JButton("New part");
+		btnNewPart.setBounds(0, 92, 212, 56);
 
 		Image btnUpdateIcon = new ImageIcon(this.getClass().getResource("/update-32.png")).getImage();
 		btnChangePart = new JButton("Change part");
+		btnChangePart.setBounds(0, 160, 212, 56);
 
 		btnUpdate = new JButton("Update");
+		btnUpdate.setBounds(0, 228, 212, 56);
 		btnUpdate.setIcon(new ImageIcon(btnUpdateIcon));
 
 		Image btnShowPictureIcon = new ImageIcon(this.getClass().getResource("/show-picture-32.png")).getImage();
 		btnShowPicture = new JButton("Show picture");
+		btnShowPicture.setBounds(0, 296, 212, 56);
 		btnShowPicture.setIcon(new ImageIcon(btnShowPictureIcon));
 
 		lblImage = new JLabel("");
+		lblImage.setBounds(182, 700, 212, 144);
 
 		lblManufacturer = new JLabel("Manufacturer:");
+		lblManufacturer.setBounds(17, 34, 98, 15);
 
 		lblPartGroup = new JLabel("Part group:");
+		lblPartGroup.setBounds(17, 70, 97, 15);
 
 		lblSearch = new JLabel("Search:");
+		lblSearch.setBounds(391, 34, 52, 15);
 		txtFilter = new JTextField();
+		txtFilter.setBounds(467, 31, 208, 22);
 		txtFilter.setColumns(10);
 
 		Image btnAddToOrderIcon = new ImageIcon(this.getClass().getResource("/add-to-cart-32.png")).getImage();
 		btnAddToOrder = new JButton("Add");
+		btnAddToOrder.setBounds(0, 23, 138, 57);
 		btnAddToOrder.setIcon(new ImageIcon(btnAddToOrderIcon));
 
 		Image btnOrderIcon = new ImageIcon(this.getClass().getResource("/order-32.png")).getImage();
 		btnOrder = new JButton("Order");
+		btnOrder.setBounds(0, 92, 138, 57);
 		btnOrder.setIcon(new ImageIcon(btnOrderIcon));
 
 		rdbtnParts = new JRadioButton("Parts");
+		rdbtnParts.setBounds(10, 22, 61, 23);
 		rdbtnParts.setBackground(new Color(119, 136, 153));
 		rdbtnParts.setSelected(true);
 
 		rdbtnOrders = new JRadioButton("Orders");
+		rdbtnOrders.setBounds(76, 22, 71, 23);
 		rdbtnOrders.setBackground(new Color(119, 136, 153));
 
 		bgPartsOrders = new ButtonGroup();
@@ -1079,8 +952,10 @@ public class MainFrame extends JFrame implements KeyListener {
 
 		stringArray = manufacturerList.toArray(new String[manufacturerList.size()]);
 		cBoxManufacturer = new JComboBox<Object>(stringArray);
+		cBoxManufacturer.setBounds(139, 29, 234, 24);
 		stringArray = partGroupList.toArray(new String[partGroupList.size()]);
 		cBoxPartGroup = new JComboBox<Object>(stringArray);
+		cBoxPartGroup.setBounds(139, 65, 234, 24);
 
 	}
 

@@ -18,8 +18,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -28,8 +26,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.LineBorder;
 
 import com.itextpdf.text.BadElementException;
@@ -52,16 +50,11 @@ import pl.nowator_zpu.warehouse_app.entities.Orders;
 import pl.nowator_zpu.warehouse_app.entities.Projects;
 import pl.nowator_zpu.warehouse_app.entities.Users;
 import pl.nowator_zpu.warehouse_app.interfaces.ItemDeleteListener;
-import javax.swing.JTextArea;
 
 public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
-	private GroupLayout gl_contentPane;
 	private JPanel contentPane;
 	private JPanel panel;
 
@@ -75,7 +68,7 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 	private JTextField txtManufacturer;
 	private JTextField txtOrderCode;
 	private JTextField txtCount;
-	
+
 	private JTextArea txtrDescription;
 
 	private JButton btnNextPart;
@@ -99,9 +92,6 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 
 	private Controller controller = new Controller();
 
-	/**
-	 * Create the frame.
-	 */
 	public OrderFrame() {
 
 		setResizable(false);
@@ -121,117 +111,35 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 		addActionListenersForControls();
 
 		prepareLayout();
-		contentPane.setLayout(gl_contentPane);
 
 	}
 
 	private void prepareLayout() {
 
 		panel = new JPanel();
+		panel.setBounds(26, 22, 378, 440);
 		panel.setBackground(new Color(195, 203, 43));
+		panel.setLayout(null);
+		panel.add(btnPreviousPart);
+		panel.add(btnNextPart);
+		panel.add(lblPartNumber);
+		panel.add(lblProject);
+		panel.add(btnOk);
+		panel.add(btnDeleteItem);
+		panel.add(btnDeleteAll);
+		panel.add(btnSave);
+		panel.add(cBoxProject);
+		panel.add(lblManufacturer);
+		panel.add(lblOrderCode);
+		panel.add(lblDescription);
+		panel.add(lblCount);
+		panel.add(txtCount);
+		panel.add(txtManufacturer);
+		panel.add(txtOrderCode);
+		panel.add(txtrDescription);
 
-		gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addContainerGap(25, Short.MAX_VALUE)
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 378, GroupLayout.PREFERRED_SIZE)
-					.addGap(23))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(21)
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 440, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(25, Short.MAX_VALUE))
-		);
-		
-		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap(198, Short.MAX_VALUE)
-					.addComponent(btnPreviousPart)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnNextPart)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(lblPartNumber)
-					.addGap(32))
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(25)
-					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(lblProject, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap(274, Short.MAX_VALUE))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-								.addComponent(btnOk)
-								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(btnDeleteItem, GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btnDeleteAll, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btnSave))
-								.addComponent(cBoxProject, Alignment.LEADING, 0, 337, Short.MAX_VALUE))
-							.addGap(30))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addGroup(Alignment.TRAILING, gl_panel.createParallelGroup(Alignment.LEADING)
-									.addComponent(lblManufacturer)
-									.addComponent(lblOrderCode, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE))
-								.addComponent(lblDescription, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblCount, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE))
-							.addGap(23)
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(txtCount, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtManufacturer, GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
-								.addComponent(txtOrderCode)
-								.addComponent(txtrDescription))
-							.addGap(32))))
-		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(31)
-							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnNextPart)
-								.addComponent(btnPreviousPart)))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(36)
-							.addComponent(lblPartNumber)))
-					.addGap(29)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(txtManufacturer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblManufacturer))
-					.addGap(14)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(txtOrderCode, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblOrderCode))
-					.addGap(18)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblCount)
-						.addComponent(txtCount, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblDescription)
-						.addComponent(txtrDescription, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-					.addComponent(lblProject)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(cBoxProject, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnOk, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-					.addGap(32)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnDeleteItem, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnDeleteAll, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnSave, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
-		);
-		panel.setLayout(gl_panel);
-
+		contentPane.setLayout(null);
+		contentPane.add(panel);
 	}
 
 	public void setItemDeleteListener(ItemDeleteListener itemDeleteListener) {
@@ -245,49 +153,65 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 	private void createControls() {
 
 		lblManufacturer = new JLabel("Manufacturer:");
+		lblManufacturer.setBounds(25, 88, 98, 15);
 		txtManufacturer = new JTextField();
+		txtManufacturer.setBounds(146, 86, 214, 19);
 		txtManufacturer.setEditable(false);
 		txtManufacturer.setColumns(10);
 
 		lblOrderCode = new JLabel("Order code:");
+		lblOrderCode.setBounds(25, 121, 93, 15);
 		txtOrderCode = new JTextField();
+		txtOrderCode.setBounds(146, 119, 214, 19);
 		txtOrderCode.setEditable(false);
 		txtOrderCode.setColumns(10);
 
 		lblProject = new JLabel("Project:");
+		lblProject.setBounds(25, 274, 93, 15);
 
 		lblCount = new JLabel("Count:");
+		lblCount.setBounds(25, 159, 98, 15);
 		txtCount = new JTextField();
+		txtCount.setBounds(146, 156, 47, 22);
 		txtCount.setToolTipText("");
 		txtCount.setColumns(10);
 
 		btnNextPart = new JButton();
+		btnNextPart.setBounds(254, 31, 50, 26);
 		Image btnNextIcon = new ImageIcon(this.getClass().getResource("/forward-16.png")).getImage();
 		btnNextPart.setIcon(new ImageIcon(btnNextIcon));
 
 		btnPreviousPart = new JButton();
+		btnPreviousPart.setBounds(198, 31, 50, 26);
 		Image btnPreviousIcon = new ImageIcon(this.getClass().getResource("/back-16.png")).getImage();
 		btnPreviousPart.setIcon(new ImageIcon(btnPreviousIcon));
-		
+
 		lblDescription = new JLabel("Description:");
-		
+		lblDescription.setBounds(26, 197, 97, 15);
+
 		txtrDescription = new JTextArea((String) null);
+		txtrDescription.setBounds(146, 196, 214, 55);
 		txtrDescription.setEditable(false);
 		txtrDescription.setLineWrap(true);
 		txtrDescription.setFont(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 13));
 
 		lblPartNumber = new JLabel("1 of n");
+		lblPartNumber.setBounds(322, 36, 38, 15);
 
 		btnDeleteAll = new JButton("Delete All");
+		btnDeleteAll.setBounds(154, 388, 107, 40);
 
 		btnDeleteItem = new JButton("Delete item");
+		btnDeleteItem.setBounds(25, 388, 123, 40);
 
 		btnSave = new JButton("Save");
+		btnSave.setBounds(267, 388, 95, 40);
 
 		Image btnSaveIcon = new ImageIcon(this.getClass().getResource("/save-32.png")).getImage();
 		btnSave.setIcon(new ImageIcon(btnSaveIcon));
 
 		btnOk = new JButton("ok");
+		btnOk.setBounds(312, 331, 50, 25);
 
 		prepareComboBoxes();
 
@@ -301,6 +225,7 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 
 		stringArray = projectList.toArray(new String[projectList.size()]);
 		cBoxProject = new JComboBox<Object>(stringArray);
+		cBoxProject.setBounds(25, 301, 337, 24);
 
 	}
 
@@ -512,7 +437,8 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 
 											i++;
 											document.add(new Paragraph(
-													"------------------------------------------------------------------------------------------", textFont));
+													"------------------------------------------------------------------------------------------",
+													textFont));
 											document.add(new Paragraph("Position number: " + i, textFont));
 
 											document.add(new Paragraph("Manufacturer: " + order.getManufacturer(),
@@ -520,16 +446,18 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 											document.add(
 													new Paragraph("Order code: " + order.getOrderCode(), textFont));
 											document.add(new Paragraph("Quantity: " + order.getPartCount(), textFont));
-											document.add(new Paragraph("Description: " + order.getDescription(), textFont));
-											document.add(new Paragraph("Project: " + order.getProject(), textFont));											 
+											document.add(
+													new Paragraph("Description: " + order.getDescription(), textFont));
+											document.add(new Paragraph("Project: " + order.getProject(), textFont));
 											document.add(new Paragraph("Link: " + order.getLink(), textFont));
-											
-											//QR code
-											
-											BarcodeQRCode barcodeQRCode = new BarcodeQRCode(order.getLink(), 1000, 1000, null);
+
+											// QR code
+
+											BarcodeQRCode barcodeQRCode = new BarcodeQRCode(order.getLink(), 1000, 1000,
+													null);
 											com.itextpdf.text.Image codeQrImage = barcodeQRCode.getImage();
 											codeQrImage.scaleAbsolute(100, 100);
-											document.add(codeQrImage);		
+											document.add(codeQrImage);
 										}
 
 										document.close();
@@ -573,9 +501,10 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 		txtManufacturer.setText(orderList.get(partNumber - 1).getManufacturer());
 		txtOrderCode.setText(orderList.get(partNumber - 1).getOrderCode());
 		txtCount.setText(orderList.get(partNumber - 1).getPartCount().toString());
-		txtCount.setToolTipText(partList.get(partNumber - 1).getQuantityMin() + "-" + partList.get(partNumber - 1).getQuantityMax());
+		txtCount.setToolTipText(
+				partList.get(partNumber - 1).getQuantityMin() + "-" + partList.get(partNumber - 1).getQuantityMax());
 		txtrDescription.setText(orderList.get(partNumber - 1).getDescription());
-		
+
 		int i;
 		for (i = 0; i < cBoxProject.getItemCount(); i++) {
 
