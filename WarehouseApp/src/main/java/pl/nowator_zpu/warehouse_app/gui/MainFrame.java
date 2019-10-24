@@ -136,47 +136,6 @@ public class MainFrame extends JFrame implements KeyListener {
 
 		prepareLayout();
 		
-		contentPane.setLayout(null);
-		contentPane.add(panel5);
-		panel5.setLayout(null);
-		panel5.add(btnOrder);
-		panel5.add(btnAddToOrder);
-		contentPane.add(lblImage);
-		contentPane.add(panel3);
-		panel3.setLayout(null);
-		panel3.add(btnDeletePart);
-		panel3.add(btnNewPart);
-		panel3.add(btnChangePart);
-		panel3.add(btnUpdate);
-		panel3.add(btnShowPicture);
-		contentPane.add(panel1);
-		panel1.setLayout(null);
-		panel1.add(lblUserRights);
-		panel1.add(lblUserName);
-		panel1.add(lblJobTitle);
-		panel1.add(txtJobTitle);
-		panel1.add(txtUserRights);
-		panel1.add(txtUserName);
-		contentPane.add(panel2);
-		panel2.setLayout(null);
-		panel2.add(btnLogin);
-		panel2.add(btnNewUser);
-		panel2.add(btnDeleteUser);
-		panel2.add(btnExit);
-		contentPane.add(scrollPane);
-		contentPane.add(panel4);
-		panel4.setLayout(null);
-		panel4.add(lblManufacturer);
-		panel4.add(cBoxManufacturer);
-		panel4.add(lblSearch);
-		panel4.add(txtFilter);
-		panel4.add(lblPartGroup);
-		panel4.add(cBoxPartGroup);
-		contentPane.add(panel6);
-		panel6.setLayout(null);
-		panel6.add(rdbtnParts);
-		panel6.add(rdbtnOrders);
-
 	}
 
 	private void prepareLayout() {
@@ -186,31 +145,73 @@ public class MainFrame extends JFrame implements KeyListener {
 		panel1.setBackground(new Color(119, 136, 153));
 		panel1.setBorder(new TitledBorder(new LineBorder(new Color(195, 203, 43)), "User data", TitledBorder.LEFT,
 				TitledBorder.TOP, null, new Color(64, 64, 64)));
-
+		panel1.setLayout(null);
+		panel1.add(lblUserRights);
+		panel1.add(lblUserName);
+		panel1.add(lblJobTitle);
+		panel1.add(txtJobTitle);
+		panel1.add(txtUserRights);
+		panel1.add(txtUserName);
+		
 		panel2 = new JPanel();
 		panel2.setBounds(440, 37, 703, 80);
 		panel2.setBackground(new Color(119, 136, 153));
-
+		panel2.setLayout(null);
+		panel2.add(btnLogin);
+		panel2.add(btnNewUser);
+		panel2.add(btnDeleteUser);
+		panel2.add(btnExit);
+		
 		panel3 = new JPanel();
 		panel3.setBounds(182, 313, 240, 369);
 		panel3.setBackground(new Color(119, 136, 153));
-
+		panel3.setLayout(null);
+		panel3.add(btnDeletePart);
+		panel3.add(btnNewPart);
+		panel3.add(btnChangePart);
+		panel3.add(btnUpdate);
+		panel3.add(btnShowPicture);
+		
 		panel4 = new JPanel();
 		panel4.setBounds(452, 189, 701, 112);
 		panel4.setBorder(new TitledBorder(new LineBorder(new Color(195, 203, 43)), "Filter", TitledBorder.LEADING,
 				TitledBorder.TOP, null, new Color(51, 51, 51)));
 		panel4.setBackground(new Color(119, 136, 153));
-
+		panel4.setLayout(null);
+		panel4.add(lblManufacturer);
+		panel4.add(cBoxManufacturer);
+		panel4.add(lblSearch);
+		panel4.add(txtFilter);
+		panel4.add(lblPartGroup);
+		panel4.add(cBoxPartGroup);
+		
 		panel5 = new JPanel();
 		panel5.setBounds(20, 313, 150, 369);
 		panel5.setBackground(new Color(119, 136, 153));
-
+		panel5.setLayout(null);
+		panel5.add(btnOrder);
+		panel5.add(btnAddToOrder);
+		
 		panel6 = new JPanel();
 		panel6.setBounds(450, 129, 152, 50);
 		panel6.setBorder(new TitledBorder(new LineBorder(new Color(195, 203, 43)), "View", TitledBorder.LEADING,
 				TitledBorder.TOP, null, new Color(51, 51, 51)));
 		panel6.setBackground(new Color(119, 136, 153));
-
+		panel6.setLayout(null);
+		panel6.add(rdbtnParts);
+		panel6.add(rdbtnOrders);	
+		
+		contentPane.setLayout(null);		
+		contentPane.add(panel1);
+		contentPane.add(panel2);
+		contentPane.add(panel3);
+		contentPane.add(panel4);
+		contentPane.add(panel5);
+		contentPane.add(panel6);
+		
+		contentPane.add(scrollPane);
+		contentPane.add(lblImage);
+		
 	}
 
 	private void createControls() {
