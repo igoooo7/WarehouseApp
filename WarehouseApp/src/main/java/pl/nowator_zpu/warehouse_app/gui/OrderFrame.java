@@ -109,7 +109,6 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 
 		createControls();
 		addActionListenersForControls();
-
 		prepareLayout();
 
 	}

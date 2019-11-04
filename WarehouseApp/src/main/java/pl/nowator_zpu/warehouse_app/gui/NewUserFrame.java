@@ -78,7 +78,6 @@ public class NewUserFrame extends JFrame implements WindowListener, KeyListener 
 
 		createControls();
 		addActionListenersForControls();
-
 		prepareLayout();
 	
 	}

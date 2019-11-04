@@ -133,7 +133,6 @@ public class MainFrame extends JFrame implements KeyListener {
 
 		createControls();
 		addActionListenersForControls();
-
 		prepareLayout();
 		
 	}

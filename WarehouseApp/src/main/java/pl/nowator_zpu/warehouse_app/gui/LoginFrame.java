@@ -61,7 +61,6 @@ public class LoginFrame extends JFrame implements WindowListener, KeyListener {
 
 		createControls();
 		addActionListenersForControls();
-
 		prepareLayout();
 		
 	}
