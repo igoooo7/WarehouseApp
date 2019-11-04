@@ -459,15 +459,14 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 
 	private void prepareComboBoxes() {
 
-		String[] stringArray;
-		Integer[] integerArray;
+		String[] stringArray;		 
 
 		ArrayList<String> manufacturerList = controller.dbManagerForParts.getAllManufacturers();
 		ArrayList<String> partGroupList = controller.dbManagerForParts.getAllPartGroups();
 		ArrayList<String> unitList = controller.dbManagerForParts.getAllUnits();
 		ArrayList<String> areaList = controller.dbManagerForParts.getAllAreas();
-		ArrayList<Integer> rackList = controller.dbManagerForParts.getAllRacks();
-		ArrayList<Integer> shelfList = controller.dbManagerForParts.getAllShelfs();
+		ArrayList<String> rackList = controller.dbManagerForParts.getAllRacks();
+		ArrayList<String> shelfList = controller.dbManagerForParts.getAllShelfs();
 
 		stringArray = manufacturerList.toArray(new String[manufacturerList.size()]);
 		cBoxManufacturer = new JComboBox<Object>(stringArray);
@@ -485,12 +484,12 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 		cBoxArea = new JComboBox<Object>(stringArray);
 		cBoxArea.setBounds(134, 352, 234, 24);
 
-		integerArray = rackList.toArray(new Integer[rackList.size()]);
-		cBoxRack = new JComboBox<Object>(integerArray);
+		stringArray = rackList.toArray(new String[rackList.size()]);
+		cBoxRack = new JComboBox<Object>(stringArray);
 		cBoxRack.setBounds(134, 388, 234, 24);
 
-		integerArray = shelfList.toArray(new Integer[shelfList.size()]);
-		cBoxShelf = new JComboBox<Object>(integerArray);
+		stringArray = shelfList.toArray(new String[shelfList.size()]);
+		cBoxShelf = new JComboBox<Object>(stringArray);
 		cBoxShelf.setBounds(134, 424, 234, 24);
 
 	}

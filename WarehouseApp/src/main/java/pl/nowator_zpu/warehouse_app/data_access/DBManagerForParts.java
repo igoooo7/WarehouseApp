@@ -772,9 +772,9 @@ public class DBManagerForParts {
 	}
 
 	// Rack
-	public ArrayList<Integer> getAllRacks() {
+	public ArrayList<String> getAllRacks() {
 
-		ArrayList<Integer> result = new ArrayList<>();
+		ArrayList<String> result = new ArrayList<>();
 
 		try {
 
@@ -830,9 +830,9 @@ public class DBManagerForParts {
 	}
 
 	// Shelf
-	public ArrayList<Integer> getAllShelfs() {
+	public ArrayList<String> getAllShelfs() {
 
-		ArrayList<Integer> result = new ArrayList<>();
+		ArrayList<String> result = new ArrayList<>();
 
 		try {
 

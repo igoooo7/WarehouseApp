@@ -21,17 +21,17 @@ import javax.persistence.UniqueConstraint;
 public class Racks implements java.io.Serializable {
 
 	private Integer rackId;
-	private int rack;
+	private String rack;
 	private Set<Parts> parts = new HashSet<Parts>(0);
 
 	public Racks() {
 	}
 
-	public Racks(int rack) {
+	public Racks(String rack) {
 		this.rack = rack;
 	}
 
-	public Racks(int rack, Set<Parts> parts) {
+	public Racks(String rack, Set<Parts> parts) {
 		this.rack = rack;
 		this.parts = parts;
 	}
@@ -49,11 +49,11 @@ public class Racks implements java.io.Serializable {
 	}
 
 	@Column(name = "rack", unique = true, nullable = false)
-	public int getRack() {
+	public String getRack() {
 		return this.rack;
 	}
 
-	public void setRack(int rack) {
+	public void setRack(String rack) {
 		this.rack = rack;
 	}
 

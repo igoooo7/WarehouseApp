@@ -21,17 +21,17 @@ import javax.persistence.UniqueConstraint;
 public class Shelfs implements java.io.Serializable {
 
 	private Integer shelfId;
-	private int shelf;
+	private String shelf;
 	private Set<Parts> parts = new HashSet<Parts>(0);
 
 	public Shelfs() {
 	}
 
-	public Shelfs(int shelf) {
+	public Shelfs(String shelf) {
 		this.shelf = shelf;
 	}
 
-	public Shelfs(int shelf, Set<Parts> parts) {
+	public Shelfs(String shelf, Set<Parts> parts) {
 		this.shelf = shelf;
 		this.parts = parts;
 	}
@@ -49,11 +49,11 @@ public class Shelfs implements java.io.Serializable {
 	}
 
 	@Column(name = "shelf", unique = true, nullable = false)
-	public int getShelf() {
+	public String getShelf() {
 		return this.shelf;
 	}
 
-	public void setShelf(int shelf) {
+	public void setShelf(String shelf) {
 		this.shelf = shelf;
 	}
 

@@ -9,8 +9,8 @@ public class Part {
 	private String area;
 	private String manufacturer;
 	private String partGroup;
-	private Integer rack;
-	private Integer shelf;
+	private String rack;
+	private String shelf;
 	private String unit;
 	private String user;
 	private String orderCode;
@@ -24,7 +24,7 @@ public class Part {
 	private Date lastChangeDate;
 	private byte[] image;
 	
-	public Part(Integer partId, String area, String manufacturer, String partGroup, Integer rack, Integer shelf,
+	public Part(Integer partId, String area, String manufacturer, String partGroup, String rack, String shelf,
 			String unit, String user, String orderCode, String productCode, String partName, String description,
 			String link, Integer quantityMin, Integer quantityMax, Date creationDate, Date lastChangeDate, byte[] image) {
 		super();
@@ -53,8 +53,8 @@ public class Part {
 		this.area = "";
 		this.manufacturer = "";
 		this.partGroup = "";
-		this.rack = 0;
-		this.shelf = 0;
+		this.rack = "";
+		this.shelf = "";
 		this.unit = "";
 		this.user = "";
 		this.orderCode = "";
@@ -101,19 +101,19 @@ public class Part {
 		this.partGroup = partGroup;
 	}
 
-	public Integer getRack() {
+	public String getRack() {
 		return rack;
 	}
 
-	public void setRack(Integer rack) {
+	public void setRack(String rack) {
 		this.rack = rack;
 	}
 
-	public Integer getShelf() {
+	public String getShelf() {
 		return shelf;
 	}
 
-	public void setShelf(Integer shelf) {
+	public void setShelf(String shelf) {
 		this.shelf = shelf;
 	}
 

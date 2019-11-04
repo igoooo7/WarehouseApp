@@ -18,20 +18,20 @@ SELECT * FROM areas;
  
 INSERT INTO racks(rack)
 VALUES
-(1),
-(2),
-(3),
-(4),
-(5);
+('rack 1'),
+('rack 2'),
+('rack 3'),
+('rack 4'),
+('rack 5');
 SELECT * FROM racks;
 
 INSERT INTO shelfs(shelf)
 VALUES
-(1),
-(2),
-(3),
-(4),
-(5);
+('półka 1'),
+('półka 2'),
+('półka 3'),
+('półka 4'),
+('półka 5');
 SELECT * FROM shelfs; 
  
 INSERT INTO units(unit) 
