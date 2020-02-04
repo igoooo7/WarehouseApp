@@ -1,25 +1,30 @@
-/home/igor/eclipse-workspace/Warehouse Management/WarehouseApp/src/main/java/pl/nowator_zpu/warehouse_app/entities/JobTitles.java
-/home/igor/eclipse-workspace/Warehouse Management/WarehouseApp/src/main/java/pl/nowator_zpu/warehouse_app/entities/UserRights.java
-/home/igor/eclipse-workspace/Warehouse Management/WarehouseApp/src/main/java/pl/nowator_zpu/warehouse_app/entities/Manufacturers.java
-/home/igor/eclipse-workspace/Warehouse Management/WarehouseApp/src/main/java/pl/nowator_zpu/warehouse_app/gui/NewPartFrame.java
-/home/igor/eclipse-workspace/Warehouse Management/WarehouseApp/src/main/java/pl/nowator_zpu/warehouse_app/entities/Shelfs.java
-/home/igor/eclipse-workspace/Warehouse Management/WarehouseApp/src/main/java/pl/nowator_zpu/warehouse_app/data_access/DBManagerForUsers.java
-/home/igor/eclipse-workspace/Warehouse Management/WarehouseApp/src/main/java/pl/nowator_zpu/warehouse_app/application_classes/PartsTableModel.java
-/home/igor/eclipse-workspace/Warehouse Management/WarehouseApp/src/main/java/pl/nowator_zpu/warehouse_app/application_classes/Part.java
-/home/igor/eclipse-workspace/Warehouse Management/WarehouseApp/src/main/java/pl/nowator_zpu/warehouse_app/entities/Projects.java
-/home/igor/eclipse-workspace/Warehouse Management/WarehouseApp/src/main/java/pl/nowator_zpu/warehouse_app/entities/Parts.java
-/home/igor/eclipse-workspace/Warehouse Management/WarehouseApp/src/main/java/pl/nowator_zpu/warehouse_app/entities/Orders.java
-/home/igor/eclipse-workspace/Warehouse Management/WarehouseApp/src/main/java/pl/nowator_zpu/warehouse_app/application_classes/User.java
-/home/igor/eclipse-workspace/Warehouse Management/WarehouseApp/src/main/java/pl/nowator_zpu/warehouse_app/hibernate/CustomNamingStrategy.java
-/home/igor/eclipse-workspace/Warehouse Management/WarehouseApp/src/main/java/pl/nowator_zpu/warehouse_app/entities/PartGroups.java
-/home/igor/eclipse-workspace/Warehouse Management/WarehouseApp/src/main/java/pl/nowator_zpu/warehouse_app/entities/Areas.java
-/home/igor/eclipse-workspace/Warehouse Management/WarehouseApp/src/main/java/pl/nowator_zpu/warehouse_app/gui/LoginFrame.java
-/home/igor/eclipse-workspace/Warehouse Management/WarehouseApp/src/main/java/pl/nowator_zpu/warehouse_app/gui/MainFrame.java
-/home/igor/eclipse-workspace/Warehouse Management/WarehouseApp/src/main/java/pl/nowator_zpu/warehouse_app/data_access/Controller.java
-/home/igor/eclipse-workspace/Warehouse Management/WarehouseApp/src/main/java/pl/nowator_zpu/warehouse_app/entities/Racks.java
-/home/igor/eclipse-workspace/Warehouse Management/WarehouseApp/src/main/java/pl/nowator_zpu/warehouse_app/interfaces/UserLoginListener.java
-/home/igor/eclipse-workspace/Warehouse Management/WarehouseApp/src/main/java/pl/nowator_zpu/warehouse_app/entities/Units.java
-/home/igor/eclipse-workspace/Warehouse Management/WarehouseApp/src/main/java/pl/nowator_zpu/warehouse_app/gui/ChangePartFrame.java
-/home/igor/eclipse-workspace/Warehouse Management/WarehouseApp/src/main/java/pl/nowator_zpu/warehouse_app/entities/Users.java
-/home/igor/eclipse-workspace/Warehouse Management/WarehouseApp/src/main/java/pl/nowator_zpu/warehouse_app/data_access/DBManagerForParts.java
-/home/igor/eclipse-workspace/Warehouse Management/WarehouseApp/src/main/java/pl/nowator_zpu/warehouse_app/gui/NewUserFrame.java
+C:\Users\igorl\eclipse-workspace\WarehouseApp\WarehouseApp\src\main\java\pl\nowatorzpu\warehouseapp\dataaccess\DBManagerForUsers.java
+C:\Users\igorl\eclipse-workspace\WarehouseApp\WarehouseApp\src\main\java\pl\nowatorzpu\warehouseapp\entities\UserRights.java
+C:\Users\igorl\eclipse-workspace\WarehouseApp\WarehouseApp\src\main\java\pl\nowatorzpu\warehouseapp\entities\Racks.java
+C:\Users\igorl\eclipse-workspace\WarehouseApp\WarehouseApp\src\main\java\pl\nowatorzpu\warehouseapp\entities\Orders.java
+C:\Users\igorl\eclipse-workspace\WarehouseApp\WarehouseApp\src\main\java\pl\nowatorzpu\warehouseapp\interfaces\ItemDeleteListener.java
+C:\Users\igorl\eclipse-workspace\WarehouseApp\WarehouseApp\src\main\java\pl\nowatorzpu\warehouseapp\dataaccess\DBManagerForOrders.java
+C:\Users\igorl\eclipse-workspace\WarehouseApp\WarehouseApp\src\main\java\pl\nowatorzpu\warehouseapp\interfaces\UserLoginListener.java
+C:\Users\igorl\eclipse-workspace\WarehouseApp\WarehouseApp\src\main\java\pl\nowatorzpu\warehouseapp\entities\Users.java
+C:\Users\igorl\eclipse-workspace\WarehouseApp\WarehouseApp\src\main\java\pl\nowatorzpu\warehouseapp\applicationclasses\PartsTableModel.java
+C:\Users\igorl\eclipse-workspace\WarehouseApp\WarehouseApp\src\main\java\pl\nowatorzpu\warehouseapp\gui\MainFrame.java
+C:\Users\igorl\eclipse-workspace\WarehouseApp\WarehouseApp\src\main\java\pl\nowatorzpu\warehouseapp\applicationclasses\Order.java
+C:\Users\igorl\eclipse-workspace\WarehouseApp\WarehouseApp\src\main\java\pl\nowatorzpu\warehouseapp\dataaccess\DBManagerForParts.java
+C:\Users\igorl\eclipse-workspace\WarehouseApp\WarehouseApp\src\main\java\pl\nowatorzpu\warehouseapp\entities\Shelfs.java
+C:\Users\igorl\eclipse-workspace\WarehouseApp\WarehouseApp\src\main\java\pl\nowatorzpu\warehouseapp\applicationclasses\OrdersTableModel.java
+C:\Users\igorl\eclipse-workspace\WarehouseApp\WarehouseApp\src\main\java\pl\nowatorzpu\warehouseapp\entities\Areas.java
+C:\Users\igorl\eclipse-workspace\WarehouseApp\WarehouseApp\src\main\java\pl\nowatorzpu\warehouseapp\entities\PartGroups.java
+C:\Users\igorl\eclipse-workspace\WarehouseApp\WarehouseApp\src\main\java\pl\nowatorzpu\warehouseapp\entities\Units.java
+C:\Users\igorl\eclipse-workspace\WarehouseApp\WarehouseApp\src\main\java\pl\nowatorzpu\warehouseapp\gui\ChangePartFrame.java
+C:\Users\igorl\eclipse-workspace\WarehouseApp\WarehouseApp\src\main\java\pl\nowatorzpu\warehouseapp\gui\LoginFrame.java
+C:\Users\igorl\eclipse-workspace\WarehouseApp\WarehouseApp\src\main\java\pl\nowatorzpu\warehouseapp\applicationclasses\User.java
+C:\Users\igorl\eclipse-workspace\WarehouseApp\WarehouseApp\src\main\java\pl\nowatorzpu\warehouseapp\entities\Parts.java
+C:\Users\igorl\eclipse-workspace\WarehouseApp\WarehouseApp\src\main\java\pl\nowatorzpu\warehouseapp\gui\NewUserFrame.java
+C:\Users\igorl\eclipse-workspace\WarehouseApp\WarehouseApp\src\main\java\pl\nowatorzpu\warehouseapp\gui\OrderFrame.java
+C:\Users\igorl\eclipse-workspace\WarehouseApp\WarehouseApp\src\main\java\pl\nowatorzpu\warehouseapp\entities\JobTitles.java
+C:\Users\igorl\eclipse-workspace\WarehouseApp\WarehouseApp\src\main\java\pl\nowatorzpu\warehouseapp\dataaccess\Controller.java
+C:\Users\igorl\eclipse-workspace\WarehouseApp\WarehouseApp\src\main\java\pl\nowatorzpu\warehouseapp\gui\NewPartFrame.java
+C:\Users\igorl\eclipse-workspace\WarehouseApp\WarehouseApp\src\main\java\pl\nowatorzpu\warehouseapp\hibernate\CustomNamingStrategy.java
+C:\Users\igorl\eclipse-workspace\WarehouseApp\WarehouseApp\src\main\java\pl\nowatorzpu\warehouseapp\entities\Manufacturers.java
+C:\Users\igorl\eclipse-workspace\WarehouseApp\WarehouseApp\src\main\java\pl\nowatorzpu\warehouseapp\entities\Projects.java
+C:\Users\igorl\eclipse-workspace\WarehouseApp\WarehouseApp\src\main\java\pl\nowatorzpu\warehouseapp\applicationclasses\Part.java

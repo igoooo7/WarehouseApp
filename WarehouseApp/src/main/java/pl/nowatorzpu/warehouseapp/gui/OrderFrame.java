@@ -448,12 +448,12 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 											document.add(
 													new Paragraph("Description: " + order.getDescription(), textFont));
 											document.add(new Paragraph("Project: " + order.getProject(), textFont));
-											
-											String link = order.getLink();											
-											
+
+											String link = order.getLink();
+
 											// Link + QR code
-											
-											if (link != null) {
+
+											if (link.length() > 0) {
 												document.add(new Paragraph("Link: " + order.getLink(), textFont));
 												BarcodeQRCode barcodeQRCode = new BarcodeQRCode(link, 1000, 1000, null);
 												com.itextpdf.text.Image codeQrImage = barcodeQRCode.getImage();
