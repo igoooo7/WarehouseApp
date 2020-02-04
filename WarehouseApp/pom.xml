@@ -77,7 +77,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>pl.nowator_zpu.warehouse_app.gui.MainFrame</mainClass>
+							<mainClass>pl.nowatorzpu.warehouseapp.gui.MainFrame</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
