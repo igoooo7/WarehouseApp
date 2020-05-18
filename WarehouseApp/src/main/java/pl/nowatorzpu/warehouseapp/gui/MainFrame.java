@@ -119,7 +119,7 @@ public class MainFrame extends JFrame implements KeyListener {
 	
 	public MainFrame() {
 
-		setTitle("AVERNA Wrocław - Warehouse Management V1.0.0");
+		setTitle("Warehouse Management V1.0.0");
 		Image formIcon = new ImageIcon(this.getClass().getResource("/averna_ico.png")).getImage();
 		setIconImage(formIcon);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -127,7 +127,7 @@ public class MainFrame extends JFrame implements KeyListener {
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(119, 136, 153));
+		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		setContentPane(contentPane);
 
@@ -140,10 +140,10 @@ public class MainFrame extends JFrame implements KeyListener {
 	private void prepareLayout() {
 
 		panel1 = new JPanel();
-		panel1.setBounds(88, 47, 280, 122);
-		panel1.setBackground(new Color(119, 136, 153));
-		panel1.setBorder(new TitledBorder(new LineBorder(new Color(195, 203, 43)), "User data", TitledBorder.LEFT,
-				TitledBorder.TOP, null, new Color(64, 64, 64)));
+		panel1.setForeground(Color.LIGHT_GRAY);
+		panel1.setBounds(53, 24, 280, 122);
+		panel1.setBackground(Color.BLACK);
+		panel1.setBorder(new TitledBorder(new LineBorder(new Color(195, 203, 43)), "User data", TitledBorder.LEFT, TitledBorder.TOP, null, Color.LIGHT_GRAY));
 		panel1.setLayout(null);
 		panel1.add(lblUserRights);
 		panel1.add(lblUserName);
@@ -153,8 +153,9 @@ public class MainFrame extends JFrame implements KeyListener {
 		panel1.add(txtUserName);
 		
 		panel2 = new JPanel();
-		panel2.setBounds(440, 37, 703, 80);
-		panel2.setBackground(new Color(119, 136, 153));
+		panel2.setBorder(new LineBorder(Color.YELLOW));
+		panel2.setBounds(440, 37, 701, 77);
+		panel2.setBackground(Color.BLACK);
 		panel2.setLayout(null);
 		panel2.add(btnLogin);
 		panel2.add(btnNewUser);
@@ -163,7 +164,7 @@ public class MainFrame extends JFrame implements KeyListener {
 		
 		panel3 = new JPanel();
 		panel3.setBounds(182, 313, 240, 369);
-		panel3.setBackground(new Color(119, 136, 153));
+		panel3.setBackground(Color.BLACK);
 		panel3.setLayout(null);
 		panel3.add(btnDeletePart);
 		panel3.add(btnNewPart);
@@ -172,10 +173,9 @@ public class MainFrame extends JFrame implements KeyListener {
 		panel3.add(btnShowPicture);
 		
 		panel4 = new JPanel();
-		panel4.setBounds(452, 189, 701, 112);
-		panel4.setBorder(new TitledBorder(new LineBorder(new Color(195, 203, 43)), "Filter", TitledBorder.LEADING,
-				TitledBorder.TOP, null, new Color(51, 51, 51)));
-		panel4.setBackground(new Color(119, 136, 153));
+		panel4.setBounds(440, 189, 701, 112);
+		panel4.setBorder(new TitledBorder(new LineBorder(new Color(195, 203, 43)), "Filter", TitledBorder.LEADING, TitledBorder.TOP, null, Color.LIGHT_GRAY));
+		panel4.setBackground(Color.BLACK);
 		panel4.setLayout(null);
 		panel4.add(lblManufacturer);
 		panel4.add(cBoxManufacturer);
@@ -185,17 +185,16 @@ public class MainFrame extends JFrame implements KeyListener {
 		panel4.add(cBoxPartGroup);
 		
 		panel5 = new JPanel();
-		panel5.setBounds(20, 313, 150, 369);
-		panel5.setBackground(new Color(119, 136, 153));
+		panel5.setBounds(12, 313, 158, 369);
+		panel5.setBackground(Color.BLACK);
 		panel5.setLayout(null);
 		panel5.add(btnOrder);
 		panel5.add(btnAddToOrder);
 		
 		panel6 = new JPanel();
-		panel6.setBounds(450, 129, 152, 50);
-		panel6.setBorder(new TitledBorder(new LineBorder(new Color(195, 203, 43)), "View", TitledBorder.LEADING,
-				TitledBorder.TOP, null, new Color(51, 51, 51)));
-		panel6.setBackground(new Color(119, 136, 153));
+		panel6.setBounds(440, 124, 212, 53);
+		panel6.setBorder(new TitledBorder(new LineBorder(new Color(195, 203, 43)), "View", TitledBorder.LEADING, TitledBorder.TOP, null, Color.LIGHT_GRAY));
+		panel6.setBackground(Color.BLACK);
 		panel6.setLayout(null);
 		panel6.add(rdbtnParts);
 		panel6.add(rdbtnOrders);	
@@ -217,26 +216,27 @@ public class MainFrame extends JFrame implements KeyListener {
 
 		Image btnLoginIcon = new ImageIcon(this.getClass().getResource("/login-form-open-32.png")).getImage();
 		btnLogin = new JButton("Login");
-		btnLogin.setBounds(12, 13, 154, 55);
+		btnLogin.setBounds(22, 13, 154, 55);
 		btnLogin.setIcon(new ImageIcon(btnLoginIcon));
 
 		Image btnNewUserFormIcon = new ImageIcon(this.getClass().getResource("/new-user-32.png")).getImage();
 		btnNewUser = new JButton("New user");
-		btnNewUser.setBounds(184, 12, 149, 56);
+		btnNewUser.setBounds(194, 12, 149, 56);
 		btnNewUser.setIcon(new ImageIcon(btnNewUserFormIcon));
 
 		Image btnDeleteUserIcon = new ImageIcon(this.getClass().getResource("/delete-user-32.png")).getImage();
 		btnDeleteUser = new JButton("Delete user");
-		btnDeleteUser.setBounds(351, 12, 149, 56);
+		btnDeleteUser.setBounds(361, 12, 149, 56);
 		btnDeleteUser.setIcon(new ImageIcon(btnDeleteUserIcon));
 
 		Image btnExitIcon = new ImageIcon(this.getClass().getResource("/close-app-32.png")).getImage();
 		btnExit = new JButton("Exit");				
-		btnExit.setBounds(518, 12, 150, 56);
+		btnExit.setBounds(528, 12, 150, 56);
 		btnExit.setIcon(new ImageIcon(btnExitIcon));		
 		
 		lblUserName = new JLabel("User name:");
-		lblUserName.setBounds(28, 31, 71, 15);
+		lblUserName.setForeground(Color.LIGHT_GRAY);
+		lblUserName.setBounds(28, 31, 81, 15);
 		lblUserName.setFont(new Font("Dialog", Font.PLAIN, 12));
 
 		txtUserName = new JTextField();
@@ -245,6 +245,7 @@ public class MainFrame extends JFrame implements KeyListener {
 		txtUserName.setColumns(10);
 
 		lblJobTitle = new JLabel("Job title:");
+		lblJobTitle.setForeground(Color.LIGHT_GRAY);
 		lblJobTitle.setBounds(28, 56, 56, 15);
 		lblJobTitle.setFont(new Font("Dialog", Font.PLAIN, 12));
 
@@ -254,6 +255,7 @@ public class MainFrame extends JFrame implements KeyListener {
 		txtJobTitle.setColumns(10);
 
 		lblUserRights = new JLabel("User rights:");
+		lblUserRights.setForeground(Color.LIGHT_GRAY);
 		lblUserRights.setBounds(28, 81, 81, 15);
 		lblUserRights.setFont(new Font("Dialog", Font.PLAIN, 12));
 
@@ -301,13 +303,16 @@ public class MainFrame extends JFrame implements KeyListener {
 		lblImage.setBounds(182, 700, 212, 144);
 
 		lblManufacturer = new JLabel("Manufacturer:");
-		lblManufacturer.setBounds(17, 34, 98, 15);
+		lblManufacturer.setForeground(Color.LIGHT_GRAY);
+		lblManufacturer.setBounds(17, 34, 104, 15);
 
 		lblPartGroup = new JLabel("Part group:");
+		lblPartGroup.setForeground(Color.LIGHT_GRAY);
 		lblPartGroup.setBounds(17, 70, 97, 15);
 
 		lblSearch = new JLabel("Search:");
-		lblSearch.setBounds(391, 34, 52, 15);
+		lblSearch.setForeground(Color.LIGHT_GRAY);
+		lblSearch.setBounds(391, 34, 75, 15);
 		txtFilter = new JTextField();
 		txtFilter.setBounds(467, 31, 208, 22);
 		txtFilter.setColumns(10);
@@ -323,13 +328,15 @@ public class MainFrame extends JFrame implements KeyListener {
 		btnOrder.setIcon(new ImageIcon(btnOrderIcon));
 
 		rdbtnParts = new JRadioButton("Parts");
-		rdbtnParts.setBounds(10, 22, 61, 23);
-		rdbtnParts.setBackground(new Color(119, 136, 153));
+		rdbtnParts.setForeground(Color.LIGHT_GRAY);
+		rdbtnParts.setBounds(10, 22, 86, 23);
+		rdbtnParts.setBackground(Color.BLACK);
 		rdbtnParts.setSelected(true);
 
 		rdbtnOrders = new JRadioButton("Orders");
-		rdbtnOrders.setBounds(76, 22, 71, 23);
-		rdbtnOrders.setBackground(new Color(119, 136, 153));
+		rdbtnOrders.setForeground(Color.LIGHT_GRAY);
+		rdbtnOrders.setBounds(118, 22, 86, 23);
+		rdbtnOrders.setBackground(Color.BLACK);
 
 		bgPartsOrders = new ButtonGroup();
 		bgPartsOrders.add(rdbtnParts);

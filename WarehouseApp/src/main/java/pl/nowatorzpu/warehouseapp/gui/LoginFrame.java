@@ -54,7 +54,7 @@ public class LoginFrame extends JFrame implements WindowListener, KeyListener {
 		setBounds(100, 100, 325, 275);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(119, 136, 153));
+		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		setContentPane(contentPane);
 		addWindowListener(this);
@@ -68,8 +68,9 @@ public class LoginFrame extends JFrame implements WindowListener, KeyListener {
 	private void prepareLayout() {
 
 		panel = new JPanel();
+		panel.setBorder(new LineBorder(Color.YELLOW));
 		panel.setBounds(26, 13, 267, 143);
-		panel.setBackground(new Color(195, 203, 43));
+		panel.setBackground(Color.BLACK);
 		panel.setLayout(null);
 		panel.add(lblUserName);
 		panel.add(lblPassword);
@@ -84,12 +85,14 @@ public class LoginFrame extends JFrame implements WindowListener, KeyListener {
 	private void createControls() {
 
 		lblPassword = new JLabel("Password:");
-		lblPassword.setBounds(36, 92, 70, 15);
+		lblPassword.setForeground(Color.LIGHT_GRAY);
+		lblPassword.setBounds(28, 92, 88, 15);
 		passwordField = new JPasswordField();
 		passwordField.setBounds(118, 90, 124, 19);
 
 		lblUserName = new JLabel("User name:");
-		lblUserName.setBounds(28, 45, 78, 15);
+		lblUserName.setForeground(Color.LIGHT_GRAY);
+		lblUserName.setBounds(28, 45, 88, 15);
 		txtUserName = new JTextField();
 		txtUserName.setBounds(118, 43, 124, 19);
 		txtUserName.setColumns(10);

@@ -71,7 +71,7 @@ public class NewUserFrame extends JFrame implements WindowListener, KeyListener 
 		setBounds(100, 100, 395, 550);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(119, 136, 153));
+		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		setContentPane(contentPane);
 		addWindowListener(this);
@@ -85,8 +85,9 @@ public class NewUserFrame extends JFrame implements WindowListener, KeyListener 
 	private void prepareLayout() {
 
 		panel = new JPanel();
+		panel.setBorder(new LineBorder(Color.YELLOW));
 		panel.setBounds(35, 38, 327, 326);
-		panel.setBackground(new Color(195, 203, 43));
+		panel.setBackground(Color.BLACK);
 		panel.setLayout(null);
 		panel.add(lblEmail);
 		panel.add(lblUserName);
@@ -114,30 +115,35 @@ public class NewUserFrame extends JFrame implements WindowListener, KeyListener 
 	private void createControls() {
 
 		lblFirstName = new JLabel("First name:");
+		lblFirstName.setForeground(Color.LIGHT_GRAY);
 		lblFirstName.setBounds(25, 25, 88, 15);
 		txtFirstName = new JTextField();
 		txtFirstName.setBounds(131, 23, 171, 19);
 		txtFirstName.setColumns(15);
 
 		lblLastName = new JLabel("Last name:");
+		lblLastName.setForeground(Color.LIGHT_GRAY);
 		lblLastName.setBounds(25, 56, 88, 15);
 		txtLastName = new JTextField();
 		txtLastName.setBounds(131, 54, 171, 19);
 		txtLastName.setColumns(15);
 
 		lblUserName = new JLabel("User name:");
+		lblUserName.setForeground(Color.LIGHT_GRAY);
 		lblUserName.setBounds(25, 87, 88, 15);
 		txtUserName = new JTextField();
 		txtUserName.setBounds(131, 85, 171, 19);
 		txtUserName.setColumns(15);
 
 		lblEmail = new JLabel("Email:");
+		lblEmail.setForeground(Color.LIGHT_GRAY);
 		lblEmail.setBounds(25, 118, 88, 15);
 		txtEmail = new JTextField();
 		txtEmail.setBounds(131, 116, 171, 19);
 		txtEmail.setColumns(25);
 
 		lblPassword = new JLabel("Password:");
+		lblPassword.setForeground(Color.LIGHT_GRAY);
 		lblPassword.setBounds(25, 149, 88, 15);
 		passUserPassword = new JPasswordField();
 		passUserPassword.setBounds(131, 147, 171, 19);
@@ -145,12 +151,15 @@ public class NewUserFrame extends JFrame implements WindowListener, KeyListener 
 		passUserRepeatedPassword = new JPasswordField();
 		passUserRepeatedPassword.setBounds(131, 178, 171, 19);
 		lblRepeatPass = new JLabel("Repeat pass:");
-		lblRepeatPass.setBounds(25, 180, 88, 15);
+		lblRepeatPass.setForeground(Color.LIGHT_GRAY);
+		lblRepeatPass.setBounds(25, 180, 99, 15);
 
 		lblJobTitle = new JLabel("Job title:");
+		lblJobTitle.setForeground(Color.LIGHT_GRAY);
 		lblJobTitle.setBounds(25, 220, 78, 15);
 
 		lblUserRights = new JLabel("Rights:");
+		lblUserRights.setForeground(Color.LIGHT_GRAY);
 		lblUserRights.setBounds(25, 262, 78, 15);
 
 		btnCreate = new JButton("Create");

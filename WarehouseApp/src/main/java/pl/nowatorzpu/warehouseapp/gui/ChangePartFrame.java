@@ -111,7 +111,7 @@ public class ChangePartFrame extends JFrame implements WindowListener, KeyListen
 		setBounds(100, 100, 450, 825);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(119, 136, 153));
+		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		setContentPane(contentPane);
 		addWindowListener(this);
@@ -128,8 +128,9 @@ public class ChangePartFrame extends JFrame implements WindowListener, KeyListen
 	private void prepareLayout() {
 
 		panel = new JPanel();
+		panel.setBorder(new LineBorder(Color.YELLOW));
 		panel.setBounds(31, 30, 391, 661);
-		panel.setBackground(new Color(195, 203, 43));
+		panel.setBackground(Color.BLACK);
 		panel.setLayout(null);
 		panel.add(lblQuantityMin);
 		panel.add(txtQuantityMin);
@@ -168,30 +169,35 @@ public class ChangePartFrame extends JFrame implements WindowListener, KeyListen
 	private void createControls() {
 
 		lblPartName = new JLabel("Part name:");
+		lblPartName.setForeground(Color.LIGHT_GRAY);
 		lblPartName.setBounds(12, 25, 78, 15);
 		txtPartName = new JTextField(part.getPartName());
 		txtPartName.setBounds(128, 23, 241, 19);
 		txtPartName.setColumns(15);
 
 		lblProductCode = new JLabel("Product code:");
-		lblProductCode.setBounds(12, 56, 97, 15);
+		lblProductCode.setForeground(Color.LIGHT_GRAY);
+		lblProductCode.setBounds(12, 56, 110, 15);
 		txtProductCode = new JTextField(part.getProductCode());
 		txtProductCode.setBounds(128, 54, 241, 19);
 		txtProductCode.setColumns(15);
 
 		lblOrderCode = new JLabel("Order code:");
+		lblOrderCode.setForeground(Color.LIGHT_GRAY);
 		lblOrderCode.setBounds(12, 87, 97, 15);
 		txtOrderCode = new JTextField(part.getOrderCode());
 		txtOrderCode.setBounds(128, 85, 241, 19);
 		txtOrderCode.setColumns(15);
 		
 		lblLink = new JLabel("Link:");
+		lblLink.setForeground(Color.LIGHT_GRAY);
 		lblLink.setBounds(12, 116, 97, 15);
 		txtLink = new JTextField(part.getLink());
 		txtLink.setBounds(128, 114, 241, 19);
 		txtLink.setColumns(15);		
 		
 		lblDescription = new JLabel("Description:");
+		lblDescription.setForeground(Color.LIGHT_GRAY);
 		lblDescription.setBounds(12, 146, 97, 15);
 		txtrDescription = new JTextArea(part.getDescription());
 		txtrDescription.setToolTipText("describe part, please add link to site.");
@@ -203,24 +209,31 @@ public class ChangePartFrame extends JFrame implements WindowListener, KeyListen
 		scrollPane.setViewportView(txtrDescription);
 
 		lblManufacturer = new JLabel("Manufacturer:");
-		lblManufacturer.setBounds(12, 241, 98, 15);
+		lblManufacturer.setForeground(Color.LIGHT_GRAY);
+		lblManufacturer.setBounds(12, 241, 110, 15);
 
 		lblPartGroup = new JLabel("Part group:");
+		lblPartGroup.setForeground(Color.LIGHT_GRAY);
 		lblPartGroup.setBounds(12, 277, 97, 15);
 
 		lblUnit = new JLabel("Unit:");
+		lblUnit.setForeground(Color.LIGHT_GRAY);
 		lblUnit.setBounds(12, 313, 97, 15);
 
 		lblArea = new JLabel("Area:");
+		lblArea.setForeground(Color.LIGHT_GRAY);
 		lblArea.setBounds(12, 349, 97, 15);
 
 		lblRack = new JLabel("Rack:");
+		lblRack.setForeground(Color.LIGHT_GRAY);
 		lblRack.setBounds(12, 385, 97, 15);
 
 		lblShelf = new JLabel("Shelf:");
+		lblShelf.setForeground(Color.LIGHT_GRAY);
 		lblShelf.setBounds(12, 421, 97, 15);
 
 		lblQuantityMin = new JLabel("Quantity min:");
+		lblQuantityMin.setForeground(Color.LIGHT_GRAY);
 		lblQuantityMin.setBounds(12, 460, 97, 15);
 		txtQuantityMin = new JTextField(part.getQuantityMin().toString());
 		txtQuantityMin.setBounds(121, 458, 47, 19);
@@ -228,6 +241,7 @@ public class ChangePartFrame extends JFrame implements WindowListener, KeyListen
 		txtQuantityMin.setColumns(15);
 
 		lblQuantityMax = new JLabel("Quantity max:");
+		lblQuantityMax.setForeground(Color.LIGHT_GRAY);
 		lblQuantityMax.setBounds(186, 460, 98, 15);
 		txtQuantityMax = new JTextField(part.getQuantityMax().toString());
 		txtQuantityMax.setBounds(301, 458, 47, 19);

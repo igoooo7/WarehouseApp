@@ -102,7 +102,7 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 		setBounds(100, 100, 430, 515);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(119, 136, 153));
+		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		setContentPane(contentPane);
 		addWindowListener(this);
@@ -116,8 +116,9 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 	private void prepareLayout() {
 
 		panel = new JPanel();
-		panel.setBounds(26, 22, 378, 440);
-		panel.setBackground(new Color(195, 203, 43));
+		panel.setBorder(new LineBorder(Color.YELLOW));
+		panel.setBounds(27, 24, 378, 440);
+		panel.setBackground(Color.BLACK);
 		panel.setLayout(null);
 		panel.add(btnPreviousPart);
 		panel.add(btnNextPart);
@@ -152,13 +153,15 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 	private void createControls() {
 
 		lblManufacturer = new JLabel("Manufacturer:");
-		lblManufacturer.setBounds(25, 88, 98, 15);
+		lblManufacturer.setForeground(Color.LIGHT_GRAY);
+		lblManufacturer.setBounds(25, 88, 123, 15);
 		txtManufacturer = new JTextField();
 		txtManufacturer.setBounds(146, 86, 214, 19);
 		txtManufacturer.setEditable(false);
 		txtManufacturer.setColumns(10);
 
 		lblOrderCode = new JLabel("Order code:");
+		lblOrderCode.setForeground(Color.LIGHT_GRAY);
 		lblOrderCode.setBounds(25, 121, 93, 15);
 		txtOrderCode = new JTextField();
 		txtOrderCode.setBounds(146, 119, 214, 19);
@@ -166,9 +169,11 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 		txtOrderCode.setColumns(10);
 
 		lblProject = new JLabel("Project:");
+		lblProject.setForeground(Color.LIGHT_GRAY);
 		lblProject.setBounds(25, 274, 93, 15);
 
 		lblCount = new JLabel("Count:");
+		lblCount.setForeground(Color.LIGHT_GRAY);
 		lblCount.setBounds(25, 159, 98, 15);
 		txtCount = new JTextField();
 		txtCount.setBounds(146, 156, 47, 22);
@@ -176,16 +181,17 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 		txtCount.setColumns(10);
 
 		btnNextPart = new JButton();
-		btnNextPart.setBounds(254, 31, 50, 26);
+		btnNextPart.setBounds(242, 25, 50, 26);
 		Image btnNextIcon = new ImageIcon(this.getClass().getResource("/forward-16.png")).getImage();
 		btnNextPart.setIcon(new ImageIcon(btnNextIcon));
 
 		btnPreviousPart = new JButton();
-		btnPreviousPart.setBounds(198, 31, 50, 26);
+		btnPreviousPart.setBounds(186, 25, 50, 26);
 		Image btnPreviousIcon = new ImageIcon(this.getClass().getResource("/back-16.png")).getImage();
 		btnPreviousPart.setIcon(new ImageIcon(btnPreviousIcon));
 
 		lblDescription = new JLabel("Description:");
+		lblDescription.setForeground(Color.LIGHT_GRAY);
 		lblDescription.setBounds(26, 197, 97, 15);
 
 		txtrDescription = new JTextArea((String) null);
@@ -195,22 +201,23 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 		txtrDescription.setFont(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 13));
 
 		lblPartNumber = new JLabel("1 of n");
-		lblPartNumber.setBounds(322, 36, 38, 15);
+		lblPartNumber.setForeground(Color.LIGHT_GRAY);
+		lblPartNumber.setBounds(310, 30, 56, 15);
 
 		btnDeleteAll = new JButton("Delete All");
-		btnDeleteAll.setBounds(154, 388, 107, 40);
+		btnDeleteAll.setBounds(141, 388, 107, 40);
 
 		btnDeleteItem = new JButton("Delete item");
-		btnDeleteItem.setBounds(25, 388, 123, 40);
+		btnDeleteItem.setBounds(12, 388, 123, 40);
 
 		btnSave = new JButton("Save");
-		btnSave.setBounds(267, 388, 95, 40);
+		btnSave.setBounds(254, 388, 112, 40);
 
 		Image btnSaveIcon = new ImageIcon(this.getClass().getResource("/save-32.png")).getImage();
 		btnSave.setIcon(new ImageIcon(btnSaveIcon));
 
 		btnOk = new JButton("ok");
-		btnOk.setBounds(312, 331, 50, 25);
+		btnOk.setBounds(290, 331, 72, 25);
 
 		prepareComboBoxes();
 
