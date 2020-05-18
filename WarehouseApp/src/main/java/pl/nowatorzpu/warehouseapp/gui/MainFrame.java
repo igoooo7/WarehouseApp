@@ -26,6 +26,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
+import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.TableRowSorter;
@@ -40,9 +41,9 @@ import pl.nowatorzpu.warehouseapp.interfaces.ItemDeleteListener;
 import pl.nowatorzpu.warehouseapp.interfaces.UserLoginListener;
 
 public class MainFrame extends JFrame implements KeyListener {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private JPanel contentPane;
 
 	private JPanel panel1;
@@ -102,8 +103,22 @@ public class MainFrame extends JFrame implements KeyListener {
 
 	private ArrayList<Part> partsToOrder = new ArrayList<>();
 	private Integer partsToOrderCount = 0;
-	
+
 	public static void main(String[] args) {
+
+		try {
+			// here you can put the selected theme class name in JTattoo
+			UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
+
+		} catch (ClassNotFoundException ex) {
+			java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		} catch (InstantiationException ex) {
+			java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		} catch (IllegalAccessException ex) {
+			java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+			java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		}
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -116,7 +131,7 @@ public class MainFrame extends JFrame implements KeyListener {
 			}
 		});
 	}
-	
+
 	public MainFrame() {
 
 		setTitle("Warehouse Management V1.0.0");
@@ -134,16 +149,16 @@ public class MainFrame extends JFrame implements KeyListener {
 		createControls();
 		addActionListenersForControls();
 		prepareLayout();
-		
+
 	}
 
 	private void prepareLayout() {
 
 		panel1 = new JPanel();
 		panel1.setForeground(Color.LIGHT_GRAY);
-		panel1.setBounds(53, 24, 280, 122);
+		panel1.setBounds(60, 28, 280, 122);
 		panel1.setBackground(Color.BLACK);
-		panel1.setBorder(new TitledBorder(new LineBorder(new Color(195, 203, 43)), "User data", TitledBorder.LEFT, TitledBorder.TOP, null, Color.LIGHT_GRAY));
+		panel1.setBorder(new TitledBorder(new LineBorder(new Color(255, 255, 0)), "User data", TitledBorder.LEFT, TitledBorder.TOP, null, Color.YELLOW));
 		panel1.setLayout(null);
 		panel1.add(lblUserRights);
 		panel1.add(lblUserName);
@@ -151,7 +166,7 @@ public class MainFrame extends JFrame implements KeyListener {
 		panel1.add(txtJobTitle);
 		panel1.add(txtUserRights);
 		panel1.add(txtUserName);
-		
+
 		panel2 = new JPanel();
 		panel2.setBorder(new LineBorder(Color.YELLOW));
 		panel2.setBounds(440, 37, 701, 77);
@@ -161,7 +176,7 @@ public class MainFrame extends JFrame implements KeyListener {
 		panel2.add(btnNewUser);
 		panel2.add(btnDeleteUser);
 		panel2.add(btnExit);
-		
+
 		panel3 = new JPanel();
 		panel3.setBounds(182, 313, 240, 369);
 		panel3.setBackground(Color.BLACK);
@@ -171,10 +186,10 @@ public class MainFrame extends JFrame implements KeyListener {
 		panel3.add(btnChangePart);
 		panel3.add(btnUpdate);
 		panel3.add(btnShowPicture);
-		
+
 		panel4 = new JPanel();
 		panel4.setBounds(440, 189, 701, 112);
-		panel4.setBorder(new TitledBorder(new LineBorder(new Color(195, 203, 43)), "Filter", TitledBorder.LEADING, TitledBorder.TOP, null, Color.LIGHT_GRAY));
+		panel4.setBorder(new TitledBorder(new LineBorder(new Color(195, 203, 43)), "Filter", TitledBorder.LEADING, TitledBorder.TOP, null, Color.YELLOW));
 		panel4.setBackground(Color.BLACK);
 		panel4.setLayout(null);
 		panel4.add(lblManufacturer);
@@ -183,33 +198,33 @@ public class MainFrame extends JFrame implements KeyListener {
 		panel4.add(txtFilter);
 		panel4.add(lblPartGroup);
 		panel4.add(cBoxPartGroup);
-		
+
 		panel5 = new JPanel();
 		panel5.setBounds(12, 313, 158, 369);
 		panel5.setBackground(Color.BLACK);
 		panel5.setLayout(null);
 		panel5.add(btnOrder);
 		panel5.add(btnAddToOrder);
-		
+
 		panel6 = new JPanel();
 		panel6.setBounds(440, 124, 212, 53);
-		panel6.setBorder(new TitledBorder(new LineBorder(new Color(195, 203, 43)), "View", TitledBorder.LEADING, TitledBorder.TOP, null, Color.LIGHT_GRAY));
+		panel6.setBorder(new TitledBorder(new LineBorder(new Color(195, 203, 43)), "View", TitledBorder.LEADING, TitledBorder.TOP, null, Color.YELLOW));
 		panel6.setBackground(Color.BLACK);
 		panel6.setLayout(null);
 		panel6.add(rdbtnParts);
-		panel6.add(rdbtnOrders);	
-		
-		contentPane.setLayout(null);		
+		panel6.add(rdbtnOrders);
+
+		contentPane.setLayout(null);
 		contentPane.add(panel1);
 		contentPane.add(panel2);
 		contentPane.add(panel3);
 		contentPane.add(panel4);
 		contentPane.add(panel5);
 		contentPane.add(panel6);
-		
+
 		contentPane.add(scrollPane);
 		contentPane.add(lblImage);
-		
+
 	}
 
 	private void createControls() {
@@ -230,10 +245,10 @@ public class MainFrame extends JFrame implements KeyListener {
 		btnDeleteUser.setIcon(new ImageIcon(btnDeleteUserIcon));
 
 		Image btnExitIcon = new ImageIcon(this.getClass().getResource("/close-app-32.png")).getImage();
-		btnExit = new JButton("Exit");				
+		btnExit = new JButton("Exit");
 		btnExit.setBounds(528, 12, 150, 56);
-		btnExit.setIcon(new ImageIcon(btnExitIcon));		
-		
+		btnExit.setIcon(new ImageIcon(btnExitIcon));
+
 		lblUserName = new JLabel("User name:");
 		lblUserName.setForeground(Color.LIGHT_GRAY);
 		lblUserName.setBounds(28, 31, 81, 15);
@@ -434,7 +449,7 @@ public class MainFrame extends JFrame implements KeyListener {
 
 								JOptionPane.showMessageDialog(null, "User successfully deleted", "Message",
 										JOptionPane.INFORMATION_MESSAGE);
-								 
+
 								setEmptyUser();
 								refreshForm();
 
