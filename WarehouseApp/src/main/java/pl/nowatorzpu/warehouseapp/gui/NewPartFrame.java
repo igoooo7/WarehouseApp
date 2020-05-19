@@ -45,6 +45,7 @@ import pl.nowatorzpu.warehouseapp.entities.Shelfs;
 import pl.nowatorzpu.warehouseapp.entities.Units;
 import pl.nowatorzpu.warehouseapp.entities.UserRights;
 import pl.nowatorzpu.warehouseapp.entities.Users;
+import javax.swing.UIManager;
 
 public class NewPartFrame extends JFrame implements WindowListener, KeyListener {
 	
@@ -109,7 +110,7 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 		setBounds(100, 100, 450, 825);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.BLACK);
+		contentPane.setBackground(UIManager.getColor("Button.foreground"));
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		setContentPane(contentPane);
 		addWindowListener(this);
@@ -125,7 +126,7 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 		panel = new JPanel();
 		panel.setBorder(new LineBorder(Color.YELLOW));
 		panel.setBounds(31, 28, 391, 665);
-		panel.setBackground(Color.BLACK);	
+		panel.setBackground(UIManager.getColor("Button.foreground"));	
 		panel.setLayout(null);
 		panel.add(btnImage);
 		panel.add(lblImage);
@@ -231,15 +232,15 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 		lblQuantityMin.setForeground(Color.LIGHT_GRAY);
 		lblQuantityMin.setBounds(12, 468, 97, 15);
 		txtQuantityMin = new JTextField();
-		txtQuantityMin.setBounds(121, 466, 47, 19);
+		txtQuantityMin.setBounds(134, 466, 47, 19);
 		txtQuantityMin.setToolTipText("minimum amount that could be ordered");
 		txtQuantityMin.setColumns(15);
 
 		lblQuantityMax = new JLabel("Quantity max:");
 		lblQuantityMax.setForeground(Color.LIGHT_GRAY);
-		lblQuantityMax.setBounds(186, 468, 103, 15);
+		lblQuantityMax.setBounds(199, 468, 103, 15);
 		txtQuantityMax = new JTextField();
-		txtQuantityMax.setBounds(301, 466, 47, 19);
+		txtQuantityMax.setBounds(321, 466, 47, 19);
 		txtQuantityMax.setToolTipText("maximum amount that could be ordered");
 		txtQuantityMax.setColumns(15);
 

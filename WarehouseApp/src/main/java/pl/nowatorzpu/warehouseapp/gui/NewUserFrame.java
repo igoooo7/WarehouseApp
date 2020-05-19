@@ -27,6 +27,7 @@ import pl.nowatorzpu.warehouseapp.dataaccess.Controller;
 import pl.nowatorzpu.warehouseapp.entities.JobTitles;
 import pl.nowatorzpu.warehouseapp.entities.UserRights;
 import pl.nowatorzpu.warehouseapp.entities.Users;
+import javax.swing.UIManager;
 
 public class NewUserFrame extends JFrame implements WindowListener, KeyListener {
 	
@@ -71,7 +72,7 @@ public class NewUserFrame extends JFrame implements WindowListener, KeyListener 
 		setBounds(100, 100, 395, 550);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.BLACK);
+		contentPane.setBackground(UIManager.getColor("Button.foreground"));
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		setContentPane(contentPane);
 		addWindowListener(this);
@@ -87,7 +88,7 @@ public class NewUserFrame extends JFrame implements WindowListener, KeyListener 
 		panel = new JPanel();
 		panel.setBorder(new LineBorder(Color.YELLOW));
 		panel.setBounds(35, 38, 327, 326);
-		panel.setBackground(Color.BLACK);
+		panel.setBackground(UIManager.getColor("Button.foreground"));
 		panel.setLayout(null);
 		panel.add(lblEmail);
 		panel.add(lblUserName);

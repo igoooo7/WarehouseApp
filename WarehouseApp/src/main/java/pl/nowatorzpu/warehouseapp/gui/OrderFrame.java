@@ -50,6 +50,7 @@ import pl.nowatorzpu.warehouseapp.entities.Orders;
 import pl.nowatorzpu.warehouseapp.entities.Projects;
 import pl.nowatorzpu.warehouseapp.entities.Users;
 import pl.nowatorzpu.warehouseapp.interfaces.ItemDeleteListener;
+import javax.swing.UIManager;
 
 public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 
@@ -102,7 +103,7 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 		setBounds(100, 100, 430, 515);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.BLACK);
+		contentPane.setBackground(UIManager.getColor("Button.foreground"));
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		setContentPane(contentPane);
 		addWindowListener(this);
@@ -118,7 +119,7 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 		panel = new JPanel();
 		panel.setBorder(new LineBorder(Color.YELLOW));
 		panel.setBounds(27, 24, 378, 440);
-		panel.setBackground(Color.BLACK);
+		panel.setBackground(UIManager.getColor("Button.foreground"));
 		panel.setLayout(null);
 		panel.add(btnPreviousPart);
 		panel.add(btnNextPart);

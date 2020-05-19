@@ -23,6 +23,7 @@ import javax.swing.border.LineBorder;
 import pl.nowatorzpu.warehouseapp.applicationclasses.User;
 import pl.nowatorzpu.warehouseapp.dataaccess.Controller;
 import pl.nowatorzpu.warehouseapp.interfaces.UserLoginListener;
+import javax.swing.UIManager;
 
 public class LoginFrame extends JFrame implements WindowListener, KeyListener {
 
@@ -54,7 +55,7 @@ public class LoginFrame extends JFrame implements WindowListener, KeyListener {
 		setBounds(100, 100, 325, 275);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.BLACK);
+		contentPane.setBackground(UIManager.getColor("Button.foreground"));
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		setContentPane(contentPane);
 		addWindowListener(this);
@@ -70,7 +71,7 @@ public class LoginFrame extends JFrame implements WindowListener, KeyListener {
 		panel = new JPanel();
 		panel.setBorder(new LineBorder(Color.YELLOW));
 		panel.setBounds(26, 13, 267, 143);
-		panel.setBackground(Color.BLACK);
+		panel.setBackground(UIManager.getColor("Button.foreground"));
 		panel.setLayout(null);
 		panel.add(lblUserName);
 		panel.add(lblPassword);
