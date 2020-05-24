@@ -97,7 +97,7 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 
 		setResizable(false);
 		setTitle("Order list");
-		Image formIcon = new ImageIcon(this.getClass().getResource("/averna_ico.png")).getImage();
+		Image formIcon = new ImageIcon(this.getClass().getResource("/storage.png")).getImage();
 		setIconImage(formIcon);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 430, 515);
@@ -409,8 +409,8 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 
 										try {
 											com.itextpdf.text.Image image = com.itextpdf.text.Image
-													.getInstance(this.getClass().getResource("/logo_averna.png"));
-											image.scaleAbsolute(165f, 35f);
+													.getInstance(this.getClass().getResource("/storage.png"));
+											image.scaleAbsolute(25f, 25f);
 											document.add(image);
 										} catch (BadElementException | IOException e1) {
 											e1.printStackTrace();
@@ -418,7 +418,7 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 											e.printStackTrace();
 										}
 
-										document.add(new Paragraph("AVERNA Automated Test & Quality Solutions, Poland",
+										document.add(new Paragraph("Igor Leskiewicz Automation&IT Services, Poland",
 												SectionTitleFont));
 										document.add(new Paragraph(" "));
 										document.add(new Paragraph(" "));
@@ -458,7 +458,10 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 											document.add(new Paragraph("Project: " + order.getProject(), textFont));
 
 											String link = order.getLink();
-
+											if (link == null) {
+												link = "";
+											}
+											
 											// Link + QR code
 
 											if (link.length() > 0) {

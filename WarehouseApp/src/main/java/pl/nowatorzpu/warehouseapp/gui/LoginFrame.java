@@ -49,7 +49,7 @@ public class LoginFrame extends JFrame implements WindowListener, KeyListener {
 
 		setResizable(false);
 		setTitle("Login");
-		Image formIcon = new ImageIcon(this.getClass().getResource("/averna_ico.png")).getImage();
+		Image formIcon = new ImageIcon(this.getClass().getResource("/storage.png")).getImage();
 		setIconImage(formIcon);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 325, 275);

@@ -125,7 +125,7 @@ public class MainFrame extends JFrame implements KeyListener {
 		setTheme("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
 
 		setTitle("Warehouse Management V1.0.0");
-		Image formIcon = new ImageIcon(this.getClass().getResource("/averna_ico.png")).getImage();
+		Image formIcon = new ImageIcon(this.getClass().getResource("/storage.png")).getImage();
 		setIconImage(formIcon);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 1550, 1200);
@@ -134,13 +134,13 @@ public class MainFrame extends JFrame implements KeyListener {
 		contentPane = new JPanel();
 		contentPane.setBackground(UIManager.getColor("Button.foreground"));
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
-		contentPane.setPreferredSize(new Dimension(2000, 2000));
+		contentPane.setPreferredSize(new Dimension(1900, 1000));
 		
 		mainScrollPane = new JScrollPane();	
 		mainScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		mainScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		mainScrollPane.setViewportView(contentPane);		 
-		add(mainScrollPane);		 
+		getContentPane().add(mainScrollPane);		 
 
 		createControls();
 		addActionListenersForControls();
@@ -175,7 +175,7 @@ public class MainFrame extends JFrame implements KeyListener {
 		panel.setLayout(null);
 
 		panel1 = new JPanel();
-		panel1.setBounds(62, 27, 280, 122);
+		panel1.setBounds(43, 23, 280, 122);
 		panel1.setForeground(Color.LIGHT_GRAY);
 		panel1.setBackground(UIManager.getColor("Button.foreground"));
 		panel1.setBorder(new TitledBorder(new LineBorder(new Color(255, 255, 0)), "User data", TitledBorder.LEFT,

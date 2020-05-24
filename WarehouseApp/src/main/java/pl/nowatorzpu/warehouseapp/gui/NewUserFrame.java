@@ -66,7 +66,7 @@ public class NewUserFrame extends JFrame implements WindowListener, KeyListener 
 
 		setResizable(false);
 		setTitle("New user");
-		Image formIcon = new ImageIcon(this.getClass().getResource("/averna_ico.png")).getImage();
+		Image formIcon = new ImageIcon(this.getClass().getResource("/storage.png")).getImage();
 		setIconImage(formIcon);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 395, 550);

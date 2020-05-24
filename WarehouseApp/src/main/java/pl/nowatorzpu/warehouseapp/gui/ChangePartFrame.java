@@ -105,7 +105,7 @@ public class ChangePartFrame extends JFrame implements WindowListener, KeyListen
 
 		setResizable(false);
 		setTitle("Change part");
-		Image formIcon = new ImageIcon(this.getClass().getResource("/averna_ico.png")).getImage();
+		Image formIcon = new ImageIcon(this.getClass().getResource("/storage.png")).getImage();
 		setIconImage(formIcon);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 825);
