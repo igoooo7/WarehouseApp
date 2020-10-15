@@ -37,6 +37,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/igor/eclipse-workspace/Warehouse Management/WarehouseApp/external-jars/JTattoo-1.6.13.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ileskiew/Documents/GitHub/WarehouseApp/WarehouseApp/external-jars/JTattoo-1.6.13.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
