@@ -363,7 +363,7 @@ public class OrderFrame extends JFrame implements WindowListener, KeyListener {
 								o.setPartCount(order.getPartCount());
 
 								Projects project = controller.dbManagerForOrders
-										.getProjectEntityByProject(order.getProject());
+										.getProjectByProject(order.getProject());
 								o.setProjects(project);
 
 								Users user = controller.dbManagerForUsers.getUserEntityByUserName(order.getUser());

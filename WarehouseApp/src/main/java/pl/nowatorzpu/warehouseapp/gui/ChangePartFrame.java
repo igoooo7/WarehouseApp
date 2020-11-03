@@ -29,6 +29,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -111,7 +112,7 @@ public class ChangePartFrame extends JFrame implements WindowListener, KeyListen
 		setBounds(100, 100, 450, 825);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.BLACK);
+		contentPane.setBackground(UIManager.getColor("Button.foreground"));
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		setContentPane(contentPane);
 		addWindowListener(this);
@@ -120,7 +121,6 @@ public class ChangePartFrame extends JFrame implements WindowListener, KeyListen
 
 		createControls();
 		addActionListenersForControls();
-
 		prepareLayout();
 		
 	}
@@ -130,7 +130,7 @@ public class ChangePartFrame extends JFrame implements WindowListener, KeyListen
 		panel = new JPanel();
 		panel.setBorder(new LineBorder(Color.YELLOW));
 		panel.setBounds(31, 30, 391, 661);
-		panel.setBackground(Color.BLACK);
+		panel.setBackground(UIManager.getColor("Button.foreground"));	
 		panel.setLayout(null);
 		panel.add(lblQuantityMin);
 		panel.add(txtQuantityMin);

@@ -12,6 +12,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -40,7 +42,7 @@ import pl.nowatorzpu.warehouseapp.interfaces.ItemDeleteListener;
 import pl.nowatorzpu.warehouseapp.interfaces.UserLoginListener;
 import java.awt.BorderLayout;
 
-public class MainFrame extends JFrame implements KeyListener {
+public class MainFrame extends JFrame implements WindowListener, KeyListener {
 
 	private static final long serialVersionUID = 1L;
 
@@ -68,6 +70,7 @@ public class MainFrame extends JFrame implements KeyListener {
 	private JTextField txtFilter;
 
 	private JButton btnExit;
+	private JButton btnSettings;
 	private JButton btnLogin;
 	private JButton btnNewUser;
 	private JButton btnDeleteUser;
@@ -92,6 +95,7 @@ public class MainFrame extends JFrame implements KeyListener {
 	private NewPartFrame newPartFrame;
 	private ChangePartFrame changePartFrame;
 	private OrderFrame orderFrame;
+	private SettingsFrame settingsFrame;
 
 	private PartsTableModel partsTableModel;
 	private OrdersTableModel ordersTableModel;
@@ -135,17 +139,16 @@ public class MainFrame extends JFrame implements KeyListener {
 		contentPane.setBackground(UIManager.getColor("Button.foreground"));
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		contentPane.setPreferredSize(new Dimension(1900, 1000));
-		
-		mainScrollPane = new JScrollPane();	
+
+		mainScrollPane = new JScrollPane();
 		mainScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		mainScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		mainScrollPane.setViewportView(contentPane);		 
-		getContentPane().add(mainScrollPane);		 
+		mainScrollPane.setViewportView(contentPane);
+		getContentPane().add(mainScrollPane);
 
 		createControls();
 		addActionListenersForControls();
 		prepareLayout();
-
 	}
 
 	private void setTheme(String theme) {
@@ -190,7 +193,7 @@ public class MainFrame extends JFrame implements KeyListener {
 		panel.add(panel1);
 
 		panel2 = new JPanel();
-		panel2.setBounds(426, 38, 701, 77);
+		panel2.setBounds(426, 38, 880, 77);
 		panel2.setBorder(new LineBorder(Color.YELLOW));
 		panel2.setBackground(UIManager.getColor("Button.foreground"));
 		panel2.setLayout(null);
@@ -198,6 +201,7 @@ public class MainFrame extends JFrame implements KeyListener {
 		panel2.add(btnNewUser);
 		panel2.add(btnDeleteUser);
 		panel2.add(btnExit);
+		panel2.add(btnSettings);
 		panel.add(panel2);
 
 		panel3 = new JPanel();
@@ -225,25 +229,25 @@ public class MainFrame extends JFrame implements KeyListener {
 		panel4.add(lblPartGroup);
 		panel4.add(cBoxPartGroup);
 		panel.add(panel4);
-		
+
 		panel5 = new JPanel();
-		panel5.setBounds(11, 316, 162, 369);		
+		panel5.setBounds(11, 316, 162, 369);
 		panel5.setBackground(UIManager.getColor("Button.foreground"));
 		panel5.setLayout(null);
 		panel5.add(btnOrder);
 		panel5.add(btnAddToOrder);
-		panel.add(panel5);	
+		panel.add(panel5);
 
 		panel6 = new JPanel();
-		panel6.setBounds(426, 127, 212, 53);		
+		panel6.setBounds(426, 127, 212, 53);
 		panel6.setBorder(new TitledBorder(new LineBorder(new Color(195, 203, 43)), "View", TitledBorder.LEADING,
 				TitledBorder.TOP, null, Color.YELLOW));
 		panel6.setBackground(UIManager.getColor("Button.foreground"));
 		panel6.setLayout(null);
 		panel6.add(rdbtnParts);
 		panel6.add(rdbtnOrders);
-		panel.add(panel6);	
-		
+		panel.add(panel6);
+
 		panel.add(scrollPane);
 
 	}
@@ -294,8 +298,8 @@ public class MainFrame extends JFrame implements KeyListener {
 		lblSearch = new JLabel("Search:");
 		lblSearch.setForeground(Color.LIGHT_GRAY);
 		lblSearch.setBounds(391, 34, 75, 15);
-		
-		txtFilter = new JTextField();		
+
+		txtFilter = new JTextField();
 		txtFilter.setBounds(467, 31, 208, 22);
 		txtFilter.setColumns(10);
 
@@ -316,8 +320,13 @@ public class MainFrame extends JFrame implements KeyListener {
 
 		Image btnExitIcon = new ImageIcon(this.getClass().getResource("/close-app-32.png")).getImage();
 		btnExit = new JButton("Exit");
-		btnExit.setBounds(539, 12, 150, 56);
+		btnExit.setBounds(712, 12, 150, 56);
 		btnExit.setIcon(new ImageIcon(btnExitIcon));
+
+		Image btnSettingsIcon = new ImageIcon(this.getClass().getResource("/cogwheels-32.png")).getImage();
+		btnSettings = new JButton("Settings");
+		btnSettings.setBounds(545, 12, 150, 56);
+		btnSettings.setIcon(new ImageIcon(btnSettingsIcon));
 
 		Image btnUpdateIcon = new ImageIcon(this.getClass().getResource("/update-32.png")).getImage();
 		btnUpdate = new JButton("Update");
@@ -333,12 +342,12 @@ public class MainFrame extends JFrame implements KeyListener {
 		btnAddToOrder = new JButton("Add");
 		btnAddToOrder.setBounds(12, 12, 138, 57);
 		btnAddToOrder.setIcon(new ImageIcon(btnAddToOrderIcon));
-		
+
 		Image btnOrderIcon = new ImageIcon(this.getClass().getResource("/order-32.png")).getImage();
 		btnOrder = new JButton("Order");
 		btnOrder.setBounds(12, 81, 138, 57);
 		btnOrder.setIcon(new ImageIcon(btnOrderIcon));
-		
+
 		btnDeletePart = new JButton("Delete part");
 		btnDeletePart.setBounds(12, 12, 212, 56);
 
@@ -364,19 +373,19 @@ public class MainFrame extends JFrame implements KeyListener {
 		rdbtnOrders = new JRadioButton("Orders");
 		rdbtnOrders.setForeground(Color.LIGHT_GRAY);
 		rdbtnOrders.setBounds(118, 22, 86, 23);
-		
+
 		bgPartsOrders.add(rdbtnParts);
 		bgPartsOrders.add(rdbtnOrders);
-		
+
 		table = new JTable();
 		table.setModel(partsTableModel);
 		table.setFont(new Font("Dialog", Font.PLAIN, 11));
 		table.setSelectionBackground(Color.LIGHT_GRAY);
 
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(427, 316, 1455, 695);		
+		scrollPane.setBounds(427, 316, 1455, 695);
 		scrollPane.setViewportView(table);
-		
+
 		prepareComboBoxes();
 
 	}
@@ -389,9 +398,33 @@ public class MainFrame extends JFrame implements KeyListener {
 				int userDecision = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?", "Question",
 						JOptionPane.YES_NO_OPTION);
 
-				if (userDecision == JOptionPane.YES_OPTION) {
-
+				if (userDecision == JOptionPane.YES_OPTION) {					
 					closeFrame();
+				}
+			}
+		});
+
+		btnSettings.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				if (user.getLogged()) {
+
+					if (user.getUserRightsLevel() > 2) {
+
+						if (settingsFrame == null) {
+
+							settingsFrame = new SettingsFrame();
+							settingsFrame.setVisible(true);
+
+						} else {
+							settingsFrame.setVisible(true);
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "Current user doesn't have rights to change settings!",
+								"Warning", JOptionPane.WARNING_MESSAGE);
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "User isn't logged", "Warning", JOptionPane.WARNING_MESSAGE);
 				}
 			}
 		});
@@ -511,15 +544,10 @@ public class MainFrame extends JFrame implements KeyListener {
 
 		btnNewPart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
-				if (newPartFrame == null) {
+				 
 					newPartFrame = new NewPartFrame();
 					newPartFrame.setUser(user);
-					newPartFrame.setVisible(true);
-				} else {
-					newPartFrame.setUser(user);
-					newPartFrame.setVisible(true);
-				}
+					newPartFrame.setVisible(true);			 
 			}
 		});
 
@@ -558,6 +586,9 @@ public class MainFrame extends JFrame implements KeyListener {
 				if (rdbtnOrders.isSelected()) {
 					getAllOrdersAndRefreshOrdersTableModel();
 				}
+
+				prepareComboBoxes();
+
 			}
 		});
 
@@ -988,18 +1019,38 @@ public class MainFrame extends JFrame implements KeyListener {
 		String[] stringArray;
 
 		ArrayList<String> manufacturerList = controller.dbManagerForParts.getAllManufacturers();
-		manufacturerList.add(0, "All");
 		ArrayList<String> partGroupList = controller.dbManagerForParts.getAllPartGroups();
-		partGroupList.add(0, "All");
 
-		stringArray = manufacturerList.toArray(new String[manufacturerList.size()]);
-		cBoxManufacturer = new JComboBox<Object>(stringArray);
-		cBoxManufacturer.setBounds(139, 29, 234, 24);
-		
-		stringArray = partGroupList.toArray(new String[partGroupList.size()]);	
-		cBoxPartGroup = new JComboBox<Object>(stringArray);
-		cBoxPartGroup.setBounds(139, 65, 234, 24);
-		
+		if (cBoxManufacturer == null) {
+			manufacturerList.add(0, "All");
+			stringArray = manufacturerList.toArray(new String[manufacturerList.size()]);
+			cBoxManufacturer = new JComboBox<Object>(stringArray);
+			cBoxManufacturer.setBounds(139, 29, 234, 24);
+		} else {
+			int itemCount = cBoxManufacturer.getItemCount();
+			for (int i = 1; i < itemCount; i++) {
+				cBoxManufacturer.removeItemAt(1);
+			}
+			for (String m : manufacturerList) {
+				cBoxManufacturer.addItem(m);
+			}
+		}
+
+		if (cBoxPartGroup == null) {
+			partGroupList.add(0, "All");
+			stringArray = partGroupList.toArray(new String[partGroupList.size()]);
+			cBoxPartGroup = new JComboBox<Object>(stringArray);
+			cBoxPartGroup.setBounds(139, 65, 234, 24);
+		} else {
+			int itemCount = cBoxPartGroup.getItemCount();
+			for (int i = 1; i < itemCount; i++) {
+				cBoxPartGroup.removeItemAt(1);
+			}
+			for (String pg : partGroupList) {
+				cBoxPartGroup.addItem(pg);
+			}
+		}
+
 	}
 
 	@Override
@@ -1012,5 +1063,33 @@ public class MainFrame extends JFrame implements KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
+	}	
+
+	@Override
+	public void windowOpened(WindowEvent e) {		
+	}
+	
+	@Override
+	public void windowClosing(WindowEvent e) {	
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e) {		
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e) {		
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {	
+	}
+
+	@Override
+	public void windowActivated(WindowEvent e) {	
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {			
 	}
 }

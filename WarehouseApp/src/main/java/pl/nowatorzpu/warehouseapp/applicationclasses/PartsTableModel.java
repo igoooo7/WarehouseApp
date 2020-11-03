@@ -6,6 +6,8 @@ import javax.swing.table.AbstractTableModel;
 
 public class PartsTableModel extends AbstractTableModel {
 
+	private static final long serialVersionUID = 1L;
+
 	private ArrayList<Part> parts = new ArrayList<>();
 
 	private String[] columnNames = { "Manufacturer", "Part group", "Part name", "Order code", "Product code", "Area", "Rack", "Shelf", "Unit", "User",

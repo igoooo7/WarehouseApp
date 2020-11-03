@@ -517,7 +517,7 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 	}
 
 	@Override
-	public void windowClosing(WindowEvent e) {
+	public void windowClosing(WindowEvent e) {		
 		clearAllTextFields();
 	}
 
@@ -566,7 +566,7 @@ public class NewPartFrame extends JFrame implements WindowListener, KeyListener 
 	}
 
 	@Override
-	public void windowOpened(WindowEvent e) {
+	public void windowOpened(WindowEvent e) {		
 	}
 
 	@Override

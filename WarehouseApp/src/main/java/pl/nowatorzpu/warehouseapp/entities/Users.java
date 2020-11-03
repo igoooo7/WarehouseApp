@@ -21,7 +21,9 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name = "users", catalog = "db_warehouse", uniqueConstraints = @UniqueConstraint(columnNames = "user_name"))
 public class Users implements java.io.Serializable {
-
+	
+	private static final long serialVersionUID = 1L;
+	
 	private Integer userId;
 	private JobTitles jobTitles;
 	private UserRights userRights;

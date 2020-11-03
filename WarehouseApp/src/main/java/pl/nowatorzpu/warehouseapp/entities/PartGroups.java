@@ -20,6 +20,7 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "part_groups", catalog = "db_warehouse", uniqueConstraints = @UniqueConstraint(columnNames = "part_group"))
 public class PartGroups implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Integer partGroupId;
 	private String partGroup;
 	private Set<Parts> parts = new HashSet<Parts>(0);

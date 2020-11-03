@@ -24,6 +24,7 @@ import javax.persistence.TemporalType;
 @Table(name = "parts", catalog = "db_warehouse")
 public class Parts implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Integer partId;
 	private Areas areas;
 	private Manufacturers manufacturers;

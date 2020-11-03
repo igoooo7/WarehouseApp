@@ -17,7 +17,6 @@ import javax.persistence.criteria.Root;
 import javassist.bytecode.stackmap.TypeData.ClassName;
 import pl.nowatorzpu.warehouseapp.applicationclasses.User;
 import pl.nowatorzpu.warehouseapp.entities.JobTitles;
-import pl.nowatorzpu.warehouseapp.entities.Projects;
 import pl.nowatorzpu.warehouseapp.entities.UserRights;
 import pl.nowatorzpu.warehouseapp.entities.Users;
 

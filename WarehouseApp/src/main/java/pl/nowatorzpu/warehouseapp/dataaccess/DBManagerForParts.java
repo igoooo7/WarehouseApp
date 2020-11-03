@@ -18,7 +18,6 @@ import javax.persistence.criteria.Root;
 import javax.swing.JOptionPane;
 
 import javassist.bytecode.stackmap.TypeData.ClassName;
-import pl.nowatorzpu.warehouseapp.applicationclasses.Order;
 import pl.nowatorzpu.warehouseapp.applicationclasses.Part;
 import pl.nowatorzpu.warehouseapp.entities.Areas;
 import pl.nowatorzpu.warehouseapp.entities.Manufacturers;
@@ -655,6 +654,48 @@ public class DBManagerForParts {
 		}
 	}
 
+	public Boolean newArea(Areas area) {
+
+		try {
+
+			createManager();
+
+			em.getTransaction().begin();
+			em.persist(area);
+			em.getTransaction().commit();
+
+			destroyManager();
+
+			return true;
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING, e.toString());
+			return false;
+		}
+	}
+	
+	public Boolean deleteAreaById(int areaId) {
+
+		try {
+
+			createManager();
+
+			Areas a = em.find(Areas.class, areaId);
+
+			if (a != null) {
+				em.getTransaction().begin();
+				em.remove(a);
+				em.getTransaction().commit();
+			}
+
+			destroyManager();
+
+			return true;
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING, e.toString());
+			return false;
+		}
+	}
+	
 	// Manufacturer
 	public ArrayList<String> getAllManufacturers() {
 
@@ -713,6 +754,48 @@ public class DBManagerForParts {
 		}
 	}
 
+	public Boolean newManufacturer(Manufacturers manufacturer) {
+
+		try {
+
+			createManager();
+
+			em.getTransaction().begin();
+			em.persist(manufacturer);
+			em.getTransaction().commit();
+
+			destroyManager();
+
+			return true;
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING, e.toString());
+			return false;
+		}
+	}
+
+	public Boolean deleteManufacturerById(int manufacturerId) {
+
+		try {
+
+			createManager();
+
+			Manufacturers m = em.find(Manufacturers.class, manufacturerId);
+
+			if (m != null) {
+				em.getTransaction().begin();
+				em.remove(m);
+				em.getTransaction().commit();
+			}
+
+			destroyManager();
+
+			return true;
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING, e.toString());
+			return false;
+		}
+	}
+	
 	// Part group
 	public ArrayList<String> getAllPartGroups() {
 
@@ -771,6 +854,48 @@ public class DBManagerForParts {
 		}
 	}
 
+	public Boolean newPartGroup(PartGroups partGroup) {
+
+		try {
+
+			createManager();
+
+			em.getTransaction().begin();
+			em.persist(partGroup);
+			em.getTransaction().commit();
+
+			destroyManager();
+
+			return true;
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING, e.toString());
+			return false;
+		}
+	}
+	
+	public Boolean deletePartGroupById(int partGroupId) {
+
+		try {
+
+			createManager();
+
+			PartGroups pg = em.find(PartGroups.class, partGroupId);
+
+			if (pg != null) {
+				em.getTransaction().begin();
+				em.remove(pg);
+				em.getTransaction().commit();
+			}
+
+			destroyManager();
+
+			return true;
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING, e.toString());
+			return false;
+		}
+	}
+	
 	// Rack
 	public ArrayList<String> getAllRacks() {
 
@@ -829,6 +954,48 @@ public class DBManagerForParts {
 		}
 	}
 
+	public Boolean newRack(Racks rack) {
+
+		try {
+
+			createManager();
+
+			em.getTransaction().begin();
+			em.persist(rack);
+			em.getTransaction().commit();
+
+			destroyManager();
+
+			return true;
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING, e.toString());
+			return false;
+		}
+	}
+	
+	public Boolean deleteRackById(int rackId) {
+
+		try {
+
+			createManager();
+
+			Racks r = em.find(Racks.class, rackId);
+
+			if (r != null) {
+				em.getTransaction().begin();
+				em.remove(r);
+				em.getTransaction().commit();
+			}
+
+			destroyManager();
+
+			return true;
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING, e.toString());
+			return false;
+		}
+	}
+	
 	// Shelf
 	public ArrayList<String> getAllShelfs() {
 
@@ -887,6 +1054,48 @@ public class DBManagerForParts {
 		}
 	}
 
+	public Boolean newShelf(Shelfs shelf) {
+
+		try {
+
+			createManager();
+
+			em.getTransaction().begin();
+			em.persist(shelf);
+			em.getTransaction().commit();
+
+			destroyManager();
+
+			return true;
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING, e.toString());
+			return false;
+		}
+	}
+	
+	public Boolean deleteShelfById(int shelfId) {
+
+		try {
+
+			createManager();
+
+			Shelfs s = em.find(Shelfs.class, shelfId);
+
+			if (s != null) {
+				em.getTransaction().begin();
+				em.remove(s);
+				em.getTransaction().commit();
+			}
+
+			destroyManager();
+
+			return true;
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING, e.toString());
+			return false;
+		}
+	}
+	
 	// Unit
 	public ArrayList<String> getAllUnits() {
 
@@ -945,6 +1154,48 @@ public class DBManagerForParts {
 		}
 	}
 
+	public Boolean newUnit(Units unit) {
+
+		try {
+
+			createManager();
+
+			em.getTransaction().begin();
+			em.persist(unit);
+			em.getTransaction().commit();
+
+			destroyManager();
+
+			return true;
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING, e.toString());
+			return false;
+		}
+	}
+	
+	public Boolean deleteUnitById(int unitId) {
+
+		try {
+
+			createManager();
+
+			Units u = em.find(Units.class, unitId);
+
+			if (u != null) {
+				em.getTransaction().begin();
+				em.remove(u);
+				em.getTransaction().commit();
+			}
+
+			destroyManager();
+
+			return true;
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING, e.toString());
+			return false;
+		}
+	}
+	
 	// Image
 	public byte[] getImageByOrderCodeAndManufacturerId(String code, Integer manufacturerId) {
 

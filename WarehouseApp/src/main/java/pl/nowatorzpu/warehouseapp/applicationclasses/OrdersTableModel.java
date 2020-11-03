@@ -6,6 +6,8 @@ import javax.swing.table.AbstractTableModel;
 
 public class OrdersTableModel extends AbstractTableModel {
 
+	private static final long serialVersionUID = 1L;
+
 	private ArrayList<Order> orders = new ArrayList<>();
 
 	private String[] columnNames = { "Manufacturer", "Order code", "Order date", "Part count", "Project", "User" };

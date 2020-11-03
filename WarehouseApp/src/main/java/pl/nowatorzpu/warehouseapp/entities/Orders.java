@@ -21,6 +21,7 @@ import javax.persistence.TemporalType;
 @Table(name = "orders", catalog = "db_warehouse")
 public class Orders implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Integer orderId;
 	private Parts parts;
 	private Projects projects;

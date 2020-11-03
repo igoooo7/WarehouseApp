@@ -20,6 +20,7 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "user_rights", catalog = "db_warehouse", uniqueConstraints = @UniqueConstraint(columnNames = "user_rights"))
 public class UserRights implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Integer userRightsId;
 	private String userRights;
 	private Set<Users> users = new HashSet<Users>(0);

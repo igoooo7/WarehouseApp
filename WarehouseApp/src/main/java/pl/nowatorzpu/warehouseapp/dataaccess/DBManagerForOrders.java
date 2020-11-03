@@ -18,19 +18,13 @@ import javax.persistence.criteria.Root;
 
 import javassist.bytecode.stackmap.TypeData.ClassName;
 import pl.nowatorzpu.warehouseapp.applicationclasses.Order;
-import pl.nowatorzpu.warehouseapp.applicationclasses.Part;
-import pl.nowatorzpu.warehouseapp.entities.Areas;
 import pl.nowatorzpu.warehouseapp.entities.Manufacturers;
 import pl.nowatorzpu.warehouseapp.entities.Orders;
-import pl.nowatorzpu.warehouseapp.entities.PartGroups;
 import pl.nowatorzpu.warehouseapp.entities.Parts;
 import pl.nowatorzpu.warehouseapp.entities.Projects;
-import pl.nowatorzpu.warehouseapp.entities.Racks;
-import pl.nowatorzpu.warehouseapp.entities.Shelfs;
-import pl.nowatorzpu.warehouseapp.entities.Units;
 import pl.nowatorzpu.warehouseapp.entities.Users;
 
-public class DBManagerForOrders {
+public class DBManagerForOrders {	
 
 	private static final Logger LOGGER = Logger.getLogger(ClassName.class.getName());
 
@@ -76,7 +70,7 @@ public class DBManagerForOrders {
 		}
 	}
 
-	public Projects getProjectEntityByProject(String project) {
+	public Projects getProjectByProject(String project) {
 
 		Projects result = new Projects();
 
@@ -105,6 +99,48 @@ public class DBManagerForOrders {
 		}
 	}
 
+	public Boolean newProject(Projects project) {
+
+		try {
+
+			createManager();
+
+			em.getTransaction().begin();
+			em.persist(project);
+			em.getTransaction().commit();
+
+			destroyManager();
+
+			return true;
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING, e.toString());
+			return false;
+		}
+	}
+	
+	public Boolean deleteProjectById(int projectId) {
+
+		try {
+
+			createManager();
+
+			Projects p = em.find(Projects.class, projectId);
+
+			if (p != null) {
+				em.getTransaction().begin();
+				em.remove(p);
+				em.getTransaction().commit();
+			}
+
+			destroyManager();
+
+			return true;
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING, e.toString());
+			return false;
+		}
+	}
+	
 	// Order
 	public Boolean newOrder(Orders order) {
 
